@@ -1,0 +1,301 @@
+
+
+ui-state-error{
+	border:thin;
+	border-color: red;
+	
+}
+
+
+.all {
+	font-family:"Source Sans Pro", Arial, sans-serif !important;
+}
+
+.en-btn, #ar-tabs {
+	display:none !important;
+}
+
+.en-btn, .ar-btn {
+	margin-right: -30px !important;
+}
+
+.LangSelection {
+	margin: 0px !important;
+	max-width: 30px !important;
+	float: right !important;
+}
+.SignIn_OutButton {
+	float: right !important;
+}
+.main-menu .glyphicon {
+	margin-right:10px !important;
+}
+
+.ProfileEditdiv div {
+	text-align: right !important;
+}
+
+/*User Image/Name Area*/
+
+.SideMenu {
+	float: left !important;
+}
+
+.UserImg {
+	float: left !important;
+}
+
+.UserName {
+	margin-left:80px !important;
+}
+
+
+/*Login Box*/
+.LoginBox {
+	float:right !important;
+}
+
+
+/*SelectAll*/
+.dual-list .selector btn {
+	padding: 6px 0px !important;
+}
+
+
+/*Page Title*/
+
+.PageTitle {
+	background-image: url(imgs/title_pullit_en.png) !important;
+	background-repeat: no-repeat !important;
+	background-position: left !important;
+	padding-left: 20px !important;
+}
+
+/*Secondary Title*/
+.SecondaryTitle .TitleIcon {
+	float: left !important;
+}
+
+.MobileBG img {
+	left: 97px !important;
+}
+.ShareBtns {
+	text-align: left !important;
+}
+
+select {
+	padding: 0px 10px 0px 10px !important;
+}
+
+
+
+
+
+/*MyBox*/
+.UserPhoto {
+	float: left;
+}
+.CompanyNameTable {
+	margin-left: 10px;
+}
+
+.CompanyNameTable div {
+	float: left;
+}
+.UserNameTable .BoxUserName,
+.CompanyNameTable .BoxUserName  {
+	margin-left:5px;
+}
+.Greeting {
+	text-align: left;
+    padding-left: 5px;
+}
+.BoxUserName  	{
+    text-align: left;
+}
+.StatesticsNumber {
+	text-align:right;
+}
+.rating {
+	float: left;
+}
+
+.completeRegistrationMessag div {
+	padding-left: 20px;
+}
+.completeRegistrationMessag .glyphicon {
+	position: absolute;
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+
+
+
+/*JobsListGrid*/
+.AlowesAtLast{
+	text-align: right;
+}
+.AlowesAtLast button{
+	float: right;
+}
+
+.LocationIcon,
+.DoneIcon,
+.CalenderIcon,
+.TimeIcon,
+.AlertIcon,
+.AlertNewIcon,
+.CompanyIcon {
+	float: left;
+}
+
+.Status {
+	float:right;
+}
+
+
+.AlertIcon,
+.AlertNewIcon {
+	margin-left: -10px !important;
+}
+
+.RegisteredHomeTabs li:first-child,
+.RegisteredHomeTabs li:nth-child(2),
+.RegisteredHomeTabs li:nth-child(3),
+.RegisteredHomeTabs li:nth-child(4) {
+    background-position: left !important;
+    padding-left: 20px !important;
+}
+
+
+
+
+
+
+.ActionsArea {
+    text-align: right;
+}
+.AddJobDivHolder {
+	float:right;
+}
+
+
+
+
+
+
+
+
+
+
+
+.ListUserPhoto {
+    margin-right: 5px;
+}
+
+
+
+.PostingDateAndTime {
+	padding-left: 5px !important;
+    padding-right: 10px !important;
+}
+.PostingDateAndTime label {
+	padding-right:10px;
+}
+.PostingDateAndTimeMyPage {
+	padding-right: 0px !important;
+	margin-top: 0px !important;
+}
+.PostingDateAndTimeMyPage label {
+	padding-right:0px;
+}
+
+.DoneIcon,
+.RefusedIcon,
+.WaitingIcon {
+    margin-left: 5px;
+    float:right;
+}
+
+.ArrowIconAr {
+	background-image: url(imgs/icon_arrow_en.png) !important;
+	background-repeat: no-repeat !important;
+	display:block;
+	width:22px;
+	height:22px;
+}
+
+
+.DownloadAttachment button,
+.CompanyInfoButton {
+	float: right !important;
+}
+
+.ui-icon-bullet {
+    background-position: -81px -145px !important;
+}
+.ui-icon-check {
+    background-position: -65px -146px !important;
+}
+
+
+
+
+.TimeTable td:first-child {
+	padding-left: 10px;
+}
+.DateTable:nth-child(2) {
+	text-align:right;
+}
+
+
+
+
+/*Popup*/
+.ui-dialog-title {
+	float:left !important;
+}
+.ui-dialog-titlebar-close {
+	float:right !important;
+}
+
+.PopupButtonArea,
+.ui-dialog-buttonpane {
+	text-align:right;
+}
+
+
+
+.RegistrationLocationPopup td:nth-child(3),
+.RegistrationLocationPopup td:nth-child(4) {
+	text-align: right;
+}
+
+.ui-button-text  {
+    margin-right: 8px !important;
+}
+
+@media screen and (max-width: 991px) {
+	
+	
+	.StatesticsNumber {
+		padding-right:50px !important;
+		padding-top:5px !important;
+	}
+	
+	
+}
+
+.AttachmentDownloadCurrentFile {
+	float:right !important;
+}
+
+
+
+@media screen and (max-width: 640px) {
+	
+	.MobileBG img {
+	left: 70px !important;
+}
+}

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+		<ui:define name="title">#{bundle['companyPostJobTitle']}</ui:define>
+
+		<ui:define name="content">
+
+			<h:form id="companyPostJob">
+
+				<div class="row PageBar">
+
+					<div class="col-sm-12 PageTitle">#{bundle['employeesRequest']}</div>
+
+				</div>
+
+				<div class="row content CompanyPostJob">
+					<div class="col-md-3 col-xs-0"></div>
+					<div class="col-md-6 col-xs-12">
+
+
+						<div class="row">
+
+							<p:messages globalOnly="true" id="msgs" />
+
+							<div class="col-xs-4">
+								<h5>#{bundle['neededJob']}</h5>
+							</div>
+
+							<div class="col-xs-8 selectarrowsolution">
+
+								<p:selectOneMenu filter="true" id="joblist"
+									value="#{companyPostJobBean.selectedJob}"
+									styleClass="form-control JobSelection">
+									<f:selectItem itemLabel="#{bundle['choosejob']}" itemValue="-1" />
+									<f:selectItems value="#{companyPostJobBean.jobs}" />
+								</p:selectOneMenu>
+								<div class="RequieredMessage">
+									<p:message id="joblistmsg" for="joblist" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4">
+								<h5>#{bundle['EmployeeNumber']}</h5>
+							</div>
+
+							<div class="col-xs-3">
+								<p:inputText id="employeeNumber" required="true"
+									requiredMessage="#{bundle['EmployeeNumberRequired']}"
+									placeholder="#{bundle['EmployeeNumber']}"
+									styleClass="form-control"
+									value="#{companyPostJobBean.employeeNumber}">
+
+								</p:inputText>
+								<div class="RequieredMessage">
+									<p:message for="employeeNumber" />
+								</div>
+							</div>
+							<div class="col-xs-5">
+
+								<p:selectOneRadio id="sex"
+									requiredMessage="#{bundle['RequiredSex']}" required="true"
+									value="#{companyPostJobBean.sex}">
+									<f:selectItem itemLabel="#{bundle['SexMale']}" itemValue="1" />
+									<f:selectItem itemLabel="#{bundle['SexFeMale']}" itemValue="2" />
+								</p:selectOneRadio>
+
+								<div class="RequieredMessage">
+									<p:message for="sex" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4">
+								<h5>#{bundle['workhours']}</h5>
+							</div>
+
+							<div class="col-xs-8">
+								<div class="row RemoveBorderBottom">
+									<div class="col-xs-2">
+										<h5>#{bundle['from']}</h5>
+									</div>
+									<div class="col-xs-4">
+										<p:calendar locale="en" pattern="hh:mm a" id="workTimeStart"
+											required="true" placeholder="#{bundle['from']}"
+											validatorMessage="#{bundle['valueMustBe']} hh:mm"
+											requiredMessage="#{bundle['fromRequired']}"
+											value="#{companyPostJobBean.workTimeStart}" timeOnly="true"
+											size="10" />
+										<div class="RequieredMessage">
+											<p:message for="workTimeStart" />
+										</div>
+									</div>
+									<div class="col-xs-2">
+										<h5>ا#{bundle['to']}</h5>
+									</div>
+									<div class="col-xs-4">
+										<p:calendar locale="en" pattern="hh:mm a" id="workTimeEnd"
+											required="true" placeholder="#{bundle['to']}"
+											validatorMessage="#{bundle['valueMustBe']} hh:mm"
+											requiredMessage="#{bundle['toRequired']}"
+											value="#{companyPostJobBean.workTimeEnd}" timeOnly="true"
+											size="10" />
+										<div class="RequieredMessage">
+											<p:message for="workTimeEnd" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4">
+								<h5>#{bundle['workdates']}</h5>
+							</div>
+
+							<div class="col-xs-8">
+								<div class="row RemoveBorderBottom">
+									<div class="col-xs-2">
+										<h5>#{bundle['from']}</h5>
+									</div>
+									<div class="col-xs-4">
+										<p:calendar lang="#{bundle['locale']}" id="fromDate"
+											required="true" mindate="new Date()"
+											requiredMessage="#{bundle['fromRequired']}"
+											placeholder="#{bundle['from']}"
+											value="#{companyPostJobBean.fromDate}" />
+										<div class="RequieredMessage">
+											<p:message for="fromDate" />
+										</div>
+									</div>
+									<div class="col-xs-2">
+										<h5>#{bundle['to']}</h5>
+									</div>
+									<div class="col-xs-4">
+										<p:calendar lang="#{bundle['locale']}" id="toDate"
+											required="true" mindate="new Date()"
+											requiredMessage="#{bundle['toRequired']}"
+											placeholder="#{bundle['to']}"
+											value="#{companyPostJobBean.toDate}" />
+										<div class="RequieredMessage">
+											<p:message for="toDate" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row BtnDiv">
+							<div class="col-xs-6 text-center"></div>
+							<div class="col-xs-6 text-center">
+								<p:commandButton value="#{bundle['addbutton']}"
+									styleClass="DoneBtnStyle" ajax="false"
+									action="#{companyPostJobBean.addJobToGrid}" />
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col-xs-12">
+								<div class="panel CompanyReviewListPanel">
+									<div class="panel-heading">
+										<span class="glyphicon glyphicon-list"></span>#{bundle['compoundRequest']}
+									</div>
+									<div class="panel-body">
+
+
+										<p:dataTable id="companyjobs" var="job" rows="20"
+											emptyMessage="" value="#{companyPostJobBean.companiesJobs}"
+											rowKey="#{job.id}" paginator="true"
+											paginatorPosition="bottom"
+											paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="20,50,100">
+
+											<p:column headerText="#{bundle['jobheader']}">
+												<h:outputText value="#{job.jobType.nameArabic}" />
+											</p:column>
+
+											<p:column headerText="#{bundle['countheader']}">
+												<h:outputText value="#{job.numberOfEmployees}" />
+											</p:column>
+
+											<p:column headerText="#{bundle['fromdateheader']}">
+												<h:outputText
+													value="#{companyPostJobBean.getFormatedDate(job.startDate)}">
+												</h:outputText>
+											</p:column>
+
+											<p:column headerText="#{bundle['todateheader']}">
+												<h:outputText
+													value="#{companyPostJobBean.getFormatedDate(job.endDate)}">
+												</h:outputText>
+											</p:column>
+
+											<p:column headerText="#{bundle['fromhoureheader']}">
+												<h:outputText
+													value="#{companyPostJobBean.getDateHHMM(job.startHour)}">
+												</h:outputText>
+											</p:column>
+
+											<p:column headerText="#{bundle['tohoureheader']}">
+												<h:outputText
+													value="#{companyPostJobBean.getDateHHMM(job.endHour)}">
+												</h:outputText>
+											</p:column>
+
+											<p:column headerText="" width="50">
+												<p:commandButton immediate="true" icon="ui-icon-trash"
+													title="#{bundle['delete']}"
+													action="#{companyPostJobBean.deletejob}"
+													update="companyjobs">
+													<f:setPropertyActionListener value="#{job}"
+														target="#{companyPostJobBean.selectedCompanyjob}" />
+												</p:commandButton>
+											</p:column>
+
+										</p:dataTable>
+									</div>
+
+								</div>
+
+
+							</div>
+						</div>
+
+						<div class="row BtnDiv">
+							<div class="col-xs-6 text-center">
+								<p:link href="/companyMainPage" class="BtnStyle buttona"
+									value="#{bundle['cancelbutton']}" />
+							</div>
+
+							<div class="col-xs-6 text-center">
+								<p:commandButton immediate="true"
+									value="#{bundle['sendbutton']}" styleClass="DoneBtnStyle"
+									ajax="false" action="#{companyPostJobBean.sendCompanyJobs}" />
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-xs-0"></div>
+				</div>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

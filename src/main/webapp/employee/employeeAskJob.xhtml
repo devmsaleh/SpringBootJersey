@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+		<ui:define name="title">#{bundle['employeeAskJobTitle']}</ui:define>
+
+		<ui:define name="content">
+
+			<h:form id="employeeAskJob">
+
+				<div class="row PageBar">
+
+					<div class="col-sm-12 PageTitle">#{bundle['employeeAskJob']}</div>
+
+				</div>
+
+
+				<div class="row content EmployeeAskJob">
+					<div class="col-md-3 col-xs-0"></div>
+					<div class="col-md-6 col-xs-12">
+
+
+						<div class="row">
+
+							<p:messages globalOnly="true" id="msgs" />
+
+							<div class="col-xs-4">
+								<h5>#{bundle['job']}</h5>
+							</div>
+
+							<div class="col-xs-8 selectarrowsolution">
+								<p:selectOneMenu value="#{employeeAskJob.job}" id="job"
+									required="true" class="form-control JobSelection"
+									requiredMessage="#{bundle['requiredjob']}">
+									<f:selectItem itemLabel="#{bundle['selectJob']}" itemValue="-1" />
+									<f:selectItems value="#{employeeAskJob.jobs}" />
+								</p:selectOneMenu>
+								<div class="RequieredMessage">
+									<p:message for="job" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4">
+								<h5>#{bundle['city']}</h5>
+							</div>
+							<div class="col-xs-8 selectarrowsolution">
+								<p:selectOneMenu value="#{employeeAskJob.city}" id="city"
+									required="true" class="form-control"
+									requiredMessage="#{bundle['requiredCity']}">
+									<f:selectItem itemLabel="#{bundle['selectCity']}"
+										itemValue="-1" />
+									<f:selectItems value="#{employeeAskJob.cities}" />
+								</p:selectOneMenu>
+								<div class="city">
+									<p:message for="city" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4">
+								<h5>#{bundle['date']}</h5>
+							</div>
+
+							<div class="col-xs-8">
+								<div class="row RemoveBorderBottom">
+									<div class="col-xs-2">
+										<h5>#{bundle['from']}</h5>
+									</div>
+									<div class="col-xs-4">
+										<p:calendar navigator="true"
+											value="#{employeeAskJob.fromDate}" locale="ar" id="fromDate"
+											required="true" mindate="new Date()"
+											requiredMessage="  #{bundle['fromRequired']} " />
+										<div class="RequieredMessage">
+											<p:message for="fromDate" />
+										</div>
+									</div>
+									<div class="col-xs-2">
+										<h5>#{bundle['to']}</h5>
+									</div>
+									<div class="col-xs-4">
+										<p:calendar navigator="true" value="#{employeeAskJob.toDate}"
+											id="toDate" mindate="new Date()" required="true"
+											requiredMessage="  #{bundle['toRequired']} " />
+										<div class="RequieredMessage">
+											<p:message for="toDate" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-xs-4">
+								<h5>#{bundle['numberOfHours']}</h5>
+							</div>
+
+							<div class="col-xs-8">
+								<div class="row RemoveBorderBottom">
+									<div class="col-xs-2">
+										<h5>#{bundle['from']}</h5>
+									</div>
+									<div class="col-xs-4">
+										<p:calendar locale="en" pattern="hh:mm a" id="workTimeStart"
+											required="true" placeholder="#{bundle['from']}"
+											validatorMessage=" #{bundle['valueMustBe']}  hh:mm a"
+											requiredMessage="#{bundle['fromRequired']}"
+											value="#{employeeAskJob.fromHour}" timeOnly="true" size="10" />
+										<div class="RequieredMessage">
+											<p:message for="workTimeStart" />
+										</div>
+									</div>
+									<div class="col-xs-2">
+										<h5>#{bundle['to']}</h5>
+									</div>
+									<div class="col-xs-4">
+										<p:calendar locale="en" pattern="hh:mm a" id="workTimeEnd"
+											required="true" placeholder="#{bundle['to']}"
+											validatorMessage=" #{bundle['valueMustBe']}   hh:mm a"
+											requiredMessage="#{bundle['toRequired']}"
+											value="#{employeeAskJob.toHour}" timeOnly="true" size="710" />
+										<div class="RequieredMessage">
+											<p:message for="workTimeEnd" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row BtnDiv">
+							<div class="col-xs-4 text-center">
+								<button type="button" class="BtnStyle">#{bundle['cancel']}</button>
+							</div>
+
+							<div class="col-xs-4 text-center">
+								<button type="button" class="BtnStyle">
+									#{bundle['emptyFields']}<span
+										class="glyphicon glyphicon-erase BtnIcon"></span>
+								</button>
+							</div>
+							<div class="col-xs-4 text-center">
+								<p:commandButton value="#{bundle['send']}"
+									action="#{employeeAskJob.handleSubmit}"
+									styleClass="DoneBtnStyle" validateClient="true" ajax="false" />
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-xs-0"></div>
+				</div>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:body>
+	<ui:composition template="/template/commonLayout.xhtml">
+
+		<ui:define name="title">#{bundle['registerCompanyTitle']}</ui:define>
+
+		<ui:define name="content">
+
+			<h:form id="registerCompany">
+
+				<div class="row PageBar">
+					<div class="col-sm-12 PageTitle">#{bundle['companyRegistration']}</div>
+				</div>
+
+				<div class="row content Registration">
+					<div class="col-md-3 col-md-0"></div>
+					<div class="col-md-6 col-md-12">
+
+						<div class="row">
+
+							<p:messages globalOnly="true" id="msgs" />
+
+							<p:panel id="filePanel"
+								rendered="#{registerCompany.showFileUopoad}">
+
+								<p:fileUpload id="regfile" cancelLabel="#{bundle['cancel']}"
+									label="#{bundle['choose']}" uploadLabel="#{bundle['upload']}"
+									fileUploadListener="#{registerCompany.uploadAttachmentFile}"
+									update="msgs :registerCompany:filePanel" sizeLimit="2100000"
+									allowTypes="/(\.|\/)(doc|docx|pdf|jpg|jpeg|png|tif|tiff|bmp)$/"
+									invalidFileMessage="#{bundle['uploadNotAllowed']}"
+									invalidSizeMessage="#{bundle['fileSizeNotAllowed']} ">
+								</p:fileUpload>
+
+							</p:panel>
+
+							<div class="col-md-4">
+								<h5>#{bundle['companyName']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<p:inputText requiredMessage="#{bundle['companyNameRequired']}"
+									id="name" required="true"
+									placeholder="#{bundle['companyName']}"
+									value="#{registerCompany.companyName}" type="text"
+									class="form-control" />
+								<div class="RequieredMessage">
+									<p:message for="name" />
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['workType']}</h5>
+							</div>
+
+							<div class="col-md-8">
+
+								<p:inputText id="workType"
+									requiredMessage="#{bundle['workTypeRequired']}" required="true"
+									placeholder="#{bundle['workType']}"
+									value="#{registerCompany.workType}" type="text"
+									class="form-control" />
+								<div class="RequieredMessage">
+									<p:message for="workType" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['commercialRecord']}</h5>
+
+							</div>
+
+							<div class="col-md-8">
+
+								<p:inputText id="commercialRecord"
+									requiredMessage="#{bundle['commercialRecordRequired']}"
+									mindate="new Date()" required="true"
+									placeholder="#{bundle['commercialRecord']}"
+									value="#{registerCompany.commercialRecord}" type="text"
+									class="form-control" />
+								<div class="RequieredMessage">
+									<p:message for="commercialRecord" />
+								</div>
+
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['commercialExpirationDate']}</h5>
+							</div>
+
+							<div class="col-md-8">
+
+								<p:inputText id="commercialExpirationDate" required="true"
+									requiredMessage="#{bundle['commercialExpirationDateRequired']}"
+									placeholder="#{bundle['commercialExpirationDate']}"
+									value="#{registerCompany.commercialExpirationDate}" />
+
+								<div class="RequieredMessage">
+									<p:message for="commercialExpirationDate" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-4">
+								<h5>#{bundle['contactNumber']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<div class="row RemoveBorderBottom">
+									<div class="col-md-10 alwasright">
+										<p:inputText id="contactNumber" required="true"
+											requiredMessage="#{bundle['contactNumberRequired']}"
+											placeholder="#{bundle['contactNumber']}"
+											value="#{registerCompany.contactNumber}" class="form-control" />
+										<div class="RequieredMessage">
+											<p:message for="contactNumber" />
+										</div>
+									</div>
+									<div class="col-md-2 NumberKey">
+										<h5>+966</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['companyEmail']}</h5>
+							</div>
+							<div class="col-md-8">
+								<p:inputText id="companyEmail" required="true"
+									placeholder="#{bundle['companyEmail']}"
+									requiredMessage="#{bundle['companyEmailRequired']}"
+									validatorMessage="#{bundle['companyEmailvalidationmessage']}"
+									value="#{registerCompany.email}" class="form-control">
+									<f:validateRegex
+										pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+								</p:inputText>
+								<div class="RequieredMessage">
+									<p:message for="companyEmail" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['workTime']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<div class="row RemoveBorderBottom">
+									<div class="col-md-2">
+										<h5>#{bundle['from']}</h5>
+									</div>
+									<div class="col-md-4">
+										<p:calendar navigator="true" locale="en" pattern="hh:mm a"
+											id="workTimeStart" required="true"
+											placeholder="#{bundle['from']}"
+											validatorMessage="لابد ان تكون القيمة hh:mm"
+											requiredMessage="#{bundle['fromRequired']}"
+											value="#{registerCompany.workTimeStart}" timeOnly="true"
+											size="10" />
+										<div class="RequieredMessage">
+											<p:message for="workTimeStart" />
+										</div>
+									</div>
+									<div class="col-md-2">
+										<h5>#{bundle['to']}</h5>
+									</div>
+									<div class="col-md-4">
+										<p:calendar navigator="true" locale="en" pattern="hh:mm a"
+											id="workTimeEnd" required="true"
+											placeholder="#{bundle['to']}"
+											validatorMessage="لابد ان تكون القيمة hh:mm"
+											requiredMessage="#{bundle['toRequired']}"
+											value="#{registerCompany.workTimeEnd}" timeOnly="true"
+											size="10" />
+										<div class="RequieredMessage">
+											<p:message for="workTimeEnd" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-4">
+								<h5>#{bundle['city']}</h5>
+							</div>
+
+							<div class="col-md-8 selectarrowsolution">
+
+								<p:selectOneMenu value="#{registerCompany.selectedCity}"
+									id="city" class="form-control">
+									<f:selectItem itemLabel="#{bundle['selectCity']}"
+										itemValue="-1" />
+									<f:selectItems value="#{registerCompany.cities}" />
+								</p:selectOneMenu>
+
+								<div class="RequieredMessage">
+									<p:message for="city" />
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-4">
+								<h5>#{bundle['locationDescription']}</h5>
+							</div>
+							<div class="col-md-8">
+
+								<div class="row RemoveBorderBottom">
+
+									<div class="col-md-9">
+										<p:inputText id="locationDescription" required="true"
+											requiredMessage="#{bundle['locationDescriptionRequired']}"
+											placeholder="#{bundle['locationDescription']}"
+											value="#{registerCompany.locationDescription}"
+											class="form-control" />
+										<div class="RequieredMessage">
+											<p:message for="locationDescription" />
+										</div>
+									</div>
+
+									<div class="col-md-3">
+
+										<h:inputHidden id="lat"
+											value="#{registerCompany.locationLatitude}" />
+										<h:inputHidden id="lng"
+											value="#{registerCompany.locationLongitude}" />
+
+										<button type="button" class="BtnLocation"
+											onclick="PF('gmapDialog').show();findMe(false,'registerCompany');">
+											<span class="glyphicon glyphicon-map-marker"></span>
+										</button>
+
+										<p:dialog class="RegistrationLocationPopup"
+											dir="#{bundle['dir']}"
+											header="#{bundle['chooseBranchLocation']}"
+											widgetVar="gmapDialog" width="700" height="500" modal="true">
+
+											<p:panelGrid columns="4" style="width:100%;">
+												<h5>#{bundle['Address']}</h5>
+												<p:inputText id="locationDescriptionDialog" readonly="true"
+													placeholder="#{bundle['Address']}" class="form-control" />
+												<p:commandButton class="BtnStyle"
+													onclick="PF('gmapDialog').hide();"
+													value="#{bundle['ChooseAddress']}" />
+												<p:commandButton class="BtnStyle"
+													onclick="findMe(true,'registerCompany');"
+													value="#{bundle['myLocation']}" />
+
+											</p:panelGrid>
+
+											<p:gmap center="24.709156813696378,46.67292563366709"
+												zoom="15" type="ROADMAP" style="width:100%;height:400px"
+												widgetVar="gmap"
+												onPointClick="handlePointClick(event,'registerCompany');">
+											</p:gmap>
+
+										</p:dialog>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['locationNearBy']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<p:inputText id="locationNearBy"
+									placeholder="#{bundle['locationNearBy']}" required="true"
+									requiredMessage="#{bundle['locationNearByRequired']}"
+									value="#{registerCompany.locationNearBy}" class="form-control" />
+								<div class="RequieredMessage">
+									<p:message for="locationNearBy" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['branchesNumber']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<div class="row RemoveBorderBottom">
+
+									<div class="col-md-4">
+										<p:inputText placeholder="#{bundle['branchesNumber']}"
+											value="#{registerCompany.branchesNumber}"
+											class="form-control" />
+									</div>
+									<div class="col-md-8">
+										<h6>#{bundle['branchCreated']}</h6>
+									</div>
+								</div>
+
+
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-4">
+								<h5>#{bundle['paymentType']}</h5>
+							</div>
+
+							<div class="col-md-8 selectarrowsolution">
+
+								<p:selectOneMenu id="paymentType"
+									value="#{registerCompany.paymentType}"
+									styleClass="form-control">
+									<f:selectItem itemLabel="#{bundle['visa']}" itemValue="1" />
+									<f:selectItem itemLabel="#{bundle['contract']}" itemValue="2" />
+
+									<p:ajax event="valueChange"
+										listener="#{registerCompany.paymentTypechanged}"
+										update="visaNumber visaExpirationYear visaExpirationMonth visaSecurityCode" />
+
+								</p:selectOneMenu>
+
+							</div>
+
+						</div>
+
+
+
+						<p:panelGrid id="visaDetails">
+
+
+
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['visaNumber']}</h5>
+								</div>
+
+								<div class="col-md-6">
+
+								
+
+									<p:inputText id="visaNumber"
+										disabled="#{!registerCompany.showVisaSection}"
+										placeholder="#{bundle['visaNumber']}"
+										requiredMessage="#{bundle['visaNumberRequired']}"
+										value="#{registerCompany.visaNumber}" class="form-control">
+										
+											<p:ajax update="VisaType" event="blur" listener="#{registerCompany.cardNumberchanged}"/>
+											
+										</p:inputText>
+										
+									<div class="RequieredMessage">
+										<p:message for="visaNumber" />
+									</div>
+
+								</div>
+								<div class="col-md-2 MasterVisaSelect">
+									<p:panel id="VisaType">
+										 <p:graphicImage name="imgs/icon_visa.png" rendered="#{registerCompany.displayVisa}" />  
+										 <p:graphicImage name="imgs/icon_masercard.png" rendered="#{registerCompany.displayMaster}"/>
+									</p:panel>
+								</div>
+							</div>
+
+							<div class="row">
+
+								<div class="col-md-4">
+									<h5>#{bundle['visaExpirationDate']}</h5>
+								</div>
+
+								<div class="col-md-8 selectarrowsolution">
+
+									<p:selectOneMenu id="visaExpirationMonth"
+										styleClass="form-control" style="width:150px"
+										disabled="#{!registerCompany.showVisaSection}"
+										value="#{registerCompany.visaExpirationMonth}" required="true">
+
+										<f:selectItem itemLabel="----" itemValue="-1" />
+										<f:selectItem itemLabel="1" itemValue="01" />
+										<f:selectItem itemLabel="2" itemValue="02" />
+										<f:selectItem itemLabel="3" itemValue="03" />
+										<f:selectItem itemLabel="4" itemValue="04" />
+										<f:selectItem itemLabel="5" itemValue="05" />
+										<f:selectItem itemLabel="6" itemValue="06" />
+										<f:selectItem itemLabel="7" itemValue="07" />
+										<f:selectItem itemLabel="8" itemValue="08" />
+										<f:selectItem itemLabel="9" itemValue="09" />
+										<f:selectItem itemLabel="10" itemValue="10" />
+										<f:selectItem itemLabel="11" itemValue="11" />
+										<f:selectItem itemLabel="12" itemValue="12" />
+
+									</p:selectOneMenu>
+
+									/
+
+									<p:selectOneMenu id="visaExpirationYear"
+										styleClass="form-control" style="width:150px"
+										disabled="#{!registerCompany.showVisaSection}"
+										value="#{registerCompany.visaExpirationYear}" required="true">
+
+										<f:selectItem itemLabel="----" itemValue="-1" />
+										<f:selectItem itemLabel="2017" itemValue="2017" />
+										<f:selectItem itemLabel="2018" itemValue="2018" />
+										<f:selectItem itemLabel="2019" itemValue="2019" />
+										<f:selectItem itemLabel="2020" itemValue="2020" />
+										<f:selectItem itemLabel="2021" itemValue="2021" />
+										<f:selectItem itemLabel="2022" itemValue="2022" />
+										<f:selectItem itemLabel="2023" itemValue="2023" />
+										<f:selectItem itemLabel="2024" itemValue="2024" />
+										<f:selectItem itemLabel="2025" itemValue="2025" />
+										<f:selectItem itemLabel="2026" itemValue="2026" />
+										<f:selectItem itemLabel="2027" itemValue="2027" />
+										<f:selectItem itemLabel="2028" itemValue="2028" />
+
+									</p:selectOneMenu>
+
+
+									<div class="RequieredMessage">
+										<p:message for="visaExpirationYear" id="visaExpirationYearmsg" />
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['visaSecurityCode']}</h5>
+								</div>
+								<div class="col-md-8">
+									<p:inputText id="visaSecurityCode" maxlength="3"
+										disabled="#{!registerCompany.showVisaSection}"
+										placeholder="#{bundle['visaSecurityCode']}" required="true"
+										requiredMessage="#{bundle['visaSecurityCodeRequired']}"
+										value="#{registerCompany.visaSecurityCode}"
+										class="form-control" />
+									<div class="RequieredMessage">
+										<p:message for="visaSecurityCode" />
+									</div>
+								</div>
+							</div>
+						</p:panelGrid>
+
+						<div class="row RegistrationCeberator">
+							<div class="col-md-12">
+								<h5>#{bundle['representativeSection']}</h5>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['representativeFullName']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<p:inputText id="representativeFullName"
+									placeholder="#{bundle['representativeFullName']}"
+									required="true"
+									requiredMessage="#{bundle['representativeFullNameRequired']}"
+									value="#{registerCompany.representativeFullName}"
+									class="form-control" />
+								<div class="RequieredMessage">
+									<p:message for="representativeFullName" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['representativeContactNumber']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<div class="row RemoveBorderBottom">
+									<div class="col-md-10 alwasright">
+										<p:inputText id="representativeContactNumber"
+											placeholder="#{bundle['representativeContactNumber']}"
+											required="true"
+											requiredMessage="#{bundle['representativeContactNumberRequired']}"
+											value="#{registerCompany.representativeContactNumber}"
+											class="form-control" />
+										<div class="RequieredMessage">
+											<p:message for="representativeContactNumber" />
+										</div>
+									</div>
+									<div class="col-md-2 NumberKey">
+										<h5>+966</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['representativeEmail']}</h5>
+							</div>
+
+							<div class="col-md-8">
+
+								<p:inputText id="representativeEmail"
+									placeholder="#{bundle['representativeEmail']}" required="true"
+									validatorMessage="#{bundle['companyEmailvalidationmessage']}"
+									requiredMessage="#{bundle['representativeEmailRequired']}"
+									value="#{registerCompany.representativeEmail}"
+									class="form-control">
+									<f:validateRegex
+										pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+								</p:inputText>
+
+								<div class="RequieredMessage">
+									<p:message for="representativeEmail" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['representativePassword']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<p:password id="pw1" match="pw2"
+									validatorMessage="#{bundle['passwordNotMatch']}"
+									value="#{registerCompany.representativePassword}"
+									feedback="true" required="true"
+									requiredMessage="#{bundle['representativePasswordRequired']}"
+									placeholder="#{bundle['representativePassword']}"
+									class="form-control" promptLabel="#{bundle['promptLabel']}"
+									weakLabel="#{bundle['weakLabel']}"
+									goodLabel="#{bundle['goodLabel']}"
+									strongLabel="#{bundle['strongLabel']}" />
+
+								<div class="RequieredMessage">
+									<p:message for="pw1" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['representativePasswordAgain']}</h5>
+							</div>
+
+							<div class="col-md-8">
+
+								<p:password id="pw2"
+									value="#{registerCompany.representativePasswordAgain}"
+									placeholder="#{bundle['representativePasswordAgain']}"
+									required="true"
+									requiredMessage="#{bundle['representativePasswordRequired']}"
+									class="form-control" />
+								<div class="RequieredMessage">
+									<p:message for="pw2" />
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="CondetionCheckbox">
+								<p:selectBooleanCheckbox id="termes" required="true"
+									value="#{registerCompany.termsAndConditions}" />
+								<label>#{bundle['agreePay']}</label> <a target="_blank"
+									href="public/termsConditions">#{bundle['termsAndConditions']}</a>
+								<p:message for="termes" />
+							</div>
+
+						</div>
+						<div class="row BtnDiv">
+							<div class="col-md-4 text-center">
+								<p:commandButton value="#{bundle['clear']}" styleClass="BtnStyle" >
+									<p:ajax update="registerCompany" resetValues="true" />
+								</p:commandButton>
+							</div>
+							<div class="col-md-4 text-center">
+
+								<p:commandButton value="#{bundle['register']} "
+									action="#{registerCompany.save}"
+									disabled="#{registerCompany.addButtonDisabled}"
+									styleClass="DoneBtnStyle" validateClient="true" ajax="false" />
+
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-md-0"></div>
+
+				</div>
+
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

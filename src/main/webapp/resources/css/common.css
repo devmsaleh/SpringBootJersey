@@ -1,0 +1,2739 @@
+@charset "utf-8" !important;
+/* CSS Document */
+
+
+html,
+body {
+  height: 100% !important;
+  margin: 0;
+}
+
+label {
+	color: #4c4c4c;
+}
+
+
+
+
+/*TimePicker*/
+.ui_tpicker_time {
+	border-bottom: 1px solid #b3b3b3 !important;
+}
+.ui_tpicker_time_input {
+	color: #1f88c4 !important;
+    font-size: 40px !important;
+    text-align: center !important;
+    margin-top: -20px !important;
+    width: 100% !important;
+    border-bottom:0px solid transparent !important;
+}
+.ui_tpicker_hour {
+	margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+.ui_tpicker_minute {
+	padding-top: 4px !important;
+}
+.ui-slider {
+	box-shadow: inset 0 2px 2px #333333 !important;
+}
+.ui-slider-horizontal {
+	    height: .4em !important;
+}
+.ui_tpicker_hour_label,
+.ui_tpicker_minute_label,
+.ui_tpicker_time_label {
+	font-size:14px !important;
+	font-weight: inherit;
+}
+.ui_tpicker_time_label {
+	font-weight: bold;
+}
+/*TimePicker End*/
+
+
+
+/*Employee Registration DatePicker*/
+.calendars-nav {
+	background-color: #1f88c4 !important;
+	padding: 5px !important;
+}
+.calendars {
+	width: 350px !important;
+	font-family: 'DroidKufi' !important;
+	border: 1px solid #fff !important;
+}
+.calendars-ctrl {
+	background-color: #676767 !important;
+	padding:5px !important;
+}
+.calendars-month {
+	width:100% !important;
+}
+.calendars-cmd:hover {
+	color: #000000 !important;
+	background-color: inherit !important;
+}
+.calendars-month-header,
+.calendars-month-year,
+.calendars-month-year {
+	height:30px !important;
+}
+.calendars-month span {
+	text-align:center;
+}
+.calendars-month td .calendars-highlight {
+	background-color: #1f88c4 !important;
+	color: #fff !important;
+}
+.calendars-month td .calendars-today {
+	background-color: #ececec !important;
+}
+.calendars-month a,
+.calendars-month td .calendars-weekend {
+	background-color: #fff !important;
+	color: #1f88c4 !important;
+}
+.calendars-month td {
+    background-color: #fff !important;
+    border: 1px solid #fff !important;
+    padding: 5px !important;
+}
+
+
+
+
+
+.ui-datepicker-today .ui-state-default {
+	background-color: #f3a06f !important;
+}
+.ui-datepicker-today .ui-state-highlight {
+	background-color: #ececec !important;
+	color: #fff !important;
+}
+..ui-datepicker-today .ui-state-hover {
+	background-color: #1f88c4 !important;
+	color: #fff !important;
+}
+
+
+
+
+
+
+/*DatePicker*/ 
+.ui-datepicker-calendar td a,
+.ui-datepicker-calendar td span {
+    text-align: center !important;
+}
+
+
+
+
+
+/*Admin*/
+.EmpAdminJobsPreview table {
+	width:100%;
+}
+.EmpAdminJobsPreview table:focus,
+.EmpAdminJobsPreview tbody:focus {
+	outline: -webkit-focus-ring-color auto 0px !important;
+}
+
+.EmpAdminJobsPreview .ListItemFirst {
+	border-bottom:0px !important;
+}
+
+.EmpAdminJobsPreview thead {
+	display:none;
+}
+
+.EmpAdminJobsPreview tr,
+.EmpAdminJobsPreview td,
+.EmpAdminJobsPreview tbody{
+	border: 0px solid transparent !important;
+	background:transparent !important;
+	box-shadow: 0 0 0px #85b2cb;
+}
+.EmpAdminJobsPreview tr:hover {
+	box-shadow: 0 0 0px #85b2cb !important;
+}
+
+.DetailsSebarator {
+	background-image: url(imgs/sebarator_details.png);
+	background-repeat: no-repeat;
+	background-position:center top;
+	height: 21px;
+	border-bottom: 5px solid #e4e4e4;
+}
+
+.BtnDetails {
+    background-image: url(imgs/btn_details.png) !important;
+}
+.BtnJobs{
+		background-image: url(imgs/btn_jobs.png) !important;
+}
+.BtnMoney{
+		background-image: url(imgs/btn_money.png) !important;
+}
+.BtnJobs,
+.BtnDetails,
+.BtnMoney {
+	height: 35px !important;
+    width: 35px !important;
+	background-repeat: no-repeat !important;
+    background-color: transparent !important;
+    border: 2px solid #989898 !important;
+    border-radius: 20px;
+    background-position: center center !important;
+	transition: 0.3s;
+}
+.BtnJobs:hover,
+.BtnDetails:hover,
+.BtnMoney:hover {
+	border: 2px solid #ffb309 !important;
+}
+.BtnDetails span,
+.BtnJobs span,
+.BtnMoney span {
+	display:none
+}
+.ui-dialog .ui-icon-check {
+	height:28px !important;
+	width:28px !important;
+	background-image: url(imgs/icon_yes.png) !important;
+    background-position: top !important;
+	background-repeat: no-repeat !important;
+	margin-top: -12px !important;
+}
+.ui-icon-close,
+.ui-icon-trash {
+	height:28px !important;
+	width:28px !important;
+	background-image: url(imgs/icon_no.png) !important;
+    background-position: top !important;
+	background-repeat: no-repeat !important;
+	margin-top: -12px !important;
+}
+.ui-icon-trash {
+    margin-left: -12px !important;
+    margin-top: -15px !important;
+}
+
+
+
+.ui-rating-star a {
+	height:25px !important;
+	width:25px !important;
+	background-image: url(imgs/star_off.png) !important;
+    background-position: top !important;
+	background-repeat: no-repeat !important;
+}
+.ui-rating-star-on a {
+	height:25px !important;
+	width:25px !important;
+	background-image: url(imgs/star_on.png) !important;
+    background-position: top !important;
+	background-repeat: no-repeat !important;
+}
+.RattingValue {
+	text-align: center;
+    font-size: 12px;
+}
+
+.BtnWithIcon .ui-button-text {
+	padding: .3em 1em .3em 3.1em !important;
+}
+
+
+.RegistrationLocationPopup tr,
+.RegistrationLocationPopup td {
+	border:0px solid transparent !important;
+}
+
+ .RegistrationLocationPopup td:nth-child(4) {
+	width: 120px;
+    padding: 0px;
+ }
+
+
+
+
+
+
+
+
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight {
+	text-shadow: 0px 0px 0px #333 !important;
+}
+.ui-widget-header .ui-state-highlight {
+	 background: #1f88c4 !important;
+}
+.ui-state-default {
+    box-shadow: inset 0 0px 0 #fff !important;
+}
+.ui-state-focus {
+	box-shadow: inset 0 0px 0 #fff !important;
+}
+.ui-selectonemenu-filter-container,
+.ui-selectonemenu-filter-container input {
+	width:100% !important;
+}
+.ui-widget-header {
+	background: #1f88c4 !important;
+    border: 0px !important;
+    border-radius: 0px !important;
+    color: #fff !important;
+    text-shadow: 0 0px 0 rgba(255,255,255,0.7) !important;
+}
+#usernamelabel {
+	font-weight: inherit !important;
+}
+.ui-datepicker-title {
+	color: #fff;
+    text-shadow: 0 0px 0 rgba(255,255,255,0.7);
+}
+.ui-datepicker-month,
+.ui-datepicker-year {
+	color: #404040 !important;
+}
+.ui-state-highlight {
+	background: #929292 !important;
+    color: #fff !important;
+}
+.ui-state-hover {
+	background-color: whitesmoke !important;
+	box-shadow: 0 0 0px #85b2cb !important;
+}
+.ListGrid .ui-datatable-tablewrapper {
+	    overflow: inherit !important;
+}
+.ui-dialog-titlebar-close {
+	background: white !important;
+	padding: 5px !important;
+}
+.ui-dialog-titlebar-close:hover {
+	box-shadow:0 0 0px white !important;
+	border:0px !important;
+}
+
+
+
+
+
+
+.ui-state-error{
+	 border: 1px solid red !important;
+}
+
+.ui-message-error-detail, .ui-column-title,.ui-message,.ui-widget,.ui-widget{
+	font-family:'DroidKufi' !important;
+}
+
+/*Main Color*/
+.navbar-default {
+	background-color: #1f88c4 !important;
+}
+/*Main Color End*/
+
+
+/*Upload Files*/
+.ui-icon-plusthick,
+.ui-icon-arrowthick-1-s,
+.ui-icon-arrowreturnthick-1-n,
+.ui-icon-cancel {
+	height:28px !important;
+	width:28px !important;
+    background-position: top !important;
+	background-repeat: no-repeat !important;
+	margin-top: -13px !important;
+}
+.ui-icon-plusthick {
+	background-image: url(imgs/icon_add.png) !important;
+}
+.ui-icon-arrowreturnthick-1-n {
+	background-image: url(imgs/icon_upload.png) !important;
+}
+.ui-icon-arrowthick-1-s {
+	background-image: url(imgs/icon_download.png) !important;
+}
+.ui-icon-cancel {
+	background-image: url(imgs/icon_cancel.png) !important;
+}
+
+.ui-button-text-icon-left {
+	text-shadow: 0 0px 0 rgba(255,255,255,0.7) !important;
+    background: #f3f3f3 !important;
+    border:0px solid transparent !important;
+	margin-right: 5px !important;
+    margin-left: 5px !important;
+    font-size:13px !important;
+}
+
+/*
+.UploadAttachment .ui-fileupload-files .ui-fileupload-progress {
+	position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+.ui-fileupload-files .ui-button-icon-only {
+	position: absolute;
+	left: 30px;
+}
+.ui-fileupload-row div:nth-child(2) {
+	position: absolute;
+	word-break: break-all;
+}
+.ui-fileupload-row div:nth-child(3) {
+	position: absolute;
+    top: 100px;
+}
+.ui-fileupload-preview {
+	border: 1px solid gainsboro;
+}
+
+.UploadUserPhoto {
+	min-width: 305px;
+}
+.UploadUserPhoto .ui-fileupload-row>div {
+	padding:0px !important;
+}
+ .UploadUserPhoto .ui-button-icon-only {
+	left: 0px;
+ }
+ .UploadAttachment {
+     margin-bottom: 5px;
+}
+ .UploadAttachment.ui-fileupload-preview {
+ 	height:90px;
+ 	min-height:90px;
+ }
+*/
+
+.UploadAttachment .ui-fileupload-files .ui-fileupload-progress {
+	display: inherit !important;
+    left: 10px;
+    bottom: 10px;
+}
+.ui-fileupload-files .ui-button-icon-only {
+	position: absolute;
+    top: 45px;
+    left: 25px;
+}
+.ui-fileupload-row div:nth-child(2) {
+	word-break: break-all;
+	display: inherit !important;
+	padding: 0px !important;
+	
+}
+.ui-fileupload-row div:nth-child(3) {
+	position: absolute;
+    top: 50px;
+    display: inherit !important;
+}
+.ui-fileupload-files {
+	margin-bottom: 0px !important;
+	display: inherit !important;
+}
+.ui-fileupload-files div:first-child {
+	display: inherit !important;
+}
+.ui-fileupload-row {
+	display: inherit !important;
+}
+.ui-fileupload-preview {
+	float: none !important;
+	text-align: center;
+    display: inherit !important;
+    width: 100% !important;
+}
+
+.ui-fileupload-preview svg {
+	    border: 1px solid gainsboro;
+}
+
+.UploadUserPhoto {
+	min-width: 305px;
+}
+.UploadUserPhoto .ui-widget-header {
+	background:transparent !important;
+}
+.UploadUserPhoto .ui-fileupload-choose input,
+.UploadUserPhoto .ui-fileupload-content {
+	display:none !important;
+}
+.UploadUserPhoto .ui-button {
+	position: absolute;
+    top: 10px;
+    background: #dadada !important;
+}
+.UploadUserPhoto .ui-icon-plusthick {
+	background-image: url(imgs/icon_edit.png) !important;
+}
+
+
+ }
+ .UploadAttachment {
+     margin-bottom: 5px;
+}
+ .UploadAttachment.ui-fileupload-preview {
+ 	height:90px;
+ 	min-height:90px;
+ }
+ 
+.DownloadAttachment button{
+    margin-top: 5px;
+    transition:0.3s;
+}
+.DownloadAttachment button:Hover{
+	background: #deebf3 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+.UploadAttachment .ui-button-icon-only .ui-icon,
+.UploadUserPhoto .ui-button-icon-only .ui-icon {
+	margin-left: -14px !important;
+    margin-top: -14px !important;
+}
+.ui-progressbar {
+	height: 10px !important;
+	top: 0px !important;
+	width:100% !important;
+}
+.CompanyUploadAttachment .ui-button-icon-only {
+	left:40px!important;
+}
+.CompanyUploadAttachment .ui-fileupload-progress {
+    left: 30px!important;
+    bottom: 20px!important;
+}
+.CompanyUploadAttachment .ui-panel-content {
+	padding:0px !important;
+}
+/*Upload Files End*/
+
+
+.all {
+	display: flex !important; /*To Make Footer always in the bottom*/
+	flex-flow: column !important; /*To Make Footer always in the bottom*/
+	height: 100% !important;
+}
+
+.content {
+  flex: 1 1 auto !important; /*To Make Footer always in the bottom*/
+}
+
+
+.footer {
+	border-top:2px solid #1f88c4 !important;
+	flex: 0 1 40px !important; /*To Make Footer always in the bottom*/
+}
+
+
+
+.main-menu {
+	padding:0px !important !important;
+}
+
+.main-menu .glyphicon {
+    font-size: 20px !important;
+	vertical-align: middle !important;
+}
+
+.MenuSearch .glyphicon {
+    font-size: 14px !important;
+	vertical-align: middle !important;
+}
+
+
+.cd-panel from-right {
+	z-index: 999 !important;
+}
+
+.cd-panel-container {
+	z-index: 999 !important;
+}
+
+
+.navbar-default {
+    background-color: #1f88c4 !important;
+    border-color: #b8b8b8 !important;
+	font-size: 13px !important;
+
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #FFF !important;
+    background-color: #29698e !important;
+    font-weight: bold !important;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff !important;
+	padding:14px !important;
+}
+
+.navbar {
+    position: relative !important;
+    min-height: 50px !important;
+    margin-bottom: 0px !important;
+    border: 0px solid transparent !important;
+	border-radius: 0px !important;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+	color:#fff !important;
+	background-color: #3ca3de !important;
+	transition:0.3s;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color: #E7E7E7 !important;
+    color: #fff !important;
+}
+
+.LangSelection {
+}
+
+.en-btn, .ar-btn {
+	background-color: #505050 !important;
+}
+
+
+
+
+.MainBanner {
+	height:130px !important;
+	min-height:130px !important;
+	background-image: url(imgs/banner.jpg), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#202020), to(#fff)) !important;
+    background-image: url(imgs/banner.jpg), -webkit-linear-gradient(top, #ebebeb, #fff) !important;
+    background-image: url(imgs/banner.jpg), -moz-linear-gradient(top, #ebebeb, #fff) !important;
+    background-image: url(imgs/banner.jpg), -ms-linear-gradient(top, #ebebeb, #fff) !important;
+    background-image: url(imgs/banner.jpg), -o-linear-gradient(top, #ebebeb, #fff) !important;
+    background-image: url(imgs/banner.jpg), linear-gradient(to top, #ebebeb, #fff) !important;
+	background-repeat: no-repeat !important;
+	 -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
+	padding-top: 15px !important;
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+	background-position:right !important;
+}
+
+.logo {
+	height: 100px !important;
+	width: 100% !important;
+    background-image: url("imgs/logo.png") !important;
+    background-position: top !important;
+	background-repeat: no-repeat !important;
+	float: left !important;
+}
+
+
+.lang-btn{
+	color:#fff !important;
+	line-height: 50px !important;
+	width: 50px !important;
+	text-align: center !important;
+	background-color: #505050 !important;
+}
+
+.lang-btn :hover{
+	background-color:#777 !important;
+}
+
+.en-btn :hover,
+.ar-btn :hover {
+	background-color:#777 !important;
+}
+
+
+.en-btn a, .ar-btn a {
+	color:#fff !important;
+	line-height: 50px !important;
+	display: block !important;
+	width: 50px !important;
+	text-align: center !important;
+}
+
+
+
+/*User Image/Name Area*/
+
+.SecondMenu {
+	height: 50px !important;
+	line-height: 40px !important;
+	background-color: #d5d5d5 !important;
+	padding:5px !important;
+	
+}
+.SideMenu {
+	width: 30px !important;
+	height: 30px !important;
+}
+
+.SideMenu button {
+	background: transparent !important;
+	border: 0px !important;
+	font-size: 17px !important;
+}
+
+.SideMenu button:hover{
+	color: #c02727 !important;
+}
+
+.SideMenu button:hover,
+.SideMenu button:active,
+.SideMenu button:focus {
+	background-color: transparent !important;
+}
+
+.UserImg {
+	height:40px !important;
+	width:40px !important;
+	background-image: url(imgs/user_ico.png) !important;
+    background-position: top !important;
+	background-repeat: no-repeat !important;
+}
+/*End*/
+
+
+/*Page Title Bar*/
+
+.PageBar {
+	background-color: whitesmoke !important;
+	padding: 5px !important;
+	margin-bottom:10px !important;
+	line-height: 30px !important;
+}
+
+.PageTitle {
+	font-weight:bold !important;
+	font-size: 18px !important;
+}
+
+.SecondaryTitle {
+	margin-top: 15px !important;
+	margin-bottom: 10px !important;
+	margin-left: -15px !important;
+	margin-right: -15px !important;
+	height: 45px !important;
+	border-bottom: 3px solid #b4b4b4 !important;
+}
+
+
+.SecondaryTitle .TitleIcon {
+	font-size: 20px !important;
+	padding: 10px !important;
+	color: #d73232 !important;
+}
+
+.SecondaryTitle  .SecondaryTitleLabel {
+	font-size: 16px !important;
+	line-height: 45px !important;
+	color: #3c3c3c !important;
+	margin-right: 5px !important;
+}
+
+
+.SearchBox {
+	max-width: 300px !important;
+}
+
+.SearchBox button {
+	background-color: #c02727 !important;
+	color:#fff !important;
+}
+/*End*/
+
+
+.body1 {
+	padding-left: 100px !important;
+	padding-right: 100px !important;
+}
+
+
+
+
+
+
+
+/*List Remove Style*/
+.SearchResults .ui-widget-content,
+.ListGrid .ui-widget-content,
+.NotificationsListGrid .ui-widget-content {
+	border: 0px solid transparent !important;
+	background:transparent !important;
+	box-shadow: 0 0 0px #85b2cb;
+}
+
+.ListGrid .ui-state-default,
+.NotificationsListGrid .ui-state-default,
+.SearchResults thead {
+	display: none;
+}
+
+.DetailsSection .ui-state-default,
+.DetailsSection .ui-state-default,
+.DetailsSection thead {
+	display: none;
+}
+
+
+
+
+
+
+/*Buttons*/
+.BtnLocation,
+.SmallBtnStyle {
+	width: 100% !important;
+    height: 33px !important;
+    border-radius: 3px !important;
+    border: 0px;
+    font-size: 13px !important;
+    font-weight: inherit !important;
+    background: #e6e6e6 !important;
+}
+.BtnStyle {
+	background: #1f88c4 !important;
+}
+.BtnStyle:hover {
+	background: #27a8f3 !important;
+}
+
+
+
+.StartWork,
+.EndWork {
+	font-size: 13px !important;
+	height: 40px !important;
+	border-radius: 3px !important;
+	padding: 0px !important;
+	transition: all 0.2s ease 0s !important;
+	color:#fff !important;
+	border: 0px !important;
+	font-family: 'DroidKufi' !important;
+    font-weight: inherit !important;
+    box-shadow: inherit !important;
+	min-width: 100px;
+    margin-bottom: 5px;
+}
+
+.StartWork:hover {
+	background:#54b664 !important;
+}
+.EndWork:hover {
+	background:#ef5d5d !important;
+}
+
+.StartWork span,
+.EndWork span {
+	margin-left: 3px;
+    margin-right: 3px;
+}
+.StartWork {
+	background:#29a43d !important;
+
+}
+.EndWork {
+	background: #f33d3d !important;
+}
+
+
+
+.DoneBtnStyle {
+	background:#29a43d !important;
+}
+.DoneBtnStyle:hover {
+	background:#54b664 !important;
+}
+
+
+.DoneBtnStyle:focus,
+.BtnStyle:focus {
+	color: black !important;
+}
+
+
+.DoneBtnStyle,
+.BtnStyle {
+	font-size: 13px !important;
+	max-width: 180px !important;
+	height: 40px !important;
+	border-radius: 3px !important;
+	padding: 0px !important;
+	transition: all 0.2s ease 0s !important;
+	color:#fff !important;
+	border: 0px !important;
+	min-width:150px !important;
+	max-width:150px !important;
+	font-family: 'DroidKufi' !important;
+    font-weight: inherit !important;
+    box-shadow: inherit !important;
+}
+
+.SmallBtnStyle {
+	
+}
+.BtnIcon {
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+	font-size:16px !important;
+	color: #fff !important;
+}
+
+.BtnDiv {
+	border: 0px!important;
+	padding-top: 30px !important;
+	padding-bottom: 20px !important;
+}
+
+
+
+.DownloadAndroidBtn {
+	background-image: url(imgs/android_logo.png) !important;
+	background-repeat: no-repeat !important;
+}
+.DownloadIOSBtn {
+	background-image: url(imgs/ios_logo.png) !important;
+	background-repeat: no-repeat !important;
+}
+
+.DownloadAndroidBtn,
+.DownloadIOSBtn{
+	width:120px !important;
+	height:50px !important;
+	background-color: transparent !important;
+	border: 1px solid transparent !important; !important;
+	border-radius: 8px !important;
+}
+
+.DownloadAndroidBtn:hover,
+.DownloadIOSBtn:hover {
+	border:1px solid #D7D7D7 !important;
+}
+
+
+
+
+
+
+/*Login Box*/
+
+.LoginBox {
+	border: 1px solid #ddd !important;
+	border-radius: 4px !important;
+	max-width: 300px !important;
+	background-color: white !important;
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+	margin-bottom: 10px !important;
+	margin-top: -34px !important;
+	min-width:320px;
+}
+
+.LoginTitle {
+	text-align: center !important;
+	background-color: #1f88c4 !important;
+	color: #fff !important;
+	border-radius: 4px 4px 0px 0px !important;
+	margin-bottom: 10px !important;
+}
+
+.LoginBox a {
+	cursor: pointer !important;
+	font-size:12px !important;
+}
+
+.LoginBox input {
+	margin-bottom: 5px !important;
+}
+
+.LoginButtons {
+	background-color: #f2f2f2 !important;
+	border-radius: 0px 0px 4px 4px !important;
+	padding: 5px !important;
+}
+
+.LoginButtons div {
+	width: 100% !important;
+}
+
+.LoginLinks {
+	border-top: 1px solid #ededed !important;
+}
+
+.LoginBox .radio,.LoginBox .checkbox {
+	margin: 0px !important;
+	line-height: 20px !important;
+	font-size: 12px !important;
+	margin-top: 5px !important;
+}
+
+/*Content*/
+
+.HomeContent {
+	border: 1px solid #d7d7d7 !important;
+}
+
+.DealContentType {
+	width:100% !important;
+}
+
+.DealContentType a {
+	width:33% !important;
+}
+
+
+.DealContentType .glyphicon  {
+	margin:5px !important;
+}
+
+
+/*Footer*/
+
+.footer {
+	text-align:center !important;
+	color: #545454 !important;
+	padding-top:10px !important;
+	padding-bottom:10px !important;
+}
+
+.footer table {
+	margin: auto !important;
+}
+
+.footer p {
+	font-size: 12px !important;
+	line-height: 11px !important;
+	padding: 8px !important;
+}
+
+/*Footer End*/
+
+#lang-li-m {
+	background-color:#6d6d6d !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*Forms Page*/
+
+.Registration .row,
+.ResetPassword .row,
+.Profile .row,
+.CompanyPostJob .row,
+.EmployeeAskJob .row,
+.SearchCarateria .row,
+.EmployeeDetailsSection .row,
+.jobsBean .row,
+.StandardFields .row
+ {
+	padding-bottom: 5px !important;
+	padding-top: 5px !important;
+	border-bottom: 1px solid #eaeaea;
+}
+
+.completeRegistrationMessag {
+	color: #2fc72f;
+}
+.completeRegistrationMessag .glyphicon {
+	color: #2fc72f;
+	
+}
+
+
+.jobsBean h5 {
+	color: #1f88c4;
+}
+
+
+/*Remove Border Bottom*/
+
+
+
+
+
+.RemoveBorderBottom {
+	border-bottom:0px solid black !important;
+}
+
+.RemoveBorder {
+	border: 0px;
+    box-shadow: inherit;
+	background: transparent !important;
+}
+
+
+.RegistrationCeberator {
+	margin-top: 20px;
+    border-bottom: 2px solid #8a8a8a !important;
+}
+.RegistrationCeberator h5 {
+	font-weight: bold;
+}
+
+
+.Profile label {
+	padding-top: 10px !important;
+	font-weight: inherit !important;
+}
+.Profile h5 {
+	color:#b1b1b1 !important;
+}
+
+.Profile .CompanyImage {
+	width: 220px !important;
+	height: 220px !important;
+	border: 1px solid #dbdbdb !important;
+	border-radius: 8px !important;
+	padding: 10px !important;
+	margin: 0 auto !important;
+}
+
+.Profile .CompanyImage img  {
+	height:200px !important;
+	max-height:200px !important;
+	min-height:200px !important;
+}
+
+
+.ChangeProfileImage {
+	background-image: url(imgs/btn_change_image.png) !important;
+	background-repeat: no-repeat !important;
+	background-color: rgba(255,255,255,0.5) !important;
+	border: 1px solid #d1d1d1 !important;
+	border-radius: 30px !important;
+	width: 35px !important;
+	height: 35px !important;
+	background-position: center center !important;
+	position: absolute !important;
+	top: 180px !important;
+}
+.ChangeProfileImage:hover {
+	border: 1px solid #898989 !important;
+}
+
+
+
+
+
+textarea {
+   resize: none !important;
+}
+
+
+.dropdown-menu  {
+	right: auto !important !important;
+}
+
+.AlertRadio {
+	margin-top:10px !important;
+}
+.AlertSelectUsersRadio {
+	padding-top: 5px !important;
+	border-radius: 6px !important;
+}
+
+
+
+.tab-content {
+	padding-right: 15px !important;
+	padding-left: 15px !important;
+}
+
+
+/*Branch List*/
+.dual-list .list-group {
+	margin-top: 8px !important;
+}
+
+.dual-list {
+	background-color: transparent
+}
+
+.dual-list .glyphicon {
+	margin: 3px !important;
+}
+.dual-list .selector{
+	color: #545454 !important;
+}
+
+
+
+.list-left li, .list-right li {
+	cursor: pointer !important;
+}
+
+.list-arrows {
+	padding-top: 100px !important;
+}
+
+.list-arrows button {
+		margin-bottom: 20px !important;
+}
+
+.BranchesScroll {
+	height: 200px !important;
+	overflow: auto !important;
+	margin-top: 5px !important;
+	border: 1px solid #f2f2f2 !important;
+	border-radius: 6px !important;
+}
+
+.BranchesScroll ul {
+	margin: 0px !important;
+	margin-top: 0px !important !important;
+}
+
+.BranchesScroll li{
+	border-bottom-left-radius:0px !important !important;
+	border-bottom-right-radius:0px !important !important;
+	border-top-left-radius:0px !important !important;
+	border-top-right-radius:0px !important !important;
+}
+
+
+
+.borderless  {
+	border-bottom: 0px!important !important;
+}
+
+.box{
+        display: none !important;
+    }
+	
+	
+	
+
+
+
+.NotiSelection {
+	width:200px !important;
+	min-width:200px !important;
+}
+.LoginType li {
+	width:33% !important;
+}
+.NotiSelection li {
+	width:50% !important;
+}
+
+
+.NotiAgeBox .form-control {
+	width: inherit !important;
+}
+
+
+
+
+.LoginType> li > a:hover {
+	opacity: 1 !important;
+	background-color:transparent !important;
+}
+
+
+.file-drop-zone{
+	max-height:200px !important;
+	min-height:200px !important;
+}
+.file-drop-zone-title {
+    padding: 80px 10px !important !important;
+}
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 20px !important !important;
+    border-bottom-right-radius: 20px !important !important;
+}
+.btn-group > .btn:last-child:not(:first-child), .btn-group > .dropdown-toggle:not(:first-child) {
+    border-top-left-radius: 20px !important !important;
+    border-bottom-left-radius: 20px !important !important;
+}
+
+
+
+.main-menu .navbar-default .navbar-toggle .icon-bar {
+	background-color:#fff !important;
+}
+
+
+.RadioBG {
+	padding: 10px !important;
+    border-radius: 10px !important;
+    width: 180px !important;
+    background-color: #f7f7f7 !important;
+}
+
+
+
+
+.ConfirmeDeal {
+	margin-bottom:20px !important;
+}
+.MobileBG {
+	background-image: url(imgs/mobile-bg.png) !important;
+	background-repeat: no-repeat !important;
+	width:500px !important;
+	min-height:460px !important;
+	background-size: 100% !important;
+	margin: 0 auto !important;
+	margin-bottom: 10px !important;
+}
+.MobileBG img {
+	width:345px !important;
+	height:140px !important;
+	position: relative !important;
+	top: 232px !important;
+}
+
+
+
+
+
+
+.alwasright {
+	float:right !important;
+}
+.ui-selectoneradio label {
+	font-size: 12px;
+}
+
+.NumberKey h5 {
+	direction:ltr !important;
+}
+
+
+
+
+
+.ui-inputfield {
+	width:100%;
+    border-color: #c1c1c1;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.ui-inputfield:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+
+
+
+
+
+
+.UploadAttachmentsSection {
+	padding:0px;
+	height: auto;
+}
+.UploadAttachmentsSection .ui-fileupload-buttonbar {
+	background:background: #f1f1f1;
+}
+.UploadAttachmentsSection .ui-fileupload-content {
+	min-height:100px;
+	max-height:100px;
+}
+
+.UploadAttachmentsSection .ui-fileupload-row {
+	    border-bottom: 1px solid gainsboro;
+}
+.UploadAttachmentsSection .ui-fileupload-preview {
+	padding:0px;
+}
+.UploadAttachmentsSection .ui-fileupload-preview canvas {
+	height:30px;
+}
+
+
+
+
+/*Wizard*/
+
+.wizard {
+    width:100% !important;
+}
+
+    .wizard .nav-tabs {
+        position: relative !important;
+        margin-bottom: 0 !important;
+        border-bottom-color: #e0e0e0 !important;
+    }
+
+    .wizard > div.wizard-inner {
+        position: relative !important;
+    }
+
+.connecting-line {
+    height: 2px !important;
+    background: #e0e0e0 !important;
+    position: absolute !important;
+    width: 80% !important;
+    margin: 0 auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 50% !important;
+    z-index: 1 !important;
+}
+
+.wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+    color: #555555 !important;
+    cursor: default !important;
+    border: 0 !important;
+    border-bottom-color: transparent !important;
+}
+
+span.round-tab {
+    width: 70px !important;
+    height: 70px !important;
+    line-height: 70px !important;
+    display: inline-block !important;
+    border-radius: 100px !important;
+    background: #fff !important;
+    border: 2px solid #e0e0e0 !important;
+    z-index: 2 !important;
+    position: absolute !important;
+    left: 0 !important;
+    text-align: center !important;
+    font-size: 25px !important;
+}
+span.round-tab i{
+    color:#555555 !important;
+}
+.wizard li.active span.round-tab {
+    background: #fff !important;
+    border: 2px solid #838383 !important;
+    
+}
+.wizard li.active span.round-tab i{
+    color: #2490b4 !important;
+}
+
+span.round-tab:hover {
+    color: #333 !important;
+    border: 2px solid #333 !important;
+}
+
+.wizard .nav-tabs > li {
+    width: 25% !important;
+}
+
+.wizard li:after {
+    content: " " !important;
+    position: absolute !important;
+    left: 46% !important;
+    opacity: 0 !important;
+    margin: 0 auto !important;
+    bottom: 0px !important;
+    border: 5px solid transparent !important;
+    border-bottom-color: #2490b4 !important;
+    transition: 0.1s ease-in-out !important;
+}
+
+.wizard li.active:after {
+    content: " " !important;
+    position: absolute !important;
+    left: 46% !important;
+    opacity: 1 !important;
+    margin: 0 auto !important;
+    bottom: 0px !important;
+    border: 10px solid transparent !important;
+    border-bottom-color: #2490b4 !important;
+}
+
+.wizard .nav-tabs > li a {
+    width: 70px !important;
+    height: 70px !important;
+    margin: 20px auto !important;
+    border-radius: 100% !important;
+    padding: 0 !important;
+}
+
+    .wizard .nav-tabs > li a:hover {
+        background: transparent !important;
+    }
+
+.wizard .tab-pane {
+    position: relative !important;
+    padding-top: 50px !important;
+}
+
+.wizard h3 {
+    margin-top: 0 !important;
+}
+
+
+.ProfileTabs {
+	border-bottom: 1px solid #e6e6e6 !important;
+	margin-bottom:10px !important;
+}
+.ProfileTabs li {
+	min-width: 120px !important;
+	text-align: center !important;
+}
+.ProfileTabs a {
+	border-radius: 4px 4px 0px 0px !important !important;
+}
+
+
+
+
+
+
+
+.CondetionCheckbox {
+	margin-top:20px;
+	margin-bottom:20px;
+	font-size: 12px !important;
+	font-weight: inherit;
+}
+
+
+
+.selectarrowsolution .ui-selectonemenu {
+	width:100%;
+	padding-left: 2px;
+    padding-right: 2px;
+}
+.selectarrowsolution label{
+    background: transparent !important;
+    border: 0px solid black !important;
+    box-shadow: inset 0 2px 2px transparent !important;
+    padding-top:0px;
+    text-align: center !important;
+}
+.ui-selectonemenu-panel .ui-selectonemenu-list-item {
+	text-align:center !important;
+}
+.selectarrowsolution .ui-selectonemenu-trigger{
+	background: transparent !important;
+    border: 0px !important;
+    min-width: 40px !important;
+    
+}
+.selectarrowsolution .ui-selectonemenu-trigger span{
+    margin-top: 10px !important;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.selectarrowsolution .ui-state-hover {
+	box-shadow: inherit !important;
+}
+
+
+
+
+/*Registration Preview*/
+.RegistrationPreview {
+	margin-top:10px;
+}
+.RegistrationPreview .title {
+	border-bottom: 1px solid #cccccc;
+	margin-bottom:5px;
+}
+.RegistrationPreview .title label {
+	font-weight: bold;
+    color: #1f88c4;
+	font-size:12px;
+}
+.RegistrationPreview .value {
+	    margin-bottom: 10px;
+}
+.RegistrationPreview .value label {
+	font-weight: normal;
+	font-size:14px;
+}
+.CompanyRepresentetive {
+	font-weight:bold;
+	margin-top:10px;
+}
+.RegistrationPreview .Reasons {
+	background-color: #efefef;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+
+
+/*Requiered Message*/
+.ui-message {
+	display:none;
+}
+.ui-message-error {
+	display:inherit !important;
+}
+.RequieredMessage .ui-message {
+	height:20px;
+	font-size:12px;
+	border-radius: 0px 0px 4px 4px;
+}
+
+
+
+/*PaymentPanel*/
+.PaymentPanel th,
+.PaymentTime th {
+	background: #75a8c5 !important;
+	color:#fff !important;
+	font-size: 15px !important;
+    font-weight: inherit !important;
+}
+.PaymentPanel table thead th:nth-child(4) {
+	width:100px !important
+}
+.PaymentPanel table tbody tr td:nth-child(4) div {
+	width:100% !important
+}
+.PaymentPanel table tbody label {
+	font-size: 13px !important;
+}
+.PaymentSamary {
+	background: #e6e6e6;
+    border: 3px solid #1f88c4;
+    padding: 5px;
+    margin: 5px;
+}
+.PaymentPopup .row {
+	padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+.PaymentSamary .value {
+	color: #1f88c4;
+    font-weight: bold;
+}
+/*End*/
+
+/*List Panel*/
+/*Head*/
+.CompanyReviewListPanel {
+	max-height: 500px;
+    overflow: auto;
+}
+.CompanyReviewListPanel .panel-heading {
+	padding:5px 15px;
+	color: #ffffff;
+    background-color: #1f88c4 !important;
+    border-color: #616161;
+    font-weight: bold;
+    font-size: 14px;
+}
+.CompanyReviewListPanel .panel-heading .glyphicon {
+	margin-left: 5px;
+	font-size: 18px;
+}
+/*Body*/
+.CompanyReviewListPanel .panel-body {
+	padding:0px !important;
+}
+.CompanyReviewListPanel thead span {
+	color: #565656;
+	font-size: 12px;
+}
+.CompanyReviewListPanel thead th,
+.CompanyReviewListPanel .ui-paginator {
+	background: #ececec;
+    border: 1px solid #cccccc;
+}
+
+
+
+
+
+
+
+/*Error Pages*/
+.NotFoundPage,
+.ErrorPage {
+	height: 400px;
+    text-align: center;
+    padding-top: 80px;
+}
+.NotFoundImage {
+	background-image: url(../imgs/notfound.png);
+	height: 150px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.ErrorImage {
+	background-image: url(../imgs/error.png);
+	height: 150px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+
+
+
+
+
+
+/*MyBox*/
+.MyBoxDiv {
+	min-height: 150px !important;
+}
+.MyBox {
+	border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    max-width: 300px !important;
+    background-color: white !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-bottom: 60px !important;
+    margin-top: -34px !important;
+    margin: 0 auto !important;
+}
+.FirstSection {
+	text-align: center !important;
+	border-radius: 6px 6px 0px 0px !important;
+	margin-bottom: 5px !important;
+	border-bottom: 2px solid #dedede;
+	min-height: 55px;
+}
+.UserPhoto {
+    height: 50px;
+    margin: 5px;
+    border-radius: 30px;
+    border: 1px solid #b3b3b3;
+}
+.UserNameTable,
+.CompanyNameTable {
+	width: 100%;
+	margin-top: 7px;
+}
+.CompanyNameTable {
+	margin-top:10px;
+}
+.CompanyNameTable td:nth-child(2) {
+	width:50px;
+}
+.UserNameTable .HomeUserPhotoHolder,
+.UserNameTable .HomeUserPhotoHolder .ui-panel-content {
+	padding:0px !important;
+	border: 0px !important;
+}
+
+.TheredSection {
+	background-color: whitesmoke;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+.Greeting,
+.GreenBold {
+	color: green;
+	font-weight: bold;
+}
+.DoneHours,
+.FailedHours {
+	    width: 70% !important;
+}
+.RedBold {
+	color: red;
+	font-weight: bold;
+}
+.StatesticsNumber {
+	font-size:16px;
+}
+.BorderBottom {
+	border-bottom: 1px solid #ececec;
+    margin-bottom: 5px;
+}
+
+
+
+/*JobsListGrid*/
+.ListItem,
+.AlertItem {
+	background-color: #f5f5f5;
+    cursor: pointer;
+    border: 2px solid #efefef;
+    transition: 0.3s;   
+}
+
+.ListItem:hover,
+.AlertItem:hover {
+	border: 2px solid #f5daa6;
+}
+.ListItem {
+	padding: 7px;
+	margin-bottom: 5px;
+}
+.title {
+	font-size:14px;
+}
+
+.CompanyiesListItem .EmployeesInfoTable,
+.EmployeeList .EmployeesInfoTable {
+	font-size: 12px;
+}
+.ListItem .JobTitle,
+.ListItem .JobTitle label {
+	font-weight: bold;
+    font-size: 15px;
+    color: #1f88c4;
+}
+.ListItem .JobField {
+	font-size: 12px;
+	font-weight: bold;
+}
+.ListItem .NearBy label {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.PostingDateAndTime {
+	font-size: 11px;
+	color: #757575;
+	margin-top: 10px;
+}
+.PostingDateAndTime label {
+	font-weight: inherit !important;
+}
+
+.ListItemFirst {
+	border-bottom: 2px solid #cecece;
+	margin-right: -7px;
+    margin-left: -7px;
+}
+.ListItem  .ListItemSecond{
+	margin-top: 2px;
+    margin-bottom: 2px;
+}
+.AlertItem {
+	border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 5px;
+	margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+.AlertItem:hover {
+	border: 1px solid #f99608;
+    transition: 0.5s;
+}
+.AlertItem label {
+	font-weight: inherit;
+    font-size: 12px;
+    margin-top: 6px;
+}
+.LocationIcon {
+	background-image: url(imgs/icon_location.png) !important;
+	background-repeat: no-repeat !important;
+	display:block;
+	width:22px;
+	height:22px;
+}
+
+.DoneIcon {
+	background-image: url(imgs/icon_done.png) !important;
+	background-repeat: no-repeat !important;
+	display:block;
+	width:22px;
+	height:22px;
+}
+.RefusedIcon {
+	background-image: url(imgs/icon_refused.png) !important;
+	background-repeat: no-repeat !important;
+	display:block;
+	width:22px;
+	height:22px;
+}
+.WaitingIcon {
+	background-image: url(imgs/icon_waiting.png) !important;
+	background-repeat: no-repeat !important;
+	display:block;
+	width:22px;
+	height:22px;
+}
+.CalenderIcon {
+	background-image: url(imgs/icon_calender.png) !important;
+	background-repeat: no-repeat !important;
+	display:block;
+	width:22px;
+	height:22px;
+}
+.TimeIcon {
+	background-image: url(imgs/icon_time.png) !important;
+	background-repeat: no-repeat !important;
+	display:block;
+	width:22px;
+	height:22px;
+}
+
+.CompanyIcon {
+	background-image: url(imgs/icon_company.png) !important;
+	background-repeat: no-repeat !important;
+	display:block;
+	width:22px;
+	height:22px;
+}
+.AlertIcon {
+	background-image: url(imgs/icon_noti.png) !important;
+	background-repeat: no-repeat !important;
+	display:block;
+	width:30px;
+	height:30px;
+}
+.AlertNewIcon {
+	background-image: url(imgs/icon_noti_on.png) !important;
+	background-repeat: no-repeat !important;
+	display:block;
+	width:30px;
+	height:30px;
+}
+
+.arrowTD {
+	padding-left:0px !important;
+	padding-right:0px !important;
+}
+
+.TimeFromToArea,
+.DateFromToArea {
+	padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+.LocationIcon,
+.CalenderIcon,
+.TimeIcon,
+.AlertIcon,
+.AlertNewIcon,
+.CompanyIcon {
+	margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+.Status label {
+	font-size:13px !important;
+}
+.StatusAccepted  {
+	color: #1bd01b;
+    font-weight: bold;
+	font-size:13px;
+}
+
+.StatusRejected  {
+	color: red;
+    font-weight: bold;
+	font-size:13px;
+}
+
+.RequestStatus label:first-child {
+	float:right;
+}
+.DateTable {
+	min-width: 280px;
+}
+.TimeTable {
+		min-width: 200px;
+}
+.TimeTable,
+.DateTable {
+	border-spacing:0px;
+	width: initial !important;
+	
+}
+.TimeTable td,
+.DateTable td {
+	border: 0px!important;
+	color:#4f4f4f !important;
+	font-weight: bold;
+}
+.DateTable .DateValue,
+.TimeTable .TimeValue,
+.JobTitle_RequestDetails{
+	font-weight: bold;
+    font-size: 16px;
+    color: #1f88c4;
+}
+
+
+
+
+.EmpSummary label {
+	font-size: 13px !important;
+    padding: 2px !important;
+}
+
+
+
+
+
+.RequestJobTitle {
+	border-bottom: 1px solid #ececec;
+	margin-bottom: 7px;
+}
+
+
+
+
+.RegisteredHomeTabs {
+	margin-top: -55px;
+	background-color: transparent !important;
+	border: 0px;
+}
+.RegisteredHomeTabs .ui-tabs-nav {
+	background: #354a58 !important;
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+    padding: 5px !important;
+}
+
+.RegisteredHomeTabs .ui-tabs-selected,
+.LoginTabs .ui-tabs-selected {
+	background-color: transparent !important;
+    border: 0px !important;
+}
+.RegisteredHomeTabs li,
+.LoginTabs li {
+	box-shadow: inset 0 0px 0 #fff !important;
+}
+.RegisteredHomeTabs a:first-child,
+.LoginTabs a {
+	color: #afafaf;
+    text-shadow: 0 0px 0 rgba(255,255,255,0.8) !important;
+    font-size: 13px;
+    
+}
+.LoginTabs a {
+	color: #afafaf !important;
+	float: inherit !important;
+}
+.RegisteredHomeTabs .ui-tabs-selected a {
+	color:white !important;
+}
+
+
+.RegisteredHomeTabs li:first-child {
+	background-image: url(imgs/tab_mypage_icon_on.png) !important;
+	background-repeat: no-repeat !important;
+}
+.RegisteredHomeTabs li:nth-child(2) {
+	background-image: url(imgs/tab_myrequests_icon_on.png) !important;
+	background-repeat: no-repeat !important;
+}
+.RegisteredHomeTabs li:nth-child(3) {
+	background-image: url(imgs/tab_notifications_icon_on.png) !important;
+	background-repeat: no-repeat !important;
+}
+.RegisteredHomeTabs li:nth-child(4) {
+	background-image: url(imgs/tab_ratting_on.png) !important;
+	background-repeat: no-repeat !important;
+}
+
+.CompanyHomeTabs li:first-child {
+	background-image: url(imgs/tab_myrequests_icon_on.png) !important;
+	background-repeat: no-repeat !important;
+}
+
+.CompanyHomeTabs li:nth-child(2) {
+	background-image: url(imgs/tab_mypage_icon_on.png) !important;
+	background-repeat: no-repeat !important;
+}
+
+.RegisteredHomeTabs li:first-child,
+.RegisteredHomeTabs li:nth-child(2),
+.RegisteredHomeTabs li:nth-child(3),
+.RegisteredHomeTabs li:nth-child(4) {
+	border: 0px;
+    background-color: transparent;
+}
+.EmpPageHeader {
+	background-color:#354a58 !important;
+	min-height: 45px;
+}
+
+.RegisteredHomeTabs .ui-state-default {
+	opacity: 0.3;
+}
+.RegisteredHomeTabs .ui-tabs-selected {
+	opacity: 1;
+}
+
+
+.LoginTabs {
+	background: #1f88c4 !important;
+    height: 45px !important;
+    border: 0px !important;
+}
+.LoginTabs ul {
+	background: transparent !important;
+	padding-top: 0px !important;
+}
+.LoginTabs li {
+	border: 0px;
+    background-color: transparent;
+}
+
+.LoginTabs .ui-state-default {
+	border: 0px !important;
+    background: transparent;
+    padding-bottom:22px !important;
+    width:30%;
+}
+.LoginTabs .ui-tabs-selected {
+	background-image: url(imgs/arrow_tab.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: center bottom !important;
+    background-size: 30% !important;
+}
+.LoginTabs .ui-tabs-selected a {
+	color:#fff !important;
+}
+
+.LoginTabs .ui-state-hover,
+.RegisteredHomeTabs .ui-state-hover{
+	background-color:transparent !important;
+}
+
+.ui-dialog-titlebar .ui-state-hover {
+	background-color: #cacaca !important;
+}
+
+
+
+.ListUserPhoto {
+	border: 2px solid #cdd8de;
+    border-radius: 6px;
+}
+
+
+
+
+.DefaultTableStyle table{
+	border: 1px solid #d2d2d2;
+}
+.DefaultTableStyle thead th {
+    background: #1f88c4 !important;
+    color: #fff !important;
+    border: 0px solid black !important;
+    padding: 10px !important;
+}
+
+.DefaultTableStyle tbody td {
+	padding: 1px 5px !important;
+	border-width: 0px !important;
+}
+.DefaultTableStyle tbody tr {
+	border: 0px solid black !important;
+}
+.DefaultTableStyle tbody .ui-datatable-odd {
+    background: none repeat scroll 0 0 #f0f7fb !important;
+}
+.DefaultTableStyle tbody button {
+	width: 35px !important;
+	height: 35px !important;
+    margin: 5px !important;
+}
+.DefaultTableStyle .ui-datatable-tablewrapper {
+	border-top-right-radius: 6px !important;
+    border-top-left-radius: 6px !important;
+}
+.DefaultTableStyle .ui-paginator {
+	background: #797979 !important;
+	border-bottom-right-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+}
+
+.DefaultTableStyle select {
+	background: #fff !important;
+}
+.DefaultTableStyle a {
+	background: #444444 !important;
+    border: 1px solid transparent !important;
+    text-shadow: 0 0px 0 rgba(255,255,255,0.7) !important;
+    color: #fff !important;
+    box-shadow: inset 0 0px 0 #fff !important;
+}
+
+
+
+
+
+
+
+.ActionsArea {
+	min-height: 45px;
+    padding: 0px;
+}
+.buttona {
+	padding:7px !important;
+	color: #fff !important;
+	margin: 0 auto;
+    display: block !important;
+    padding-top: 12px !important;
+    text-align:center !important;
+}
+.buttona :hover {
+	text-decoration: inherit !important;
+}
+.buttona span {
+	padding: 0px 5px 0px 5px !important;
+    color: white !important;
+}
+
+
+
+.AddJobDivHolder .buttona {
+	max-width: inherit !important;
+}
+
+
+
+
+.MyProfileIcon {
+	height:37px !important;
+	width:37px !important;
+	background-image: url(imgs/btn_setting.png) !important;
+    background-position: top !important;
+	background-repeat: no-repeat !important;
+}
+
+
+.BoxUserName  	{
+    font-size: 12px;
+}
+
+
+
+/*Profile*/
+.Profile .UserImage {
+	width: 220px;
+	height: 220px;
+	padding: 10px;
+	margin: 0 auto;
+}
+
+.Profile .UserImage img  {
+	height:200px;
+	max-height:200px;
+	min-height:200px;
+}
+
+.Profile .UserImage div {
+	width:100% !important;
+	height:100% !important;
+	padding:0px !important;
+}
+
+
+.ChangeProfileImage {
+	background-image: url(../imgs/btn_change_image.png);
+	background-repeat: no-repeat;
+	background-color: rgba(255,255,255,0.5);
+	border: 1px solid #d1d1d1;
+	border-radius: 30px;
+	width: 35px;
+	height: 35px;
+	background-position: center center;
+	position: absolute;
+	top: 180px;
+}
+.ChangeProfileImage:hover {
+	border: 1px solid #898989;
+}
+.Profile .title {
+    color: #b1b1b1;
+}
+.ProfileEditdiv {
+	text-align: center;
+    padding-top: 15px;
+}
+.ProfileEditdiv div {
+	margin-bottom:10px;
+}
+
+
+
+
+
+
+
+
+
+
+.EmployeeList .ListUserPhoto,
+.CompanyiesListItem .ListUserPhoto  {
+    margin-bottom: 5px;
+	border: 1px solid #e8e8e8;
+}
+.EmployeeList .ListRatting,
+.CompanyiesListItem .ListRatting  {
+	text-align:center;
+	font-size: 12px;
+	padding-top:10px;
+}
+.EmployeeList .Status {
+	padding-top:10px;
+}
+
+
+
+
+
+
+.AskButton {
+    color: #2abf2a !important;
+    background: transparent !important;
+    border: 4px solid #d8d8d8 !important;
+}
+.DetailsButton {
+    color: #1f88c4 !important;
+    background: transparent !important;
+    border: 4px solid #d8d8d8 !important;
+}
+.AcceptedButton {
+    color: #fff !important;
+	background: #14af14;
+    border: 4px solid #14af14;
+}
+.AskedButton {
+    color: #fff !important;
+    background: #c33838;
+    border: 4px solid #d8d8d8;
+}
+.CancelJobButton {
+    color: #c33838 !important;
+    background: transparent !important;
+	border: 4px solid #c33838 !important;
+	margin-top: -5px;
+    margin-bottom: 5px;
+}
+
+.AskButton,
+.AcceptedButton,
+.AskedButton,
+.CancelJobButton,
+.DetailsButton {
+	font-weight: bold !important;
+    font-size: 13px !important;
+    cursor: pointer !important;
+    font-family: 'DroidKufi' !important;
+	padding: 2px 5px 2px 5px !important;
+    min-width:80px;
+	display: inherit !important;
+    opacity: 1 !important;
+}
+.AskButton .ui-button-text,
+.AcceptedButton .ui-button-text,
+.AskedButton .ui-button-text,
+.CancelJobButton .ui-button-text,
+.DetailsButton .ui-button-text {
+	padding:0px !important;
+}
+
+
+.AskButton:hover,
+.AcceptedButton:hover,
+.AskedButton:hover,
+.CancelJobButton:hover,
+.DetailsButton:hover {
+	border-color: #7d7d7d !important;
+}
+
+
+
+
+
+.EmployeePreview,
+.padding {
+	padding:10px;
+}
+.EmployeePreview {
+	padding-top:0px !important;
+}
+.DetailsArrow {
+	background-image: url(imgs/arrow_details.png);
+	background-repeat: no-repeat;
+	background-position:center top;
+	height: 15px;
+	border-bottom: 3px solid #1f88c4;
+}
+/*
+.DetailsSection {
+	padding: 15px;
+	min-height: 350px;
+}
+*/
+.DetailsSection .ui-datatable-data,
+.DetailsSection .ui-datatable-data tr,
+.DetailsSection .ui-datatable-data td {
+	background: 0px;
+    border: 0px;
+}
+
+
+
+
+.Separetor {
+	border-bottom: 1px solid #d6d6d6;
+    margin-top: 5px;
+	margin-bottom:5px;
+}
+
+
+
+
+.DetailsListItem_Employees,
+.DetailsListItem_Companies {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #bdbdbd;
+    padding: 5px;
+}
+.RequetesNumber{
+    text-align: center;
+}
+.RequetesNumber label{
+	color: #2abf2a;
+    text-align: center;
+}
+
+
+
+
+
+
+.EmployeesInfoTable,
+.EmployeesDataTable {
+	border-spacing:0px;
+}
+.EmployeesInfoTable td,
+.EmployeesDataTable td {
+	border: 0px!important;
+}
+.EmployeesInfoTable {
+	width: calc((100%) - 60px) !important;
+}
+.FullWidth {
+	width:100% !important;
+}
+.UserPhotoTd {
+	padding:0px !important;
+	width:50px !important;
+}
+.EmployeesDataTable {
+	width: initial !important;
+}
+.EmployeesDataTable {
+	min-width:330px;
+}
+.CompanyiesListItem .ListItemSecond {
+	margin-top:0px;
+	margin-bottom:0px;
+}
+.SearchCarateria {
+	border: 4px solid #e6e6e6;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background: #fbfbfb;
+}
+.SearchCarateria .BtnDiv {
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.SearchCarateria h5 {
+	color: #1f88c4;
+}
+.SearchButton {
+	margin-top:7px;
+	margin-bottom:7px;
+}
+.ui-datatable-empty-message td {
+	text-align: center;
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+}
+.PaginationHolder {
+	text-align: center;
+}
+.PageNumber {
+	cursor: inherit !important;
+	color: #333333 !important;
+	padding: 4px 12px !important;
+}
+.PageNumber:hover {
+	background-color: transparent !important;
+}
+.PageNumber td {
+	padding-left:2px;
+	padding-right:2px;
+}
+
+
+
+
+.JobSelection {
+	min-width: inherit !important;
+}
+
+
+
+
+.ui-messages-info {
+	color: #17c13d !important;
+    background-color: #d3f9e4 !important;
+    border-color: #9de6b7 !important;
+}
+
+
+
+
+
+/*Admin*/
+ul.AdminTabs {
+	list-style-type: none;
+	margin: 0 0 30px 0;
+	padding: 50px 0 0 0;
+	background: #354a58;
+	text-align: right;
+	margin-bottom: 10px !important;
+	margin-right: -15px !important;
+	margin-left: -15px !important;
+}
+ul.AdminTabs li {
+	display: inline-block;
+    padding: 15px 50px;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.2;
+}
+ul.AdminTabs li a{
+	color: #fff !important;
+}
+ul.AdminTabs li.TabRequestes {
+    		background: url(imgs/tab_requestes_on.png) no-repeat;
+        background-position:7px center;
+}
+ul.AdminTabs li.TabCompanies {
+    		background: url(imgs/tab_myrequests_icon_on.png) no-repeat;
+        background-position:7px center;
+}
+ul.AdminTabs li.TabEmployees {
+    		background: url(imgs/tab_employees_on.png) no-repeat;
+        background-position:7px center;
+}
+ul.AdminTabs li.TabAccountant {
+    		background: url(imgs/tab_finance_on.png) no-repeat;
+        background-position:7px center;
+}
+	ul.AdminTabs li:hover {
+		    opacity: 0.7;
+	}
+	ul.AdminTabs li.active {
+		    opacity: 1;
+	}
+
+	ul.AdminTabs {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		color: #000000;
+	}
+	
+	
+	
+	
+
+
+
+/*Popup*/
+.PopupButtonArea,
+.ui-dialog-buttonpane {
+	background: #f1f1f1;
+    margin-top: 20px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    margin-bottom: -8px;
+    border: 0px!important;
+    padding-left:20px;
+    padding-right:20px;
+}
+.ui-dialog .ui-selectonemenu {
+	width:100% !important;
+}
+.ui-dialog .BtnStyle {
+	width: inherit !important;
+    min-width: inherit !important;
+    background: #cecece !important;
+    color: #353535 !important;
+	font-weight: bold !important;
+}
+.ui-dialog .BtnStyle:hover {
+	background: #bbbbbb !important;
+}
+.ui-dialog .PageBar {
+	    margin-top: -8px;
+}
+
+
+
+
+
+
+/*Master Visa Select*/
+.MasterVisaSelect div {
+	padding: 0px !important;
+	border: 0px solid transparent !important;
+    background: transparent !important;
+}
+
+.MasterVisaSelect img {
+	margin-top: 7px;
+}
+/*Master Visa Select End*
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media( max-width : 585px ) {
+
+    .wizard {
+        width: 90% !important;
+        height: auto !important !important;
+    }
+
+    span.round-tab {
+        font-size: 16px !important;
+        width: 50px !important;
+        height: 50px !important;
+        line-height: 50px !important;
+    }
+
+    .wizard .nav-tabs > li a {
+        width: 50px !important;
+        height: 50px !important;
+        line-height: 50px !important;
+    }
+
+    .wizard li.active:after {
+        content: " " !important;
+        position: absolute !important;
+        left: 35% !important;
+    }
+}
+
+/*wizard End*/
+
+@media screen and (max-width: 991px) {
+
+	.LoginBox {
+		margin-top:0px !important;
+		float: unset !important;
+		margin: 0 auto !important;
+		
+	}
+	.EmpPageHeader {
+		display:none
+	}
+	.MyBox {
+	    border: 0px solid #ddd !important;
+    	max-width: inherit !important;
+    }
+    .DoneHours,
+	.FailedHours {
+	    width: 25% !important;
+	}
+	.FirstSection {
+	    margin-bottom: 0px !important;
+	}
+}
+
+
+@media screen and (min-width: 640px) {
+
+	.all {
+		width:90% !important;
+	}
+	
+}
+
+@media screen and (max-width: 640px) {
+		.LoginType label {
+			display:none !important;
+		}
+		.LoginType .glyphicon {
+			font-size: 20px !important;
+		}
+		.LoginType {
+			width:auto !important;
+			min-width:auto !important;
+		}
+		.NotiSelection label {
+			display:inline !important;
+		}
+		.NotiSelection .glyphicon {
+			font-size: inherit !important;
+		}
+		
+		.DoneBtnStyle,
+		.BtnStyle {
+			min-width:120px !important;
+			max-width:120px !important;
+			font-size: 10px !important;
+		}
+		
+		
+		
+		
+		.MobileBG {
+			width:350px !important;
+			min-height:322px !important;
+		}
+		.MobileBG img {
+			width:242px !important;
+			height:99px !important;
+			top: 162px !important;
+		}
+		
+}
+
+
+@media screen and (max-width: 500px) {
+		.DoneBtnStyle,
+		.BtnStyle {
+			min-width:120px !important;
+			max-width:120px !important;
+			font-size: 10px !important;
+		}
+}
+
+
+
+.glyphicon {
+	top:auto !important !important;
+}
+
+

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      >
+    <h:body>
+ 
+    	<ui:composition template="/template/commonLayout.xhtml">   
+
+			<ui:define name="title">#{bundle['loginPageTitle']}</ui:define>
+            
+    		<ui:define name="content">    			
+    			<div class="row PageBar">
+						<div class="col-sm-12 PageTitle">#{bundle['loginPage']} </div>
+				</div>
+    		<div class="row">
+						<div class="col-sm-4 col-sm-push-8 LoginBoxDiv ">
+							<div class="LoginBox">
+								<div class="row LoginTitle">
+									<h5>#{bundle['logIn']} </h5>
+								
+								
+									<p:tabView class="LoginTabs">
+									
+									        <p:ajax event="tabChange" listener="#{loginBean.onTabChange}" update="usernamelabel username"/>
+
+										<p:tab id="employee" title="#{bundle['employee']}"></p:tab>
+
+										<p:tab id="company" title="#{bundle['company']}"></p:tab>
+										
+										<p:tab id="branch" title="#{bundle['branch']}"></p:tab>
+									</p:tabView>
+									
+								</div>
+								<form id="login" action="#{request.contextPath}/login" method="post">
+								<div class="tab-content">
+									<div id="EmployeeTabLogin" class="row tab-pane fade in active">
+										
+										<div class="row">
+											<div class="col-xs-5">
+												<h6><h:outputLabel value="#{loginBean.userIdDescription}" id="usernamelabel"/></h6>
+											</div>
+									
+											<div class="col-xs-7">
+						
+												<p:inputText a:placeholder="#{loginBean.userIdDescription}" id="username" class="form-control"></p:inputText>
+					
+											</div>
+										</div>
+										<div class="row">
+												<div class="col-xs-5">
+													<h6> #{bundle['password']}</h6>
+												</div>
+										
+												<div class="col-xs-7">
+													<p:password a:placeholder="#{bundle['password']} " id="password" class="form-control"/>
+												</div>
+										</div>
+										
+										<div class="row LoginLinks">
+												<div class="col-xs-6">
+													<div class="checkbox">
+														<label>
+														  <input type="checkbox" id="remember-me"/> #{bundle['rememberMe']} 
+														</label>
+													</div>
+												</div>
+												<div class="col-xs-6">
+													<a href="/dawam/returnPassword"> #{bundle['forgotPassword']} </a>
+												</div>
+												
+										</div>
+										<div class="row LoginButtons">
+												<div class="col-xs-6 text-center">
+													<h:commandButton styleClass="buttonStyle" class="BtnStyle" value="#{bundle['logIn']}"/>
+												</div>
+										</div>		
+								
+									</div>
+									
+									<div id="CompanyTabLogin" class="row tab-pane fade">
+												
+												#{bundle['companyFields']}
+												
+									</div>
+									
+									<div id="BranchTabLogin" class="row tab-pane fade">
+								
+												#{bundle['branchFields']}
+									</div>
+								</div>
+								
+
+								 <h:panelGroup rendered="#{param.error != null}" id="errorMessage" layout="block" styleClass="ui-messages-error ui-corner-all">
+			      				 <h:panelGroup styleClass="ui-messages-error-icon"></h:panelGroup>
+			      				 <h:panelGroup styleClass="ui-messages-error-detail">#{bundle['userNameOrPasswordIncorrect']}</h:panelGroup>
+			    			</h:panelGroup>
+				<input type="hidden" name="#{_csrf.parameterName}" value="#{_csrf.token}"/>  
+    			</form>
+							</div>
+						</div>
+						<div class="col-sm-8 col-sm-pull-4 HomeContent">#{bundle['aboutApp']}</div>
+					</div>
+					
+    			
+			   
+    						
+    		</ui:define>
+
+		
+
+    	</ui:composition>
+
+    </h:body>
+
+</html>

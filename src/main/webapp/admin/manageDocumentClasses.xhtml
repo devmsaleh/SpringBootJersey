@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      >
+    <h:body>
+
+    	<ui:composition template="/template/commonLayout.xhtml">
+
+    		<ui:define name="content">
+    		    <ui:param name="activeIndex" value="2" />    			
+    			<ui:include src="/template/commonMenubar.xhtml" />
+    			<h:form id="form">
+    			  <h:outputLabel value="أسماء التصنيفات"/>
+    			  
+    			  <p:selectOneMenu id="documentClassesMenu" style="margin-bottom:10px" value="#{manageDocumentClassesBean.selectedDocumentClassId}">
+    			     <f:selectItems value="#{manageDocumentClassesBean.documentClassesList}" var="documentClass"
+			   			itemLabel="#{documentClass.displayName}" itemValue="#{documentClass.id}" />
+			         <p:ajax listener="#{manageDocumentClassesBean.changeDocumentClass}" update="propertiesTable"/>
+			      </p:selectOneMenu>
+			       
+			       <p:dataTable id="propertiesTable" var="property" value="#{manageDocumentClassesBean.selectedDocumentClass.properties}">
+					    <p:column headerText="إسم الخاصية">
+					        <h:outputText value="#{property.displayName}" />
+					    </p:column>	
+					    
+					    <p:column headerText="إسم العمود">
+					        <h:outputText value="#{property.columnName}" />
+					    </p:column>
+					    
+					    <p:column headerText="نوع العمود">
+					        <h:outputText value="#{property.columnTypeLabe}" />
+					    </p:column>				    								    
+					</p:dataTable>
+					
+					<p:fieldset legend="العمليات" style="margin-top:20px">
+						<h:panelGrid columns="1">
+						    <p:commandButton class="BtnStyle" value="إنشاء خاصية جديدة" type="button" onclick="PF('properyDialog').show();" />
+						    <p:commandButton class="BtnStyle" value="إنشاء تصنيف جديد" type="button" onclick="PF('documentClassDialog').show();" />
+						</h:panelGrid>
+					</p:fieldset>
+					
+					<p:dialog header="إنشاء تصنيف جديد" widgetVar="documentClassDialog" resizable="false" modal="true">
+
+					    
+					    <h:panelGrid columns="2">
+					          <h:outputText value="إسم التصنيف: "/>
+					          <p:inputText value="#{manageDocumentClassesBean.documentClass.displayName}"/>
+					          	
+					   
+					    </h:panelGrid>
+					    
+					    <div class="row PopupButtonArea">
+					    	<div class="text-center">			   		  
+			   		 		 <p:commandButton class="BtnStyle" action="#{manageDocumentClassesBean.createNewDocumentClass}" value="إنشاء" update="documentClassesMenu propertiesTable" oncomplete="PF('documentClassDialog').hide();"/>
+			   			</div>
+			   			</div>
+					</p:dialog>
+					
+					<p:dialog class="StandardFields" header="إنشاء خاصية جديدة" widgetVar="properyDialog" resizable="false" modal="true" width="500">
+					    <h:panelGrid id="newPropertyTable" style="width:100%" columns="2">
+					          <h:outputText value="إسم الخاصية: "/>
+					          <p:inputText value="#{manageDocumentClassesBean.property.displayName}"/>
+					          
+					          <h:outputText value="نوع الخاصية: "/>
+					          <p:selectOneMenu value="#{manageDocumentClassesBean.property.customType}">
+					   			<f:selectItems value="#{manageDocumentClassesBean.propertyTypesMap}" />
+					   			<p:ajax update="newPropertyTable"/>
+					   		  </p:selectOneMenu>
+					   		  
+					   		  
+					   		  <h:outputText value="إسم القائمة: " rendered="#{manageDocumentClassesBean.property.customType == 'CHOICE_LIST'}"/>
+					          <h:panelGrid columns="2" rendered="#{manageDocumentClassesBean.property.customType == 'CHOICE_LIST'}">
+						          <p:selectOneMenu  id="choiceListDropdown" value="#{manageDocumentClassesBean.property.selectedChoiceListId}"  >
+						   			<f:selectItems value="#{manageDocumentClassesBean.choiceLists}" var="c"
+	  			                                itemLabel="#{c.displayName}" itemValue="#{c.id}" />
+						   		  </p:selectOneMenu>
+						   		  <p:commandButton type="button" value="إنشاء قائمة جديدة"  onclick="PF('choiceListDialog').show();" />
+					   		  </h:panelGrid>
+					   		  
+				   		 
+					    </h:panelGrid>
+					    
+					     <div class="row PopupButtonArea">
+				    			<div class="text-center">
+				   		  			<p:commandButton class="BtnStyle" action="#{manageDocumentClassesBean.createNewProperty}" value="إضافة" update="propertiesTable" oncomplete="PF('properyDialog').hide();"/>
+				    			</div>
+				    		</div>
+					</p:dialog>
+					
+					<p:dialog header="إنشاء قائمة جديدة" widgetVar="choiceListDialog"  resizable="false" modal="true" height="300">
+					    
+					    <h:panelGrid columns="3">
+					          <h:outputText value="إسم القائمة: "/>
+					          <p:inputText value="#{manageDocumentClassesBean.choiceList.displayName}"/>
+					          <h:outputText />
+					          
+					          <h:outputText value="إسم العنصر: "/>
+					          <p:inputText value="#{manageDocumentClassesBean.choiceListItemStr}" onkeypress="if (event.keyCode == 13) { document.getElementById('form:addChoiceListItem').click(); return false; }">
+					          </p:inputText>
+					          
+					          	
+					         			 <p:commandButton id="addChoiceListItem" actionListener="#{manageDocumentClassesBean.createNewChoiceListItem}" value="إضافة العنصر" update="choiceListItemsTableDiv" />
+					          
+					    </h:panelGrid>
+					    
+					    <h:panelGroup layout="block" id="choiceListItemsTableDiv">
+					    	<p:dataTable id="choiceListItemsTable" rendered="#{manageDocumentClassesBean.choiceListItemsList.size() > 0}"  var="item" value="#{manageDocumentClassesBean.choiceListItemsList}">					    
+							    <p:column headerText="">
+							        <h:outputText value="#{item}" />
+							    </p:column>						 
+							</p:dataTable>
+						</h:panelGroup>
+				   		  
+				   		<p:commandButton action="#{manageDocumentClassesBean.createNewChoiceList}" value="إنشاء القائمة" update="choiceListDropdown" oncomplete="PF('choiceListDialog').hide();"/>
+					</p:dialog>
+								  
+    			</h:form>			
+    		</ui:define>
+
+		
+
+    	</ui:composition>
+
+    </h:body>
+
+</html>

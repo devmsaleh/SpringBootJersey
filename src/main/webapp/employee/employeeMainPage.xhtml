@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+		<ui:define name="title">#{bundle['employeeMainPageTitle']}</ui:define>
+
+		<ui:define name="content">
+
+			<h:form id="employeeMainPage">
+				<div style="display: none" class="col-md-3 SecondMenu ">
+
+					<div class="SideMenu">
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button"
+								id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="true">
+								<span class="glyphicon glyphicon-menu-hamburger"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="/dawam/employeeProfile">#{bundle['employeeProfile']}</a></li>
+								<li><a href="/dawam/employeeAskJob">#{bundle['addEmployeeRequest']}
+								</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="UserImg"></div>
+					<div class="UserName">#{employeeMainPage.loggedUser.fullName}</div>
+				</div>
+
+
+
+				<div class="row PageBar EmpPageHeader"></div>
+
+
+				<div class="row">
+					<div class="col-md-3 col-md-push-9 MyBoxDiv">
+						<div class="MyBox">
+							<div class="row FirstSection">
+
+
+								
+									<table class="UserNameTable">
+										<tr>
+											<td>
+												<div class="UserImage">
+													<p:panel id="employeeImg" class="HomeUserPhotoHolder">
+														<img class="ListUserPhoto" src="#{employeeMainPage.loggedUser.employeeDetails.avatar.imageBase64}" height="60" width="60" />
+													</p:panel>
+												</div>
+											</td>
+											<td>
+												<table>
+													<tr>
+														<td><div class="Greeting">#{bundle['welcome']}</div>
+															<div class="BoxUserName">#{employeeMainPage.loggedUser.fullName}</div></td>
+													</tr>
+													<tr>
+														<td><p:rating styleClass="rating"
+																value="#{employeeMainPage.loggedUser.employeeDetails.rank}"
+																readonly="true" /></td>
+													</tr>
+												</table>
+											</td>
+											<td>
+												<p:link class="MyProfileButton"
+												href="/employeeProfile">
+												<div class="MyProfileIcon"></div>
+											</p:link>
+											</td>
+										</tr>
+									</table>
+
+								
+
+							</div>
+							<div class="row">
+								<div class="col-md-3 DoneHours">
+									<h6>#{bundle['completeHours']}</h6>
+								</div>
+
+								<div class="col-md-3 StatesticsNumber GreenBold">
+									<p>#{employeeMainPage.loggedUser.employeeDetails.completedHours}</p>
+								</div>
+								<div class="col-md-3 FailedHours">
+									<h6>#{bundle['inCompleteHours']}</h6>
+								</div>
+
+								<div class="col-md-3 StatesticsNumber RedBold">
+									<p>#{employeeMainPage.loggedUser.employeeDetails.incompletedHours}</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-md-9 col-md-pull-3">
+
+						<p:dialog dir="#{bundle['dir']}"
+											header="تفاصيل الشركة" closeOnEscape="true"
+											widgetVar="gmapDialog" width="800" height="520" modal="true">
+											
+											<h:inputHidden id="lat" value="#{employeeMainPage.companyLat}" />
+											<h:inputHidden id="lng"	value="#{employeeMainPage.companyLang}" />
+											
+											<h:inputHidden id="locationDescription"     	value="1" />
+											<h:inputHidden id="locationDescriptionDialog"	value="1" />
+											
+											<p:panelGrid columns="2" style="width:100%;" id="locationDetails">
+												<p:outputLabel value="#{bundle['companyName']}"/>
+												<p:outputLabel value="#{employeeMainPage.companyName}"/>
+												<p:outputLabel value="#{bundle['contactNumber']}"/>
+												<p:outputLabel value="#{employeeMainPage.contactNumber}"/>
+												<p:outputLabel value="#{bundle['Address']}"/>
+												<p:outputLabel value="#{employeeMainPage.companyAddress}"/>
+											
+											</p:panelGrid>
+
+											<p:gmap id="gmap" center="24.709156813696378,46.67292563366709"
+												zoom="15" type="ROADMAP" style="width:100%;height:400px"
+												widgetVar="gmap">
+											</p:gmap>
+
+								</p:dialog>
+							
+						<p:tabView class="RegisteredHomeTabs" id="tabView" dynamic="true">
+
+							<p:tab title="#{bundle['myPage']}" id="myPage">
+								
+								<div class="ActionsArea">
+									<div class="AddJobDivHolder">
+									<p:link class="BtnStyle buttona"	href="/employeeAskJob">
+										<span class="glyphicon glyphicon-plus"></span>
+										#{bundle['addEmployeeRequest']}
+									</p:link>
+									</div>
+								</div>
+								
+								<p:dataTable class="SearchResults row" id="requests"
+									var="jobRequest" rows="20"
+									emptyMessage=" #{bundle['noRequestsAvailable']} "
+									value="#{employeeMainPage.myJobRequests}"
+									rowKey="#{jobRequest.id}">
+									<p:column>
+										<div class="ListItem">
+											<div class="row ListItemFirst">
+												<div class="col-md-4 JobTitle">
+													<label>#{jobRequest.companyJobPost.jobType.nameArabic}</label>
+												</div>
+												<div class="col-md-4 JobField" style="text-align:center">
+													<label>#{jobRequest.companyJobPost.workType}</label>
+												</div>
+												<div class="col-md-4 PostingDateAndTime AlowesAtLast">
+													<label>#{jobRequest.companyJobPost.dateCreated}</label>
+												</div>
+											</div>
+
+											<div class="row ListItemSecond">
+												<div class="col-md-5 DateFromToArea">
+													<table class="DateTable">
+														<tr>
+															<td><label class="DateValue"><span
+																	class="CalenderIcon"></span>#{jobRequest.companyJobPost.numberOfDays}
+																	#{bundle['days']}</label></td>
+															<td><label>#{employeeMainPage.getDateAsString(jobRequest.companyJobPost.startDate)}</label></td>
+															<td class="arrowTD"><span class="ArrowIconAr"></span></td>
+															<td><label>#{employeeMainPage.getDateAsString(jobRequest.companyJobPost.endDate)}</label></td>
+														</tr>
+													</table>
+												</div>
+												<div class="col-md-5 TimeFromToArea">
+													<table class="TimeTable" border="0">
+														<tr>
+															<td><label class="TimeValue"><span
+																	class="TimeIcon"></span>#{jobRequest.companyJobPost.numberOfHours}
+																	#{bundle['hours']}</label></td>
+															<td><label>#{employeeMainPage.getTimeAsString(jobRequest.companyJobPost.startHour)}</label></td>
+															<td class="arrowTD"><span class="ArrowIconAr"></span></td>
+															<td><label>#{employeeMainPage.getTimeAsString(jobRequest.companyJobPost.endHour)}</label></td>
+														</tr>
+													</table>
+												</div>
+												<div class="col-md-2 AlowesAtLast">
+													<div class="Status">
+														<p:outputLabel styleClass="WaitingIcon"
+																rendered="#{jobRequest.requestStatus eq 1}" /> <p:outputLabel
+																styleClass="DoneIcon"
+																rendered="#{jobRequest.requestStatus eq 2}" /> <p:outputLabel
+																styleClass="RefusedIcon"
+																rendered="#{jobRequest.requestStatus eq 3}" /> <p:outputLabel
+																styleClass="RefusedIcon"
+																rendered="#{jobRequest.requestStatus eq 8}" /> <p:outputLabel
+																value="#{bundle['underImplementation']}"
+																rendered="#{jobRequest.requestStatus eq 1}" /> <p:outputLabel
+																styleClass="StatusAccepted" value="#{bundle['accepted']}"
+																rendered="#{jobRequest.requestStatus eq 2}" /> <p:outputLabel
+																styleClass="StatusRejected" value="#{bundle['canceled']}"
+																rendered="#{jobRequest.requestStatus eq 3}" /> <p:outputLabel
+																styleClass="StatusRejected"
+																value="#{bundle['selectAnotherCompany']}"
+																rendered="#{jobRequest.requestStatus eq 8}" />
+															
+													</div>
+											</div>
+										</div>
+
+											<div class="row ListItemTherd">
+
+												<div class="col-md-12 NearBy">
+													<h:outputLabel rendered="#{jobRequest.requestStatus ne 2}"><label><span class="LocationIcon"></span>#{jobRequest.companyJobPost.nearBy}</label> </h:outputLabel>
+													<p:commandButton value="بيانات الشركة" ajax="true" styleClass="AskButton CompanyInfoButton" rendered="#{jobRequest.requestStatus eq 2}" 
+														action="#{employeeMainPage.displayCompanyData}"
+														update="employeeMainPage:lat employeeMainPage:lng employeeMainPage:locationDetails employeeMainPage:gmap"
+														oncomplete="PF('gmapDialog').show();currentMarker = null;findMe(true,'employeeMainPage');">
+														
+														<f:setPropertyActionListener
+																			value="#{jobRequest}"
+																			target="#{employeeMainPage.selectedEmployeeApplyRequest}" />
+													</p:commandButton>
+												</div>
+											</div>
+										</div>
+									</p:column>
+								</p:dataTable>
+
+							</p:tab>
+
+							<p:tab title="#{bundle['myRequests']}">
+								
+								<div class="ActionsArea">
+									<div class="AddJobDivHolder">
+									<p:link class="BtnStyle buttona"	href="/employeeAskJob">
+										<span class="glyphicon glyphicon-plus"></span>
+										#{bundle['addEmployeeRequest']}
+									</p:link>
+									</div>
+								</div>
+
+
+								<p:dataTable class="ListGrid row" id="jobs" var="job" rows="20"
+									emptyMessage=" #{bundle['noRequestsAvailable']}  "
+									value="#{employeeMainPage.myJobPosts}"
+									selection="#{employeeMainPage.selectedJobPost}"
+									rowKey="#{job.employeeJobPostId}" selectionMode="single">
+									<p:ajax event="rowSelect"
+										listener="#{employeeMainPage.employeeJobsOnRowSelect}"
+										update="employeeMainPage:tabView:applicants_details"
+										oncomplete="PF('applicants_details').show();" />
+									<p:column>
+										<div class="ListItem">
+											<div class="row ListItemFirst">
+												<div class="col-md-4 JobTitle">
+													<label>#{job.jobNameArabic}</label>
+												</div>
+												<div class="col-md-4" style="    text-align: center;">
+													<label>#{job.numberOfOffers} #{bundle['offers']}</label>
+												</div>
+												<div class="col-md-4  AlowesAtLast PostingDateAndTime">
+													<label>#{job.dateCreated}</label>
+												</div>
+											</div>
+
+											<div class="row ListItemSecond">
+												<div class="col-md-5 DateFromToArea">
+													<table class="DateTable">
+														<tr>
+															<td><label class="DateValue"><span
+																	class="CalenderIcon"></span>#{job.numberOfDays}
+																	#{bundle['days']}</label></td>
+															<td><label>#{employeeMainPage.getDateAsString(job.startDate)}</label></td>
+															<td class="arrowTD"><span class="ArrowIconAr"></span></td>
+															<td><label>#{employeeMainPage.getDateAsString(job.endDate)}</label></td>
+														</tr>
+													</table>
+												</div>
+												<div class="col-md-5 TimeFromToArea">
+													<table class="TimeTable">
+														<tr>
+															<td><label class="TimeValue"><span
+																	class="TimeIcon"></span>#{job.numberOfHours}
+																	#{bundle['hours']}</label></td>
+															<td><label>#{employeeMainPage.getTimeAsString(job.startHour)}</label></td>
+															<td class="arrowTD"><span class="ArrowIconAr"></span></td>
+															<td><label>#{employeeMainPage.getTimeAsString(job.endHour)}</label></td>
+														</tr>
+													</table>
+												</div>
+												<div class="col-md-2 AlowesAtLast">
+													<p:commandButton value="التفاصيل" ajax="true" styleClass="DetailsButton" 
+														action="#{employeeMainPage.displayDetails()}"
+														update="employeeMainPage:tabView:applicants_details"
+														oncomplete="PF('applicants_details').show();" >
+														
+														<f:setPropertyActionListener value="#{job}"
+															target="#{employeeMainPage.selectedJobPost}" />
+															
+													</p:commandButton>
+												</div>
+
+											</div>
+										</div>
+									</p:column>
+								</p:dataTable>
+								<p:dialog dir="#{bundle['dir']}" id="applicants_details"
+									widgetVar="applicants_details" width="800" height="550"
+									modal="true" closeOnEscape="true">
+									<div class="row PageBar">
+										<div class="col-md-12 PageTitle">
+											#{bundle['RequestData']}</div>
+									</div>
+									<p:messages globalOnly="true" id="acceptMessage" />
+									<div class="EmployeePreview">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row RequestJobTitle">
+													<div class="col-md-9 JobTitle_RequestDetails">
+														<p:outputLabel
+															value="#{employeeMainPage.selectedJobPost.jobNameArabic}" />
+													</div>
+													<div class="col-md-3 AlowesAtLast">
+														<p:commandButton
+															rendered="#{employeeMainPage.selectedJobPost.requestStatus  ne 4}"
+															value="#{bundle['cancelRequest']} " ajax="true"
+															styleClass="CancelJobButton"
+															action="#{employeeMainPage.employeeCancelJobPost}"
+															update=":employeeMainPage:tabView:applicants_details"
+															oncomplete="PF('applicants_details').show();">
+														</p:commandButton>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col-md-5 DateFromToArea">
+														<table class="DateTable">
+															<tr>
+																<td><label class="DateValue"><span
+																		class="CalenderIcon"></span>#{employeeMainPage.selectedJobPost.numberOfDays}
+																		#{bundle['days']}</label></td>
+
+																<td><p:outputLabel
+																		value="#{employeeMainPage.getDateAsString(employeeMainPage.selectedJobPost.startDate)}" /></td>
+																<td class="arrowTD"><span class="ArrowIconAr"></span></td>
+																<td><p:outputLabel
+																		value="#{employeeMainPage.getDateAsString(employeeMainPage.selectedJobPost.endDate)}" /></td>
+															</tr>
+														</table>
+
+													</div>
+													<div class="col-md-5 TimeFromToArea">
+														<table class="TimeTable">
+															<tr>
+																<td><label class="TimeValue"><span
+																		class="TimeIcon"></span>#{employeeMainPage.selectedJobPost.numberOfHours}
+																		#{bundle['hours']}</label></td>
+																<td><p:outputLabel
+																		value="#{employeeMainPage.getTimeAsString(employeeMainPage.selectedJobPost.startHour)}" /></td>
+																<td class="arrowTD"><span class="ArrowIconAr"></span></td>
+																<td><p:outputLabel
+																		value="#{employeeMainPage.getTimeAsString(employeeMainPage.selectedJobPost.endHour)}" /></td>
+															</tr>
+														</table>
+													</div>
+													<div class="col-md-2 AlowesAtLast PostingDateAndTime">
+														<p:outputLabel
+															value="#{employeeMainPage.selectedJobPost.dateCreated}">
+															<f:convertDateTime pattern="dd-MM-yyyy hh:mm a" />
+														</p:outputLabel>
+													</div>
+
+												</div>
+
+												<div class="RequetesNumber">
+													<p:outputLabel
+														value="#{employeeMainPage.selectedJobPost.numberOfOffers} #{bundle['offers']}" />
+												</div>
+
+
+												<div class="DetailsArrow"></div>
+
+												<p:dataTable class="DetailsSection"
+													id="companyOfferRequestList"
+													value="#{employeeMainPage.companyOfferRequestList}"
+													var="companyOfferRequest"
+													emptyMessage=" #{bundle['noOffersAvailable']}  "
+													rowKey="#{companyOfferRequest.id}">
+
+													<p:column>
+
+														<div class="DetailsListItem_Employees">
+															<div class="row">
+																<div class="col-md-8">
+
+
+																	<div class="col-md-8">
+																		<p:outputLabel
+																			value="#{companyOfferRequest.company.typeId ==3 ? companyOfferRequest.company.branchDetails.companyDetails.workType : companyOfferRequest.company.companyDetails.workType}" />
+																	</div>
+
+																	<div class="col-md-8">
+																		<p:outputLabel
+																			value="#{ companyOfferRequest.company.typeId ==3 ? companyOfferRequest.company.branchDetails.locationNearBy : companyOfferRequest.company.companyDetails.locationNearBy}" />
+																	</div>
+																</div>
+																
+																<div class="col-md-8">
+																
+																<p:commandButton value="بيانات الشركة" ajax="true" styleClass="AskButton" rendered="#{companyOfferRequest.requestStatus eq 2}" 
+																	action="#{employeeMainPage.displayCompanyDataFromOffers}"
+																	update="employeeMainPage:lat employeeMainPage:lng employeeMainPage:locationDetails employeeMainPage:gmap"
+																	oncomplete="PF('gmapDialog').show();currentMarker = null;findMe(true,'employeeMainPage');">
+														
+																	<f:setPropertyActionListener
+																			value="#{companyOfferRequest}"
+																			target="#{employeeMainPage.selectedcompanyOfferRequestForLocation}" />
+																</p:commandButton>
+													
+																</div>
+
+																<div class="col-md-4 AlowesAtLast">
+
+																	<p:commandButton
+																		rendered="#{companyOfferRequest.requestStatus eq 1}"
+																		value="#{bundle['accept']}" ajax="true"
+																		styleClass="AskButton"
+																		action="#{employeeMainPage.employeeAcceptOffer}"
+																		update=":employeeMainPage:tabView:companyOfferRequestList :employeeMainPage:tabView:acceptMessage">
+																		<f:setPropertyActionListener
+																			value="#{companyOfferRequest}"
+																			target="#{employeeMainPage.selectedCompanyOfferRequest}" />
+																	</p:commandButton>
+
+																	<p:outputLabel styleClass="AcceptedButton"
+																		style="text-align: center;" value="#{bundle['done']}"
+																		rendered="#{companyOfferRequest.requestStatus eq 2}" />
+																	<p:outputLabel styleClass="AcceptedButton"
+																		value="#{bundle['selectAnotherEmployee']} "
+																		rendered="#{companyOfferRequest.requestStatus eq 7}" />
+
+																</div>
+
+															</div>
+														</div>
+													</p:column>
+												</p:dataTable>
+											</div>
+										</div>
+									</div>
+								</p:dialog>
+							</p:tab>
+
+							<p:tab title="#{bundle['notifications']}" id="myNotifications">
+
+								<p:dataTable class="SearchResults" id="notofocation"
+									var="notificate" rows="20"
+									emptyMessage=" #{bundle['noFoundNotifications']} "
+									value="#{employeeMainPage.notifications}"
+									rowKey="#{notificate.id}">
+
+									<p:column>
+										<div class="row AlertItem">
+											<div class="col-md-10">
+												<span class="AlertNewIcon"></span><label>#{notificate.message}</label>
+											</div>
+											<div class="col-md-2 AlowesAtLast PostingDateAndTime">#{notificate.dateLastModified}</div>
+										</div>
+
+									</p:column>
+								</p:dataTable>
+
+							</p:tab>
+						</p:tabView>
+
+
+					</div>
+				</div>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

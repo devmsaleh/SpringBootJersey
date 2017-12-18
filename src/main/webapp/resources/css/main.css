@@ -1,0 +1,80 @@
+html{
+    background-color:#2F2F2F;
+}
+ 
+body, #mainWrapper {
+    height: 100%;
+    background-image: -webkit-gradient(
+    linear,
+    right bottom,
+    right top,
+    color-stop(0, #EDEDED),
+    color-stop(0.08, #EAEAEA),
+    color-stop(1, #2F2F2F),
+    color-stop(1, #AAAAAA)
+);
+background-image: -o-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+background-image: -moz-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+background-image: -webkit-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+background-image: -ms-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+background-image: linear-gradient(to top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
+}
+ 
+body, #mainWrapper, .form-control{
+    font-size:14px!important;
+}
+ 
+#mainWrapper {
+    height: 100vh; 
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:10px;
+}
+ 
+#authHeaderWrapper{
+    clear:both;
+    width: 100%;
+    height:3%;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+ 
+
+.login-card {
+    width: 100%;
+    height:100%;
+    margin: 0 auto;
+}
+.login-form {
+    width:250px;
+    position: absolute;
+    top:25%;
+    left: 30%
+}
+
+.login-container{
+  background-color: floralwhite;
+  width: 40%;
+  height: 220px;	
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.borderless-input{
+	-moz-border-radius:0px !important;
+	-webkit-border-radius:0px !important;
+	border-radius:0px !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow:none !important;
+	box-shadow:none !important;
+}
+
+.buttonStyle{
+	background-color:#337AB7;
+	color:white;
+	border:1px solid #337AB7;
+	border-radius: 2px;
+	padding:5px;
+	cursor: pointer;
+}

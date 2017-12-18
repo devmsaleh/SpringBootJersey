@@ -1,0 +1,562 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:body>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+		<ui:define name="content">
+
+			<h:form id="employeeAdmin">
+							
+				<ul class="AdminTabs">
+					<li class="TabRequestes">
+						<p:link href="/admin/registrationCompanypreView" > #{bundle['registrationRequests']} </p:link>
+					</li>
+					<li class="TabCompanies">
+						<p:link href="/admin/companyAdminPage" > #{bundle['companyadmin']} </p:link>
+					</li>
+					<li class="TabEmployees active">
+						<p:link href="/admin/employeeAdminPage" > #{bundle['employeeAdmin']} </p:link>
+					</li>
+					<!--<li class="TabAccountant">الحسابات</li>-->
+				</ul>
+
+				<div class="row">
+					<div class="col-md-3 SearchCarateria">
+						<div class="row">
+
+							<div class="col-xs-12">
+								<h5>#{bundle['employeeName']}</h5>
+							</div>
+
+							<div class="col-xs-12">
+								<p:inputText value="#{employeeAdminPage.employeeName}" />
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-xs-12">
+								<h5>#{bundle['nationalNumber']}</h5>
+							</div>
+
+							<div class="col-xs-12">
+								<p:inputText value="#{employeeAdminPage.nationalNumber}" />
+							</div>
+						</div>
+						
+						<div class="row">
+
+							<div class="col-xs-12">
+								<h5>#{bundle['employeesCode']}</h5>
+							</div>
+
+							<div class="col-xs-12">
+								<p:inputText value="#{employeeAdminPage.code}" />
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-xs-12">
+								<h5>#{bundle['city']}</h5>
+							</div>
+
+							<div class="col-xs-12 selectarrowsolution">
+
+								<p:selectOneMenu value="#{employeeAdminPage.selectedCity}"
+									id="city" class="form-control">
+									<f:selectItem itemLabel="#{bundle['selectCity']}"
+										itemValue="-1" />
+									<f:selectItems value="#{employeeAdminPage.cities}" />
+								</p:selectOneMenu>
+
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-xs-12">
+								<h5>#{bundle['employeestatus']}</h5>
+							</div>
+							<div class="col-xs-12 selectarrowsolution">
+
+								<p:selectOneMenu value="#{employeeAdminPage.statusId}"
+									id="statusId" class="form-control">
+									<f:selectItem itemLabel="#{bundle['selectStatus']}"
+										itemValue="-1" />
+									<f:selectItem itemLabel="#{bundle['active']}" itemValue="4" />
+									<f:selectItem itemLabel="#{bundle['unActive']}" itemValue="5" />
+									<f:selectItem itemLabel="#{bundle['locked']}" itemValue="6" />
+								</p:selectOneMenu>
+
+							</div>
+						</div>
+
+						<div class="row BtnDiv">
+							<div class="col-xs-12 text-center">
+								<p:commandButton value="#{bundle['search']}"
+									action="#{employeeAdminPage.search}" update="employees"
+									styleClass="DoneBtnStyle" />
+							</div>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div class="panel CompanyReviewListPanel">
+							<div class="panel-heading">
+								<span class="glyphicon glyphicon-list"></span>#{bundle['employeesList']}
+							</div>
+							<div class="panel-body">
+
+								<p:dataTable id="employees" var="employee"
+									value="#{employeeAdminPage.employees}" selectionMode="single"
+									selection="#{employeeAdminPage.selectedEmployeeDTO}"
+									rowKey="#{employee.userId}">
+
+
+									<p:column headerText="#{bundle['empFullName']} ">
+										<h:outputText value="#{employee.fullName}" />
+									</p:column>
+
+									<p:column headerText="#{bundle['nationalNumber']}">
+										<h:outputText value="#{employee.nationalNumber}" />
+									</p:column>
+
+									<p:column headerText="#{bundle['employeesCode']} ">
+										<h:outputText value="#{employee.userCode}" />
+									</p:column>
+
+									<p:column headerText="#{bundle['city']}">
+										<h:outputText value="#{employee.cityName}" />
+									</p:column>
+									<p:column>
+										<p:commandButton class="BtnDetails"
+											icon="imgs/employee_default_photo.png"
+											title="#{bundle['empInfo']}"
+											action="#{employeeAdminPage.showEmpInfo}"
+											update=":employeeAdmin:empDetails">
+											<f:setPropertyActionListener value="#{employee}"
+												target="#{employeeAdminPage.selectedEmployeeDTO}" />
+										</p:commandButton>
+										<p:commandButton class="BtnJobs"
+											icon="imgs/tab_myrequests_icon_off.png"
+											title=" #{bundle['empJobs']}"
+											action="#{employeeAdminPage.showEmpJobs}"
+											update=":employeeAdmin:empDetails">
+											<f:setPropertyActionListener value="#{employee}"
+												target="#{employeeAdminPage.selectedEmployeeDTO}" />
+										</p:commandButton>
+										
+										<p:commandButton class="BtnMoney"
+											icon="imgs/tab_myrequests_icon_off.png"
+											title=" #{bundle['empJobs']}"
+											action="#{employeeAdminPage.goToUnpayedJobs}">
+											<f:setPropertyActionListener value="#{employee}"
+												target="#{employeeAdminPage.selectedEmployeeDTO}" />
+										</p:commandButton>
+									</p:column>
+								</p:dataTable>
+							</div>
+						</div>
+
+
+						<div class="DetailsArrow"></div>
+
+
+						<p:panel id="empDetails" style="border-style: none !important">
+							<p:panelGrid id="empInfo"
+								rendered="#{employeeAdminPage.renderEmpInfo}">
+								<div class="content RegistrationPreview">
+								
+								<div class="col-md-3 col-md-push-9">
+									<div class="UserImage">
+										<img class="ListUserPhoto" 
+												src="#{employeeAdminPage.selectedEmployee.employeeDetails.avatar.imageBase64}"
+									 			 height="200" width="200" />
+									</div>
+								  </div>
+								  <div class="col-md-9 col-md-pull-3">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label> #{bundle['empFullName']}</label>
+												</div>
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{employeeAdminPage.selectedEmployee.fullName}"
+														id="fullName" />
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label> #{bundle['nationalNumber']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{employeeAdminPage.selectedEmployee.employeeDetails.nationalNumber}"
+														id="nationalNumber" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['employeesCode']} </label>
+												</div>
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{employeeAdminPage.selectedEmployee.employeeDetails.code}"
+														id="userCode" />
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="row">
+
+												<div class="col-xs-12 title">
+													<label>#{bundle['city']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{employeeAdminPage.selectedEmployee.city.nameArabic}"
+														id="cityName" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['contactNumber']} </label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{employeeAdminPage.selectedEmployee.contactNumber}"
+														id="contactNumber" />
+												</div>
+											</div>
+										</div>
+
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label> #{bundle['email']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{employeeAdminPage.selectedEmployee.email}"
+														id="email" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['iban']} </label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{employeeAdminPage.selectedEmployee.employeeDetails.iban}"
+														id="iban" />
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['aboutEmployee']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{employeeAdminPage.selectedEmployee.employeeDetails.aboutMe}"
+														id="aboutMe" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label> #{bundle['experience']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{employeeAdminPage.employeeExperiencesList}"
+														id="employeeExperiencesList" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+												<div class="col-xs-12 title">
+													<label> #{bundle['ProfileAttach']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h5>#{bundle['identity']}</h5> 
+													<p:commandButton
+														value="Download" ajax="false"
+														onclick="#{employeeAdminPage.downloadFile(1)}"
+														oncomplete="PrimeFaces.monitorDownload(start, stop);"
+														rendered="#{employeeAdminPage.identityFile != null}"
+														icon="ui-icon-arrowthick-1-s">
+														<p:fileDownload value="#{employeeAdminPage.idFile}" />
+													</p:commandButton>
+												</div>
+												<div>
+													<h5>#{bundle['CVAttach']}</h5>
+													<p:commandButton
+														id="DownloadCV" value="DownloadCV" ajax="false"
+														onclick="#{employeeAdminPage.downloadFile(2)}"
+														oncomplete="PrimeFaces.monitorDownload(start, stop);"
+														rendered="#{employeeAdminPage.cvFile != null}"
+														icon="ui-icon-arrowthick-1-s">
+														<p:fileDownload value="#{employeeAdminPage.cvFileStream}" />
+													</p:commandButton>
+												</div>
+												<div class="col-xs-12 title">
+													<label> #{bundle['experienceAttach']}</label>
+												</div>
+												<div>
+													<p:outputLabel id="experinceFile1"
+														value="#{employeeAdminPage.experinceFile1.fileName}"
+														rendered="#{employeeAdminPage.experinceFile1 != null}" /> 
+													<p:commandButton
+														id="DownloadExp1" value="DownloadExp1" ajax="false"
+														onclick="#{employeeAdminPage.downloadFile(3)}"
+														oncomplete="PrimeFaces.monitorDownload(start, stop);"
+														rendered="#{employeeAdminPage.experinceFile1 != null}"
+														icon="ui-icon-arrowthick-1-s">
+														<p:fileDownload value="#{employeeAdminPage.experinceFile1Stream}" />
+													</p:commandButton>
+												</div>
+												<div>
+													<p:outputLabel id="experinceFile2"
+														value="#{employeeAdminPage.experinceFile2.fileName}"
+														rendered="#{employeeAdminPage.experinceFile2 != null}" /> 
+													<p:commandButton
+														id="DownloadExp2" value="DownloadExp2" ajax="false"
+														onclick="#{employeeAdminPage.downloadFile(4)}"
+														oncomplete="PrimeFaces.monitorDownload(start, stop);"
+														rendered="#{employeeAdminPage.experinceFile2 != null}"
+														icon="ui-icon-arrowthick-1-s">
+														<p:fileDownload value="#{employeeAdminPage.experinceFile2Stream}" />
+													</p:commandButton>
+												</div>
+												<div>
+													<p:outputLabel id="experinceFile3"
+														value="#{employeeAdminPage.experinceFile3.fileName}"
+														rendered="#{employeeAdminPage.experinceFile3 != null}" /> 
+													<p:commandButton
+														id="DownloadExp3" value="DownloadExp3" ajax="false"
+														onclick="#{employeeAdminPage.downloadFile(5)}"
+														oncomplete="PrimeFaces.monitorDownload(start, stop);"
+														rendered="#{employeeAdminPage.experinceFile3 != null}"
+														icon="ui-icon-arrowthick-1-s">
+														<p:fileDownload value="#{employeeAdminPage.experinceFile1Stream}" />
+													</p:commandButton>
+												</div>
+												<div>
+													<p:outputLabel id="experinceFile4"
+														value="#{employeeAdminPage.experinceFile4.fileName}"
+														rendered="#{employeeAdminPage.experinceFile4 != null}" /> 
+													<p:commandButton
+														id="DownloadExp4" value="DownloadExp4" ajax="false"
+														onclick="#{employeeAdminPage.downloadFile(6)}"
+														oncomplete="PrimeFaces.monitorDownload(start, stop);"
+														rendered="#{employeeAdminPage.experinceFile4 != null}"
+														icon="ui-icon-arrowthick-1-s">
+														<p:fileDownload value="#{employeeAdminPage.experinceFile4Stream}" />
+													</p:commandButton>
+												</div>
+											</div>
+								  </div>
+								</div>
+
+							</p:panelGrid>
+
+							<div class="EmpAdminJobsPreview">
+								<p:panelGrid id="empJobs"
+									rendered="#{employeeAdminPage.renderEmpJobs}">
+
+
+									<p:dataTable id="jobs" var="job" rows="20"
+										emptyMessage=" #{bundle['noRequestsAvailable']}  "
+										value="#{employeeAdminPage.myJobPosts}"
+										selection="#{employeeAdminPage.selectedJobPost}"
+										rowKey="#{job.id}" selectionMode="single">
+										<p:ajax event="rowSelect"
+											listener="#{employeeAdminPage.showselectedJobPost}"
+											update=":employeeAdmin:job_details"
+											oncomplete="PF('job_details').show();" />
+										<p:column>
+											<div class="row ListItem">
+
+												<div class="ListItemFirst">
+													<div class="col-sm-8 JobTitle">
+														<label>#{job.jobType.nameArabic}</label>
+													</div>
+
+												</div>
+
+												<div class="ListItemSecond">
+													<div class="col-sm-5 DateFromToArea">
+														<table class="DateTable">
+															<tr>
+																<td><label class="DateValue"><span
+																		class="CalenderIcon"></span>#{job.numberOfDays}
+																		#{bundle['days']}</label></td>
+																<td><label>#{employeeAdminPage.getDateAsString(job.startDate)}</label></td>
+																<td><span class="ArrowIconAr"></span></td>
+																<td><label>#{employeeAdminPage.getDateAsString(job.endDate)}</label></td>
+															</tr>
+														</table>
+													</div>
+													<div class="col-sm-5 TimeFromToArea">
+														<table class="TimeTable">
+															<tr>
+																<td><label class="TimeValue"><span
+																		class="TimeIcon"></span>#{job.numberOfHours}
+																		#{bundle['hours']}</label></td>
+																<td><label>#{employeeAdminPage.getTimeAsString(job.startHour)}</label></td>
+																<td><span class="ArrowIconAr"></span></td>
+																<td><label>#{employeeAdminPage.getTimeAsString(job.endHour)}</label></td>
+															</tr>
+														</table>
+													</div>
+
+
+												</div>
+											</div>
+										</p:column>
+									</p:dataTable>
+
+								</p:panelGrid>
+							</div>
+						</p:panel>
+					</div>
+					<p:dialog dir="#{bundle['dir']}" id="job_details"
+						widgetVar="job_details" width="600" modal="true"
+						closeOnEscape="true"
+						rendered="#{employeeAdminPage.selectedJobPost != null}">
+						<div class="row PageBar">
+							<div class="col-sm-12 PageTitle"> #{bundle['RequestData']}</div>
+						</div>
+						<p:messages globalOnly="true" id="updateMessage" />
+						<div class="EmployeePreview">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="row">
+										<div class="col-xs-4">
+											<h5>#{bundle['date']}</h5>
+										</div>
+
+										<div class="col-xs-8">
+											<div class="row RemoveBorderBottom">
+												<div class="col-xs-2">
+													<h5>#{bundle['from']}</h5>
+												</div>
+												<div class="col-xs-4">
+													<p:calendar value="#{employeeAdminPage.updateJobStartDate}"
+														id="fromDate" locale="ar" pattern="yyyy/MM/dd" mask="true"
+														maxlength="10">
+														<f:convertDateTime pattern="yyyy/MM/dd" />
+													</p:calendar>
+												</div>
+												<div class="col-xs-2">
+													<h5>#{bundle['to']}</h5>
+												</div>
+												<div class="col-xs-4">
+													<p:calendar value="#{employeeAdminPage.updateJobEndDate}"
+														id="toDate" locale="ar" pattern="yyyy/MM/dd" mask="true"
+														maxlength="10">
+														<f:convertDateTime pattern="yyyy/MM/dd" />
+													</p:calendar>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-xs-4">
+											<h5>#{bundle['numberOfHours']}</h5>
+										</div>
+
+										<div class="col-xs-8">
+											<div class="row RemoveBorderBottom">
+												<div class="col-xs-2">
+													<h5>#{bundle['from']}</h5>
+												</div>
+												<div class="col-xs-4">
+													<p:calendar lang="#{bundle['locale']}"
+														value="#{employeeAdminPage.updateJobStartHour}"
+														id="fromTime" placeholder="#{bundle['from']}"
+														validatorMessage=" #{bundle['valueMustBe']}   hh:mm"
+														pattern="HH:mm" timeZone="GMT+3" timeOnly="true" size="10">
+														<f:convertDateTime pattern="HH:mm" />
+													</p:calendar>
+
+												</div>
+												<div class="col-xs-2">
+													<h5>#{bundle['to']}</h5>
+												</div>
+												<div class="col-xs-4">
+													<p:calendar lang="#{bundle['locale']}"
+														value="#{employeeAdminPage.updateJobEndHour}"
+														placeholder="#{bundle['to']}"
+														validatorMessage=" #{bundle['valueMustBe']}   hh:mm"
+														pattern="HH:mm" timeZone="GMT+3" id="toTime"
+														timeOnly="true" size="10">
+														<f:convertDateTime pattern="HH:mm" />
+													</p:calendar>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+
+								</div>
+							</div>
+						</div>
+						<div class="row BtnDiv PopupButtonArea">
+							<p:commandButton value="#{bundle['editProfile']}" title="#{bundle['empJobs']} "
+								process="@this employeeAdmin:fromDate employeeAdmin:toDate employeeAdmin:fromTime employeeAdmin:toTime"
+								action="#{employeeAdminPage.updateJobPost}"
+								update=":employeeAdmin:empJobs"
+								oncomplete="PF('job_details').hide();" styleClass="BtnStyle" />
+						</div>
+					</p:dialog>
+				</div>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

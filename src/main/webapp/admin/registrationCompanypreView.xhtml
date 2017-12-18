@@ -1,0 +1,367 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:body>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+		<ui:define name="content">
+
+			<h:form id="registrationCompanypreView">
+
+				<ul class="AdminTabs">
+					<li class="TabRequestes active">
+						<p:link href="/admin/registrationCompanypreView" > #{bundle['registrationRequests']} </p:link>
+					</li>
+					<li class="TabCompanies">
+						<p:link href="/admin/companyAdminPage" > #{bundle['companyadmin']} </p:link>
+					</li>
+					<li class="TabEmployees">
+						<p:link href="/admin/employeeAdminPage" > #{bundle['employeeAdmin']} </p:link>
+					</li>
+					<!--<li class="TabAccountant">الحسابات</li>-->
+				</ul>
+
+
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel CompanyReviewListPanel">
+							<div class="panel-heading">
+								<span class="glyphicon glyphicon-list"></span>#{bundle['companieslist']}
+							</div>
+							<div class="panel-body">
+								<p:dataTable id="companies" var="company" rows="20"
+									emptyMessage="#{bundle['nofoundcompany']}"
+									value="#{adminCompanyReview.companies}" selectionMode="single"
+									selection="#{adminCompanyReview.selectedCompany}"
+									rowKey="#{company.id}" paginator="true"
+									paginatorPosition="bottom"
+									paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="20,50,100">
+
+									<p:ajax event="rowSelect"
+										listener="#{adminCompanyReview.onRowSelect}"
+										update=":registrationCompanypreView:notes :registrationCompanypreView:acceptBtn :registrationCompanypreView:rejectBtn :registrationCompanypreView:companyName :registrationCompanypreView:workType :registrationCompanypreView:commercialRecord :registrationCompanypreView:commercialExpirationDate :registrationCompanypreView:branchesNumber :registrationCompanypreView:workTimeStart :registrationCompanypreView:workTimeEnd :registrationCompanypreView:contactNumber :registrationCompanypreView:email :registrationCompanypreView:locationDescription :registrationCompanypreView:locationNearBy :registrationCompanypreView:fullName :registrationCompanypreView:reContactNumber :registrationCompanypreView:reEmail :registrationCompanypreView:paymentType :registrationCompanypreView:files" />
+
+									<p:column headerText="#{bundle['commercialRecord']} ">
+										<h:outputText
+											value="#{company.companyDetails.commercialRecord}" />
+									</p:column>
+
+									<p:column headerText="#{bundle['companyName']} ">
+										<h:outputText value="#{company.companyDetails.name}" />
+									</p:column>
+
+									<p:column headerText=" #{bundle['registerDate']}">
+										<h:outputText value="#{company.dateCreated}" />
+									</p:column>
+
+								</p:dataTable>
+							</div>
+
+						</div>
+
+
+					</div>
+					<div class="col-md-6">
+						<p:panelGrid id="companyDetails">
+
+							<div class="row content RegistrationPreview">
+								<div class="col-md-1 col-xs-0"></div>
+								<div class="col-md-10 col-xs-12">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label> #{bundle['companyName']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+
+													<h:outputLabel
+														value="#{adminCompanyReview.selectedCompany.companyDetails.name}"
+														id="companyName" />
+
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['companyActivity']} </label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{adminCompanyReview.selectedCompany.companyDetails.workType}"
+														id="workType" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label> #{bundle['commercialRecord']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{adminCompanyReview.selectedCompany.companyDetails.commercialRecord}"
+														id="commercialRecord" />
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['commercialExpirationDate']} </label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{adminCompanyReview.formatDateAsStringRepresentation(adminCompanyReview.selectedCompany.companyDetails.commercialExpirationDate)}"
+														id="commercialExpirationDate" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['branchesNumber']} </label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{adminCompanyReview.selectedCompany.companyDetails.branchesNumber}"
+														id="branchesNumber" />
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label> #{bundle['workdates']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<span>من</span>
+													<h:outputLabel
+														value="#{adminCompanyReview.formatTimeAsStringRepresentation(adminCompanyReview.selectedCompany.companyDetails.workTimeStart)}"
+														id="workTimeStart" />
+													<span>الى</span><label><h:outputLabel
+															value="#{adminCompanyReview.formatTimeAsStringRepresentation(adminCompanyReview.selectedCompany.companyDetails.workTimeEnd)}"
+															id="workTimeEnd" /></label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['contactNumber']} </label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{adminCompanyReview.selectedCompany.companyDetails.contactNumber}"
+														id="contactNumber" />
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['email']} </label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{adminCompanyReview.selectedCompany.companyDetails.email}"
+														id="email" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label> #{bundle['locationDescription']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{adminCompanyReview.selectedCompany.companyDetails.locationDescription}"
+														id="locationDescription" />
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['locationNearBy']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{adminCompanyReview.selectedCompany.companyDetails.locationNearBy}"
+														id="locationNearBy" />
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['attachments']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+									<p:panel id="files" class="UploadAttachment CompanyUploadAttachment">	
+										
+										<p:outputLabel rendered="#{adminCompanyReview.nofiles}" value="#{bundle['noFoundAttachments']}" />
+									
+										<p:outputLabel id="certificateFileLabel"
+											value="#{adminCompanyReview.certificateFileInfo.fileName}"
+											rendered="#{adminCompanyReview.certificateFileInfo != null}"/>	
+								
+									<p:commandButton id="certificateFileButton"
+										value="#{bundle['upload']} " ajax="false"
+										onclick="#{adminCompanyReview.downloadFile()}"
+										oncomplete="PrimeFaces.monitorDownload(start, stop);"
+										rendered="#{adminCompanyReview.certificateFileInfo != null}"
+										icon="ui-icon-arrowthick-1-s">
+										<p:fileDownload value="#{adminCompanyReview.certificateFile}" />
+									</p:commandButton>
+								
+								</p:panel>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label> #{bundle['paymentType']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{adminCompanyReview.paymentTypeDesc}"
+														id="paymentType" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="CompanyRepresentetive">#{bundle['representativeSection']}</div>
+
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['representativeFullName']}</label>
+												</div>
+
+												<div class="col-xs-12 value">
+													<h:outputLabel
+														value="#{adminCompanyReview.selectedCompany.fullName}"
+														id="fullName" />
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="row">
+												<div class="col-xs-12 title">
+													<label>#{bundle['representativeContactNumber']} </label>
+												</div>
+
+												<div class="col-xs-12 value">
+
+													<h:outputLabel
+														value="#{adminCompanyReview.selectedCompany.contactNumber}"
+														id="reContactNumber" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-xs-12 title">
+											<label>#{bundle['representativeEmail']}</label>
+										</div>
+
+										<div class="col-xs-12 value">
+											<h:outputLabel
+												value="#{adminCompanyReview.selectedCompany.email}"
+												id="reEmail" />
+										</div>
+									</div>
+
+									<div class="row Reasons">
+										<div class="col-xs-4">
+											<h5>#{bundle['notes']}</h5>
+										</div>
+
+										<div class="col-xs-8">
+											<p:inputText styleClass="form-control" id="notes"
+												value="#{adminCompanyReview.notes}" />
+										</div>
+									</div>
+
+									<div class="row BtnDiv">
+										<div class="col-xs-6 text-center">
+
+											<p:commandButton value="#{bundle['accept']}" id="acceptBtn"
+												class="DoneBtnStyle"
+												disabled="#{adminCompanyReview.acceptBtnDisabled}"
+												action="#{adminCompanyReview.acceptCompany}"
+												update="companies notes :registrationCompanypreView:acceptBtn :registrationCompanypreView:rejectBtn :registrationCompanypreView:companyName :registrationCompanypreView:workType :registrationCompanypreView:commercialRecord :registrationCompanypreView:commercialExpirationDate :registrationCompanypreView:branchesNumber :registrationCompanypreView:workTimeStart :registrationCompanypreView:workTimeEnd :registrationCompanypreView:contactNumber :registrationCompanypreView:email :registrationCompanypreView:locationDescription :registrationCompanypreView:locationNearBy :registrationCompanypreView:fullName :registrationCompanypreView:reContactNumber :registrationCompanypreView:reEmail :registrationCompanypreView:paymentType :registrationCompanypreView:files">
+												<span class="glyphicon glyphicon-ok BtnIcon"></span>
+											</p:commandButton>
+
+										</div>
+
+										<div class="col-xs-6 text-center">
+
+
+											<p:commandButton value="#{bundle['rejectButton']}"
+												id="rejectBtn" class="BtnStyle"
+												disabled="#{adminCompanyReview.rejectBtnDisabled}"
+												action="#{adminCompanyReview.rejectCompany}"
+												update="companies notes :registrationCompanypreView:acceptBtn :registrationCompanypreView:rejectBtn :registrationCompanypreView:companyName :registrationCompanypreView:workType :registrationCompanypreView:commercialRecord :registrationCompanypreView:commercialExpirationDate :registrationCompanypreView:branchesNumber :registrationCompanypreView:workTimeStart :registrationCompanypreView:workTimeEnd :registrationCompanypreView:contactNumber :registrationCompanypreView:email :registrationCompanypreView:locationDescription :registrationCompanypreView:locationNearBy :registrationCompanypreView:fullName :registrationCompanypreView:reContactNumber :registrationCompanypreView:reEmail :registrationCompanypreView:paymentType :registrationCompanypreView:files">
+												<span class="glyphicon glyphicon-ok BtnIcon"></span>
+											</p:commandButton>
+										</div>
+									</div>
+
+
+
+
+								</div>
+								<div class="col-md-1 col-xs-0"></div>
+
+
+
+							</div>
+
+						</p:panelGrid>
+					</div>
+				</div>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

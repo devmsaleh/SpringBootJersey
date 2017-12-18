@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+		<ui:define name="title">#{bundle['registerCompanyBranchTitle']}</ui:define>
+
+		<ui:define name="content">
+
+			<h:form id="registrationCompanyBranchBranch">
+
+				<div class="row PageBar">
+
+					<div class="col-sm-12 PageTitle">#{bundle['companyRegistrationBranch']}</div>
+
+				</div>
+
+				<div class="row content Registration">
+					<div class="col-md-3 col-xs-0"></div>
+					<div class="col-md-6 col-xs-12">
+
+				<p:messages globalOnly="true" id="msgs" />						
+						
+				<div class="row">
+				
+					<div class="col-xs-4">
+						<h5>#{bundle['city']}</h5>
+					</div>
+				
+					<div class="col-xs-8 selectarrowsolution">
+				
+				    	<p:selectOneMenu value="#{registrationCompanyBranch.selectedCity}" id="city"  class="form-control">
+							<f:selectItem itemLabel="#{bundle['selectCity']}" itemValue="-1"/>
+							<f:selectItems  value="#{registrationCompanyBranch.cities}" />
+						</p:selectOneMenu>
+						
+						<div class="RequieredMessage"><p:message  for="city" /></div>	
+					
+					</div>
+					
+				</div>
+				
+				<div class="row">
+							
+				<div class="col-xs-4">
+						#{bundle['branchlocationDescription']}
+				</div>
+					<div class="col-xs-8">
+						<div class="row LocationSection">
+							<div class="col-xs-9">
+								<p:inputText id="locationDescription" required="true"
+									requiredMessage="#{bundle['branchlocationDescriptionRequired']}"
+									placeholder="#{bundle['branchlocationDescription']}"
+									value="#{registrationCompanyBranch.locationDescription}"
+									class="form-control" />
+										<p:message for="locationDescription" />
+									</div>
+
+									<div class="col-xs-3">
+
+										<h:inputHidden id="lat"
+											value="#{registrationCompanyBranch.locationLatitude}" />
+										<h:inputHidden id="lng"
+											value="#{registrationCompanyBranch.locationLongitude}" />
+
+										<button type="button" class="BtnLocation"
+											onclick="PF('gmapDialog').show();findMe(false,'registrationCompanyBranchBranch');">
+											<span class="glyphicon glyphicon-map-marker"></span>
+										</button>
+
+									<p:dialog dir="#{bundle['dir']}" class="RegistrationLocationPopup" header="#{bundle['chooseBranchLocation']}" widgetVar="gmapDialog" width="700" height="500" modal="true">
+		
+										<p:panelGrid columns="4" style="width:100%;">		
+											<h5>#{bundle['Address']}</h5>
+											<p:inputText     id="locationDescriptionDialog"     readonly="true" placeholder="#{bundle['Address']}" class="form-control" />
+											<p:commandButton class="BtnStyle" onclick="PF('gmapDialog').hide();" value= "#{bundle['ChooseAddress']}" />
+											<p:commandButton class="BtnStyle" onclick="findMe(true,'registrationCompanyBranchBranch');" value= "#{bundle['myLocation']}" />
+										
+										</p:panelGrid>
+										
+										<p:gmap center="24.709156813696378,46.67292563366709" zoom="15" type="ROADMAP" style="width:100%;height:400px" widgetVar="gmap" onPointClick="handlePointClick(event,'registrationCompanyBranchBranch');">
+				    					</p:gmap>
+	
+									</p:dialog>
+	
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-xs-4">
+								#{bundle['locationNearBy']}
+							</div>
+
+							<div class="col-xs-8">
+								<p:inputText placeholder="#{bundle['locationNearBy']}"
+									id="locationNearBy"
+									requiredMessage="#{bundle['locationNearByRequired']}"
+									value="#{registrationCompanyBranch.locationNearBy}"
+									required="true" class="form-control" />
+
+								<p:message for="locationNearBy" />
+							</div>
+
+						</div>
+
+
+						<div class="row">
+							<div class="col-xs-4">
+								#{bundle['workTime']}
+							</div>
+
+							<div class="col-xs-8">
+								<div class="row WorkingTimeSection">
+									<div class="col-xs-2">
+										#{bundle['from']}
+									</div>
+									<div class="col-xs-4">
+										<p:calendar locale="en" pattern="hh:mm a" navigator="true"  id="workTimeStart" required="true"
+											placeholder="#{bundle['from']}"
+											requiredMessage="#{bundle['fromRequired']}"
+											value="#{registrationCompanyBranch.workTimeStart}"
+											timeOnly="true" size="10" />
+										<p:message for="workTimeStart" />
+									</div>
+									<div class="col-xs-2">
+										#{bundle['to']}
+									</div>
+									<div class="col-xs-4">
+										<p:calendar navigator="true"  locale="en" pattern="hh:mm a" id="workTimeEnd" required="true"
+											placeholder="#{bundle['to']}"
+											requiredMessage="#{bundle['toRequired']}"
+											value="#{registrationCompanyBranch.workTimeEnd}"
+											timeOnly="true" size="10" />
+										<p:message for="workTimeEnd" />
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+
+							<div class="col-xs-4">
+								#{bundle['contactNumber']}
+							</div>
+
+							<div class="col-xs-8">
+								<div class="row">
+									<div class="col-xs-10">
+										<p:inputText id="contactNumber" required="true"
+											requiredMessage="#{bundle['contactNumberRequired']}"
+											placeholder="#{bundle['contactNumber']}"
+											value="#{registrationCompanyBranch.contactNumberBranch}"
+											class="form-control" />
+										<p:message for="contactNumber" />
+									</div>
+									<div class="col-xs-2">
+										<h5>00966</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-xs-4">
+								#{bundle['companyBranchEmail']}
+							</div>
+
+							<div class="col-xs-8">
+								<p:inputText id="companyBranchEmail" required="true"
+									placeholder="#{bundle['companyBranchEmail']}"
+									requiredMessage="#{bundle['companyBranchEmailRequired']}"
+									validatorMessage="#{bundle['companyBranchEmailvalidationmessage']}"
+									value="#{registrationCompanyBranch.emailBranch}"
+									class="form-control">
+									<f:validateRegex
+										pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+								</p:inputText>
+								<p:message for="companyBranchEmail" />
+							</div>
+						</div>
+
+
+
+
+						<div class="row RegistrationCeberator">
+							<div class="col-xs-4">
+								#{bundle['companyRepresentativeData']}
+							</div>
+
+							<div class="col-xs-8"></div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-xs-4">
+								#{bundle['representativeFullName']}
+							</div>
+
+							<div class="col-xs-8">
+								<p:inputText placeholder="#{bundle['representativeFullName']}"
+									id="companyBranchRepresentativeName"
+									requiredMessage="#{bundle['representativeFullNameRequired']}"
+									value="#{registrationCompanyBranch.companyBranchRepresentativeName}"
+									required="true" class="form-control" />
+
+								<p:message for="companyBranchRepresentativeName" />
+							</div>
+						</div>
+
+
+
+						<div class="row">
+							<div class="col-xs-4">
+								#{bundle['representativeContactNumber']}
+							</div>
+
+							<div class="col-xs-8">
+								<div class="row contactnumbersection">
+									<div class="col-xs-10 contactnumber">
+										<p:inputText id="representativeContactNumber"
+											placeholder="#{bundle['representativeContactNumber']}"
+											required="true"
+											requiredMessage="#{bundle['representativeContactNumberRequired']}"
+											value="#{registrationCompanyBranch.companyBranchRepresentativecontactNumber}"
+											class="form-control" />
+										<p:message for="representativeContactNumber" />
+									</div>
+									<div class="col-xs-2">
+										<p:outputLabel value="+966" />
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-xs-4">
+								#{bundle['representativeEmail']}
+							</div>
+
+							<div class="col-xs-8">
+
+								<p:inputText id="representativeEmail"
+									placeholder="#{bundle['representativeEmail']}" required="true"
+									validatorMessage="#{bundle['companyEmailvalidationmessage']}"
+									requiredMessage="#{bundle['representativeEmailRequired']}"
+									value="#{registrationCompanyBranch.companyBranchRepresentativeEmail}"
+									class="form-control">
+									<f:validateRegex
+										pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+								</p:inputText>
+
+								<p:message for="representativeEmail" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-4">
+								#{bundle['representativePassword']}
+							</div>
+
+							<div class="col-xs-8">
+								<p:password id="pw1"
+									value="#{registrationCompanyBranch.companyBranchRepresentativePassword}"
+									feedback="true" required="true"
+									requiredMessage="#{bundle['representativePasswordRequired']}"
+									placeholder="#{bundle['representativePassword']}"
+									class="form-control" promptLabel="#{bundle['promptLabel']}"
+									weakLabel="#{bundle['weakLabel']}"
+									goodLabel="#{bundle['goodLabel']}"
+									strongLabel="#{bundle['strongLabel']}"
+									match="pw2"
+									validatorMessage="#{bundle['passwordNotMatch']}"
+									 />
+
+								<p:message for="pw1" />
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-xs-4">
+								#{bundle['representativePasswordAgain']}
+							</div>
+
+							<div class="col-xs-8">
+
+								<p:password id="pw2"
+									value="#{registrationCompanyBranch.companyBranchRepresentativePasswordAgain}"
+									placeholder="#{bundle['representativePasswordAgain']}"
+									required="true"
+									requiredMessage="#{bundle['representativePasswordRequired']}"
+									class="form-control" />
+								<p:message for="pw2" />
+							</div>
+						</div>
+						<div class="row BtnDiv">
+														
+							<div class="col-xs-4 text-center">
+
+								<p:commandButton value="#{bundle['register']} "
+									action="#{registrationCompanyBranch.save}"
+									styleClass="DoneBtnStyle" validateClient="true" ajax="false" />
+
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-xs-0"></div>
+
+				</div>
+
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

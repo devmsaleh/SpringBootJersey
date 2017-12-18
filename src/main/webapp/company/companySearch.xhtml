@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+		<ui:define name="title">#{bundle['companySearchTitle']}</ui:define>
+
+		<ui:define name="content">
+
+			<h:form id="companySearch">
+
+				<div class="row PageBar">
+					<div class="col-md-12 PageTitle">#{bundle['jobSeeker']}</div>
+				</div>
+
+				<div class="row content">
+					<div class="col-md-3 SearchCarateria">
+
+						<div class="row">
+
+							<p:messages id="msgs" />
+
+							<div class="col-md-12">
+								<h5>#{bundle['neededJob']}</h5>
+							</div>
+
+							<div class="col-md-12 selectarrowsolution">
+
+								<p:selectOneMenu filter="true" id="joblist"
+									value="#{companySearchBean.selectedJob}"
+									styleClass="form-control JobSelection">
+									<f:selectItem itemLabel="#{bundle['choosejob']}" itemValue="-1" />
+									<f:selectItems value="#{companySearchBean.jobs}" />
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<h5>#{bundle['gender']}</h5>
+							</div>
+							<div class="col-md-12">
+								<p:selectOneRadio id="sex" value="#{companySearchBean.sex}">
+									<f:selectItem itemLabel="#{bundle['SexMale']}" itemValue="1" />
+									<f:selectItem itemLabel="#{bundle['SexFeMale']}" itemValue="2" />
+								</p:selectOneRadio>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-md-12">
+								<h5>#{bundle['city']}</h5>
+							</div>
+
+							<div class="col-md-12 selectarrowsolution">
+								<p:selectOneMenu value="#{companySearchBean.city}" id="city"
+									class="form-control">
+									<f:selectItem itemLabel="#{bundle['selectCity']}"
+										itemValue="-1" />
+									<f:selectItems value="#{companySearchBean.cities}" />
+								</p:selectOneMenu>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<h5>#{bundle['date']}</h5>
+							</div>
+
+							<div class="col-md-12">
+								<div class="row RemoveBorderBottom">
+									<div class="col-md-2">
+										<h6>#{bundle['from']}</h6>
+									</div>
+									<div class="col-md-4">
+										<p:calendar lang="#{bundle['locale']}" mindate="new Date()"
+											id="fromDate" placeholder="#{bundle['from']}"
+											value="#{companySearchBean.fromDate}" />
+									</div>
+									<div class="col-md-2">
+										<h6>#{bundle['to']}</h6>
+									</div>
+									<div class="col-md-4">
+										<p:calendar lang="#{bundle['locale']}" id="toDate"
+											mindate="new Date()" placeholder="#{bundle['to']}"
+											value="#{companySearchBean.toDate}" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<h5>#{bundle['numberOfHours']}</h5>
+							</div>
+
+							<div class="col-md-12">
+								<div class="row RemoveBorderBottom">
+									<div class="col-md-2">
+										<h6>#{bundle['from']}</h6>
+									</div>
+									<div class="col-md-4">
+										<p:calendar locale="en" pattern="hh:mm a"
+											placeholder="#{bundle['from']}"
+											value="#{companySearchBean.workTimeStart}" timeOnly="true" />
+									</div>
+
+									<div class="col-md-2">
+										<h6>#{bundle['to']}</h6>
+									</div>
+									<div class="col-md-4">
+										<p:calendar locale="en" pattern="hh:mm a"
+											placeholder="#{bundle['to']}"
+											value="#{companySearchBean.workTimeEnd}" timeOnly="true" />
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<h5>#{bundle['lowEmployeeRating']}</h5>
+							</div>
+
+							<div class="col-md-12">
+								<p:rating value="#{companySearchBean.rating}" />
+							</div>
+						</div>
+
+						<div class="row BtnDiv">
+							<div class="col-md-12 text-center">
+								<p:commandButton styleClass="BtnStyle SearchButton" ajax="true"
+									value="#{bundle['search']}"
+									action="#{companySearchBean.search}"
+									update="jobs msgs pageNumber previous next" />
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-md-9">
+
+						<p:dataTable class="SearchResults" id="jobs" var="job" rows="20"
+							emptyMessage="#{bundle['noEmployeeAvailable']}"
+							value="#{companySearchBean.employeeJobPosts}" rowKey="#{job.id}"
+							selection="#{companySearchBean.selectedEmployeeJobPost}"
+							selectionMode="single">
+
+							<p:ajax event="rowSelect"
+								listener="#{companySearchBean.onRowSelect}"
+								update=":companySearch:job_details :companySearch:job_apply"
+								oncomplete="PF('employees_job_details').show();" />
+
+							<p:column>
+								<div class="row ListItem CompanyiesListItem">
+									<div class="row ListItemFirst">
+										<div class="col-md-6">
+											
+											<table class="EmployeesInfoTable FullWidth">
+												<tr>
+													<td rowspan="3" class="UserPhotoTd">
+														<img class="ListUserPhoto"
+															src="#{job.employeeDetails.avatar.imageBase64}" width="50px"
+															height="50px"></img>
+													</td>
+												</tr>
+												<tr>
+													<td class="JobTitle">#{job.jobType.nameArabic}</td>
+												</tr>
+												<tr>
+													<td class="EmpSummary">
+														<p:outputLabel value="#{job.employeeDetails.code} | "></p:outputLabel>
+														<p:outputLabel value="#{bundle['SexMale']} "
+															rendered="#{job.employeeDetails.gender eq 1}" /> <p:outputLabel
+															value="#{bundle['SexFeMale']} "
+															rendered="#{job.employeeDetails.gender eq 2}" /> <p:outputLabel
+															value="| #{companySearchBean.getAge(job.employeeDetails.birthDateHijri,job.employeeDetails.birthDateGreg)} #{bundle['year']}" />
+													</td>
+												</tr>
+											</table>
+										</div>
+										<div class="col-md-3 ListRatting">
+											<p:rating value="#{job.employeeDetails.rank}" readonly="true" />
+											<p:outputLabel
+												value="#{job.employeeDetails.numberOfEvaluations} #{bundle['vote']}" />
+										</div>
+										<div class="col-md-3 AlowesAtLast">
+
+											<p:commandButton value="#{bundle['apply']}"
+												rendered="#{companySearchBean.allowAction}"
+												styleClass="AskButton"
+												action="#{companySearchBean.openApplyDialog}"
+												update=":companySearch:job_apply"
+												oncomplete="PF('job_apply_details').show();">
+												<f:setPropertyActionListener value="#{job}"
+													target="#{companySearchBean.selectedEmployeeJobPost}" />
+											</p:commandButton>
+											
+											<p:commandButton value="التفاصيل"
+												styleClass="DetailsButton"
+												action="#{companySearchBean.openDetails}"
+												update=":companySearch:job_details :companySearch:job_apply"
+												oncomplete="PF('employees_job_details').show();">
+												<f:setPropertyActionListener value="#{job}"
+													target="#{companySearchBean.selectedEmployeeJobPost}" />
+											</p:commandButton>
+											
+										</div>
+									</div>
+
+									<div class="row ListItemSecond">
+										<div class="col-md-5 DateFromToArea">
+											<table class="DateTable">
+												<tr>
+													<td><label class="DateValue"><span
+															class="CalenderIcon"></span>#{job.numberOfDays}
+															#{bundle['days']}</label></td>
+
+													<td><p:outputLabel
+															value="#{companySearchBean.formatDateAsStringRepresentation(job.startDate)}" /></td>
+													<td class="arrowTD"><span class="ArrowIconAr"></span></td>
+													<td><p:outputLabel
+															value="#{companySearchBean.formatDateAsStringRepresentation(job.endDate)}" /></td>
+													<td></td>
+												</tr>
+											</table>
+
+										</div>
+										<div class="col-md-5 TimeFromToArea">
+											<table class="TimeTable">
+												<tr>
+													<td><label class="TimeValue"><span
+															class="TimeIcon"></span>#{job.numberOfHours}
+															#{bundle['hours']}</label></td>
+
+													<td><p:outputLabel
+															value="#{companySearchBean.formatTimeAsStringRepresentation(job.startHour)}" /></td>
+													<td class="arrowTD"><span class="ArrowIconAr"></span></td>
+													<td><p:outputLabel
+															value="#{companySearchBean.formatTimeAsStringRepresentation(job.endHour)}" /></td>
+													<td></td>
+												</tr>
+											</table>
+										</div>
+										<div class="col-md-2 AlowesAtLast PostingDateAndTime">
+											<p:outputLabel value="#{job.dateCreated}">
+												<f:convertDateTime pattern="dd-MM-yyyy hh:mm a" />
+											</p:outputLabel>
+										</div>
+
+									</div>
+								</div>
+
+
+
+
+							</p:column>
+						</p:dataTable>
+
+
+						<p:dialog dir="#{bundle['dir']}" header="#{bundle['jobDetails']} "
+							id="job_details" widgetVar="employees_job_details" width="800"
+							height="430" modal="true" closeOnEscape="true">
+
+							<div class="row PageBar">
+								<div class="col-md-12 PageTitle">#{bundle['jobData']}</div>
+							</div>
+
+							<div class="padding">
+								<div>
+									<div class="row ListItem CompanyiesListItem">
+										<div class="row ListItemFirst">
+											<div class="col-md-6">
+												<table class="EmployeesInfoTable SearchEmployeesInfoTable">
+													<tr>
+														<td rowspan="3" class="UserPhotoTd">
+															<img class="ListUserPhoto"
+																src="#{companySearchBean.employeeJobPostForDetails.employeeDetails.avatar.imageBase64}"
+																width="50px" height="50px"></img>
+														</td>
+													</tr>
+													<tr>
+														<td class="JobTitle">#{companySearchBean.selectedEmployeeJobPost.jobType.nameArabic}</td>
+													</tr>
+													<tr>
+														<td class="EmpSummary">
+															<p:outputLabel
+																value="#{bundle['SexMale']}"
+																rendered="#{companySearchBean.employeeJobPostForDetails.employeeDetails.gender eq 1}" />
+															<p:outputLabel value="#{bundle['SexFeMale']}"
+																rendered="#{companySearchBean.employeeJobPostForDetails.employeeDetails.gender eq 2}" />
+															<p:outputLabel
+															value="| #{companySearchBean.getAge(companySearchBean.employeeJobPostForDetails.employeeDetails.birthDateHijri,companySearchBean.employeeJobPostForDetails.employeeDetails.birthDateGreg)} #{bundle['year']}" />
+															</td>
+													</tr>
+												</table>
+											</div>
+											<div class="col-md-3 ListRatting">
+												<p:rating
+													value="#{companySearchBean.employeeJobPostForDetails.employeeDetails.rank}"
+													readonly="true" />
+												<p:outputLabel
+													value="#{companySearchBean.employeeJobPostForDetails.employeeDetails.numberOfEvaluations} #{bundle['vote']}" />
+											</div>
+											<div class="col-md-3 AlowesAtLast">
+
+												<p:commandButton value="#{bundle['apply']}"
+													rendered="#{companySearchBean.allowAction}"
+													styleClass="AskButton" update=":companySearch:job_apply"
+													oncomplete="PF('job_apply_details').show();">
+													
+													</p:commandButton>
+
+											</div>
+										</div>
+
+										<div class="row ListItemSecond">
+											<div class="col-md-5 DateFromToArea">
+												<table class="DateTable EmployeesDataTable">
+													<tr>
+														<td><label class="DateValue"><span
+																class="CalenderIcon"></span>#{companySearchBean.employeeJobPostForDetails.numberOfDays}
+																#{bundle['days']}</label></td>
+
+														<td><p:outputLabel
+																value="#{companySearchBean.formatDateAsStringRepresentation(companySearchBean.employeeJobPostForDetails.startDate)}" /><span
+															class="ArrowIconAr"></span></td>
+														<td><p:outputLabel
+																value="#{companySearchBean.formatDateAsStringRepresentation(companySearchBean.employeeJobPostForDetails.endDate)}" /></td>
+														<td></td>
+													</tr>
+												</table>
+
+											</div>
+											<div class="col-md-5 TimeFromToArea">
+												<table class="TimeTable EmployeesTimeTable">
+													<tr>
+														<td><label class="TimeValue"><span
+																class="TimeIcon"></span>#{companySearchBean.employeeJobPostForDetails.numberOfHours}
+																#{bundle['hours']}</label></td>
+														<td><p:outputLabel
+																value="#{companySearchBean.formatTimeAsStringRepresentation(companySearchBean.employeeJobPostForDetails.startHour)}" /><span
+															class="ArrowIconAr"></span></td>
+														<td><p:outputLabel
+																value="#{companySearchBean.formatTimeAsStringRepresentation(companySearchBean.employeeJobPostForDetails.endHour)}" /></td>
+														<td></td>
+													</tr>
+												</table>
+											</div>
+											<div class="col-md-2 AlowesAtLast PostingDateAndTime">
+												<p:outputLabel
+													value="#{companySearchBean.employeeJobPostForDetails.dateCreated}">
+													<f:convertDateTime pattern="dd-MM-yyyy hh:mm a" />
+												</p:outputLabel>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="DetailsArrow"></div>
+
+									<div class="row DetailsSection EmployeeDetailsSection">
+										<div class="row">
+
+											<div class="col-md-4 title">
+												<label>#{bundle['employeesCode']}</label>
+											</div>
+
+											<div class="col-md-8 value">
+												<p:outputLabel
+													value="#{companySearchBean.employeeJobPostForDetails.employeeDetails.code}" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4 title">
+												<label>#{bundle['city']}</label>
+											</div>
+
+											<div class="col-md-8 value">
+												<p:outputLabel
+													value="#{companySearchBean.employeeJobPostForDetails.city.nameArabic}" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4 title">
+												<label>#{bundle['nationalNumber']} </label>
+											</div>
+
+											<div class="col-md-8 value">
+												<p:outputLabel
+													value="#{companySearchBean.formateNationalNumber(companySearchBean.employeeJobPostForDetails.employeeDetails.nationalNumber)}" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4 title">
+												<label>#{bundle['experience']} </label>
+											</div>
+
+											<div class="col-md-8 value">
+												<p:outputLabel
+													value="#{companySearchBean.employeeExperienceslist}" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4 title">
+												<label>#{bundle['aboutEmployee']} </label>
+											</div>
+
+											<div class="col-md-8 value">
+												<p:outputLabel
+													value="#{companySearchBean.employeeJobPostForDetails.employeeDetails.aboutMe}" />
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4"></div>
+
+
+							</div>
+
+						</p:dialog>
+
+						<p:dialog dir="#{bundle['dir']}"
+							header="#{bundle['employeeapply']}" id="job_apply"
+							widgetVar="job_apply_details" width="600" modal="true"
+							closeOnEscape="true">
+
+
+							<p:messages globalOnly="true" id="job_apply_msgs" />
+
+							<div class="StandardFields">
+								<div class="row">
+									<div class="col-md-12">
+										<h5>#{bundle['date']}</h5>
+									</div>
+
+									<div class="col-md-12">
+										<div class="row RemoveBorderBottom">
+											<div class="col-md-2">
+												<h5>#{bundle['from']}</h5>
+											</div>
+											<div class="col-md-4">
+												<p:calendar id="offerFromDate" lang="#{bundle['locale']}"
+													mindate="new Date()" placeholder="#{bundle['from']}"
+													value="#{companySearchBean.offerFromDate}" />
+											</div>
+											<div class="col-md-2">
+												<h5>#{bundle['to']}</h5>
+											</div>
+											<div class="col-md-4">
+												<p:calendar id="offerTomDate" lang="#{bundle['locale']}"
+													mindate="new Date()" placeholder="#{bundle['to']}"
+													value="#{companySearchBean.offerTomDate}" />
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<h5>#{bundle['numberOfHours']}</h5>
+									</div>
+
+									<div class="col-md-12">
+										<div class="row RemoveBorderBottom">
+
+											<div class="col-md-2">
+												<h5>#{bundle['from']}</h5>
+											</div>
+											<div class="col-md-4">
+												<p:calendar locale="en" pattern="hh:mm a" id="offerfromTime"
+													placeholder="#{bundle['from']}"
+													value="#{companySearchBean.offerfromTime}" timeOnly="true" />
+											</div>
+											<div class="col-md-2">
+												<h5>#{bundle['to']}</h5>
+											</div>
+
+											<div class="col-md-4">
+												<p:calendar locale="en" pattern="hh:mm a" id="offerToTime"
+													placeholder="#{bundle['to']}"
+													value="#{companySearchBean.offerToTime}" timeOnly="true" />
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="row PopupButtonArea">
+								<p:commandButton value="#{bundle['sendbutton']}"
+									styleClass="DoneBtnStyle" ajax="true"
+									action="#{companySearchBean.applyForEmployee}"
+									update="job_apply_msgs" />
+							</div>
+
+
+						</p:dialog>
+
+						<div class="PaginationHolder">
+							<nav aria-label="Page navigation text-center">
+							<ul class="pagination">
+								<li><p:commandLink value="#{bundle['previous']} &laquo;"
+										action="#{companySearchBean.previous}" id="previous"
+										ajax="true" update="jobs pageNumber previous next"
+										disabled="#{companySearchBean.previousDisabled}"></p:commandLink>
+								</li>
+								<li><a class="PageNumber"><table>
+											<tr>
+												<tr>
+													<td>#{bundle['page']}</td>
+													<td><p:outputLabel id="pageNumber"
+															value="#{companySearchBean.pageNumber}" /></td>
+												</tr>
+											</tr>
+										</table></a></li>
+								<li><p:commandLink value="#{bundle['next']} &raquo;"
+										action="#{companySearchBean.next}" id="next" ajax="true"
+										update="jobs pageNumber previous next"
+										disabled="#{companySearchBean.nextDisabled}"></p:commandLink>
+								</li>
+							</ul>
+							</nav>
+						</div>
+
+					</div>
+				</div>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

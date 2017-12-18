@@ -1,0 +1,218 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:body>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+		<ui:define name="content">
+
+			<h:form id="employeeUnPayedAdmin">
+
+				<div class="row PageBar">
+					<div class="col-md-12 PageTitle">#{bundle['paymentAdmin']} </div>
+				</div>
+				<p:messages globalOnly="true" id="payMessage" />
+				<div class="row PaymentPanel">
+						<p:dataTable  id="jobs" var="job" rows="20"
+							emptyMessage=" #{bundle['RequestData']}  "
+							value="#{adminEmployeeJobsPayment.unPayedJobs}"
+							selection="#{adminEmployeeJobsPayment.selectedJobDTO}"
+							rowKey="#{job.id}" selectionMode="single" resizableColumns="true">
+							<p:ajax event="rowSelect"
+								listener="#{adminEmployeeJobsPayment.showSelectUnpayedJob}"
+								update=":employeeUnPayedAdmin:job_details"
+								oncomplete="PF('job_details').show();" />
+							<p:column  headerText="#{bundle['job']}">
+								<div class="row ListItemSecond">
+									<div class="col-md-10">
+										<label>#{job.jobNameArabic} </label>
+									</div>
+								</div>
+							</p:column>
+							<p:column headerText="#{bundle['companyName']}">
+								<div class="row ListItemSecond">
+									<div class="col-md-10">
+										<label>#{job.companyName} </label>
+									</div>
+								</div>
+							</p:column>
+							<p:column headerText="#{bundle['jobData']}">
+								<div class="row ListItemSecond">
+									<div class="col-md-10">
+										<label class="DateValue">#{job.startDate} </label>
+									</div>
+								</div>
+							</p:column>
+							<p:column headerText="">
+								<div class="col-md-4 AlowesAtLast">
+									<p:commandButton value="التفاصيل" ajax="true" styleClass="DetailsButton" 
+											action="#{adminEmployeeJobsPayment.showSelectUnpayedJob}"
+											update="employeeUnPayedAdmin:job_details"
+											oncomplete="PF('job_details').show();" >
+										<f:setPropertyActionListener value="#{job}"
+												target="#{adminEmployeeJobsPayment.selectedJobDTO}" />
+									</p:commandButton>
+								</div>
+								
+							</p:column>
+						</p:dataTable>
+						<p:dialog dir="#{bundle['dir']}" id="job_details"
+							widgetVar="job_details" width="1000"  modal="true"
+							closeOnEscape="true">
+							<div class="row PageBar">
+								<div class="col-md-12 PageTitle">  #{bundle['jobData']}</div>
+							</div>
+							<div class="JobPreview">
+									<div class="StandardFields PaymentPopup">
+										<div class="row">
+											<div class="col-md-3">
+												<h5>#{bundle['job']}</h5>
+											</div>
+											<div class="col-md-3 value">
+												<h5>#{adminEmployeeJobsPayment.employeeAttendace.jobType.nameArabic}</h5>
+											</div>
+											<div class="col-md-3">
+												<h5>#{bundle['company']}</h5>
+											</div>
+											<div class="col-md-3 value">
+												<h5>#{adminEmployeeJobsPayment.employeeAttendace.jobRequestDTO.companyName}</h5>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3">
+												<h5>#{bundle['startDate']}</h5>
+											</div>
+											<div class="col-md-3 value">
+												<h5>#{adminEmployeeJobsPayment.employeeAttendace.jobStartDate!=null?adminEmployeeJobsPayment.formateDate(adminEmployeeJobsPayment.employeeAttendace.jobStartDate):adminEmployeeJobsPayment.employeeAttendace.jobStartDate}</h5>
+											</div>
+											<div class="col-md-3">
+												<h5>#{bundle['endDate']}</h5>
+											</div>
+											<div class="col-md-3 value">
+												<h5>#{adminEmployeeJobsPayment.formateDate(adminEmployeeJobsPayment.employeeAttendace.jobEndDate)}</h5>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3">
+												<h5>#{bundle['startHour']}</h5>
+											</div>
+											<div class="col-md-3 value">
+												<h5>#{adminEmployeeJobsPayment.formateTime(adminEmployeeJobsPayment.employeeAttendace.jobStartHour)}</h5>
+											</div>
+											<div class="col-md-3">
+												<h5>#{bundle['endHour']}</h5>
+											</div>
+											<div class="col-md-3 value">
+												<h5>#{adminEmployeeJobsPayment.formateTime(adminEmployeeJobsPayment.employeeAttendace.jobStartHour)}</h5>
+											</div>
+										</div>
+										<div class="row PaymentTime">
+											<p:dataTable id="attendanceList" var="attendance"
+												value="#{adminEmployeeJobsPayment.employeeAttendace.attendanceList}"
+												rowKey="#{attendance.id}">
+												<p:column headerText="#{bundle['attendanceSignInTime']} ">
+													<h:outputText value="#{attendance.signInTime}" />
+												</p:column>
+												<p:column headerText=" #{bundle['attendanceSignOutTime']}">
+													<h:outputText value="#{attendance.signOutTime}" />
+												</p:column>
+												<p:column headerText="#{bundle['attendanceWorkHours']}">
+													<h:outputText value="#{attendance.secondsWorked/3600}" />
+												</p:column>
+											</p:dataTable>
+										</div>
+										<div class="row">
+											<div class="col-md-3">
+												<h5>#{bundle['numberOfWorkingDays']}</h5>
+											</div>
+											<div class="col-md-3 value">
+												<h4>#{adminEmployeeJobsPayment.employeeAttendace.jobNumberOfDays}</h4>
+											</div>
+											<div class="col-md-3">
+												<h5>#{bundle['numberOfHoursperDay']}</h5>
+											</div>
+											<div class="col-md-3 value">
+												<h4>#{adminEmployeeJobsPayment.employeeAttendace.jobNumberOfHoursPerDay}</h4>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3">
+												<h4>#{bundle['totalWorkingHours']}</h4>
+											</div>
+											<div class="col-md-3 value">
+												<h5>#{adminEmployeeJobsPayment.employeeAttendace.jobTotalNumberOfHours}</h5>
+											</div>
+											<div class="col-md-3">
+												<h4>#{bundle['princePerHour']}</h4>
+											</div>
+											<div class="col-md-3 value">
+												<h5>#{adminEmployeeJobsPayment.employeeAttendace.pricePerMinuteDawam*60}</h5>
+											</div>
+										</div>
+										<div class="PaymentSamary">
+											<div class="row">
+												<div class="col-md-3">
+													<h5>الحساب الإجمالي للموظف</h5>
+												</div>
+												<div class="col-md-3 value">
+													<h4>#{adminEmployeeJobsPayment.employeeAttendace.dueAmoutEmployee} SR</h4>
+												</div>
+												<div class="col-md-3">
+													<h5>رقم حساب الموظف (الايبان)</h5>
+												</div>
+												<div class="col-md-3 value">
+													<h4>#{adminEmployeeJobsPayment.selectedEmployeeDetails.iban}</h4>
+												</div>
+											</div>
+										</div>
+										<div class="PaymentSamary">
+											<div class="row">
+												<div class="col-md-3">
+													<h5>الحساب الإجمالي للشركة</h5>
+												</div>
+												<div class="col-md-3 value">
+													<h4>#{adminEmployeeJobsPayment.employeeAttendace.dueAmoutDawam} SR</h4>
+												</div>
+												<div class="col-md-3">
+													<h5>طريقة الدفع</h5>
+												</div>
+												<div class="col-md-3 value">
+													<h4>#{adminEmployeeJobsPayment.getPaymentType()}</h4>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6"></div>
+												<div class="col-md-3">
+													<h5>رقم البطاقة</h5>
+												</div>
+												<div class="col-md-3 value">
+													<h4>#{adminEmployeeJobsPayment.selectedJobCardNumber}</h4>
+												</div>
+											</div>
+											
+										</div>
+									</div>
+
+								<div class="row PopupButtonArea">
+									<div class="col-md-12">
+										<p:commandButton value="#{bundle['payment']}"
+											action="#{adminEmployeeJobsPayment.payUnpayedJob}"
+											update=":employeeUnPayedAdmin:jobs :employeeUnPayedAdmin:payMessage"
+											oncomplete="PF('job_details').hide();"></p:commandButton>
+									</div>
+								</div>
+							</div>
+	
+						</p:dialog>
+				</div>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

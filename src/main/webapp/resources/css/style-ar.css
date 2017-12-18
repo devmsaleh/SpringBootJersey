@@ -1,0 +1,341 @@
+@font-face {
+    font-family: 'DroidKufi';
+    src: url('fonts/DroidKufi-Regular.woff') format('woff');
+    font-weight: normal ;
+    font-style: normal ;
+}
+
+@font-face {
+    font-family: 'DroidKufi';
+    src: url('fonts/DroidKufi-bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+	font-family:'DroidKufi' !important;
+}
+
+.form-control{
+	font-family:'DroidKufi' !important;
+}
+.all {
+	font-family:'DroidKufi' !important;
+}
+
+.ar-btn, #en-tabs {
+	display:none !important;
+}
+
+.ui-datepicker{
+	width:400px !important;	
+}
+
+.ui-slider{
+	margin-right: 60px !important;
+}
+
+
+.en-btn, .ar-btn {
+	margin-left: -15px !important;
+}
+
+.LangSelection {
+	float: left !important;
+	margin-left:-15px !important;
+	margin-right: 0px !important;
+}
+.SignIn_OutButton {
+	float: left !important;
+}
+.main-menu .glyphicon {
+	margin-left:10px !important;
+}
+
+.ProfileEditdiv div {
+	text-align: left !important;
+}
+
+
+/*User Image/Name Area*/
+
+.SideMenu {
+	float: right !important;
+}
+
+.UserImg {
+	float: right !important;
+}
+
+.UserName {
+	margin-right: 80px !important;
+}
+
+
+/*Login Box*/
+.LoginBox {
+	float:left !important;
+}
+
+
+
+
+/*SelectAll*/
+.dual-list .selector {
+	padding: 6px 0px !important;
+}
+
+
+/*Page Title*/
+
+.PageTitle {
+	background-image: url(imgs/title_pullit_ar.png) !important;
+	background-repeat: no-repeat !important;
+	background-position: right !important;
+	padding-right: 20px !important;
+}
+
+
+
+/*Secondary Title*/
+.SecondaryTitle .TitleIcon {
+	float: right !important;
+}
+
+
+
+.MobileBG img {
+	right: 58px !important;
+}
+.ShareBtns {
+	text-align: right !important;
+}
+
+
+
+select {
+	padding: 0px 10px 0px 10px !important;
+}
+
+
+
+
+
+/*MyBox*/
+.UserPhoto {
+	float: right;
+}
+
+.CompanyNameTable {
+	margin-right: 10px;
+}
+
+.CompanyNameTable div {
+	float: right;
+}
+.UserNameTable .BoxUserName,
+.CompanyNameTable .BoxUserName {
+	margin-right:5px;
+}
+.Greeting {
+	text-align: right;
+    padding-right: 5px;
+}
+.BoxUserName  	{
+    text-align: right;
+}
+.StatesticsNumber {
+	text-align:left;
+}
+.rating {
+	float: right;
+}
+
+.completeRegistrationMessag div {
+	padding-right: 20px;
+}
+.completeRegistrationMessag .glyphicon {
+	position: absolute;
+    margin-top: 50px;
+    margin-right: 10px;
+}
+
+
+
+
+
+
+/*JobsListGrid*/
+.AlowesAtLast{
+	text-align: left;
+}
+.AlowesAtLast button{
+	float: left;
+}
+
+.LocationIcon,
+.DoneIcon,
+.CalenderIcon,
+.TimeIcon,
+.AlertIcon,
+.AlertNewIcon,
+.CompanyIcon  {
+	float: right;
+}
+
+.ArrowIconAr {
+	float:left;
+}
+
+
+.AlertIcon,
+.AlertNewIcon {
+	margin-right: -10px !important;
+}
+
+
+.RegisteredHomeTabs li:first-child,
+.RegisteredHomeTabs li:nth-child(2),
+.RegisteredHomeTabs li:nth-child(3),
+.RegisteredHomeTabs li:nth-child(4) {
+	background-position: right !important;
+    padding-right: 20px !important;
+}
+
+
+
+
+
+.ActionsArea {
+    text-align: left;
+}
+.AddJobDivHolder {
+	float:left;
+}
+
+
+
+
+
+
+
+.ListUserPhoto {
+    margin-left: 5px;
+}
+
+
+.PostingDateAndTime {
+	padding-left: 10px !important;
+    padding-right: 5px !important;
+}
+.PostingDateAndTime label {
+	padding-left:10px;
+}
+
+.PostingDateAndTimeMyPage {
+	padding-left: 0px !important;
+	margin-top: 0px !important;
+}
+.PostingDateAndTimeMyPage label {
+	padding-left:0px;
+}
+
+
+
+.DoneIcon,
+.RefusedIcon,
+.WaitingIcon {
+    margin-right: 5px;
+    float:left;
+}
+
+.ArrowIconAr {
+	background-image: url(imgs/icon_arrow_ar.png) !important;
+	background-repeat: no-repeat !important;
+	display:block;
+	width:22px;
+	height:22px;
+}
+
+
+
+.DownloadAttachment button,
+.CompanyInfoButton{
+	float: left !important;
+}
+
+.ui-icon-bullet {
+    background-position: -79px -145px !important;
+}
+.ui-icon-check {
+    background-position: -63px -146px !important;
+}
+
+
+
+.TimeTable td:first-child {
+	padding-left: 10px;
+}
+.DateTable td:nth-child(2) {
+	text-align:left;
+}
+
+
+
+
+
+/*Popup*/
+.ui-dialog-title {
+	float:right !important;
+}
+.ui-dialog-titlebar-close {
+	float:left !important;
+}
+
+.PopupButtonArea,
+.ui-dialog-buttonpane {
+	text-align:left;
+}
+
+
+
+.RegistrationLocationPopup td:nth-child(3),
+.RegistrationLocationPopup td:nth-child(4) {
+	text-align: left;
+}
+
+
+
+.form-control {
+	font-size: 13px;
+}
+.ui-button-text {
+	margin-left: 8px !important;
+}
+
+
+
+.ui-icon-arrowthick-1-s {
+	float:left !important;
+}
+
+@media screen and (max-width: 991px) {
+
+	.StatesticsNumber {
+		padding-left:50px !important;
+		padding-top:5px !important;
+	}
+	
+	
+}
+
+
+@media screen and (max-width: 640px) {
+	
+	.MobileBG img {
+	right: 40px !important;
+	}
+	
+}

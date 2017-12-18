@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:body>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+		<ui:define name="title">#{bundle['employeeProfileTitle']}</ui:define>
+
+		<ui:define name="content">
+
+			<h:form id="employeeProfile">
+
+
+				<div class="row PageBar">
+					<div class="col-md-12 PageTitle">#{bundle['myProfile']}</div>
+				</div>
+				<div class="ProfileView">
+					<div class="row content Profile">
+						<div class="col-md-2 col-md-0"></div>
+						<div class="col-md-3 col-md-push-6">
+							<div class="UserImage">
+								<p:panel id="employeeImg" style="border-style: none !important">
+									<img class="ListUserPhoto"
+										src="#{employeeProfile.loggedUser.employeeDetails.avatar.imageBase64}"
+										height="200" width="200" />
+								</p:panel>
+								
+								<div class="UploadUserPhoto">
+									<p:fileUpload 
+										cancelLabel="#{bundle['cancel']}"
+										label="#{bundle['choose']}" 
+										uploadLabel="#{bundle['upload']}"
+										auto="true"
+										fileUploadListener="#{employeeProfile.uploadEmployeeImage}"
+										update="employeeImg" sizeLimit="5250000"
+										allowTypes="/(\.|\/)(jpg|jpeg|png)$/"
+										invalidFileMessage="#{bundle['uploadNotAllowed']} "
+										invalidSizeMessage="#{bundle['fileSizeNotAllowed']}"
+										fileLimitMessage="limit wrong"
+										rendered="#{!employeeProfile.disableEdit}">
+									</p:fileUpload>
+								</div>
+							</div>
+							
+							<div class="ProfileEditdiv">
+								<div>
+									<p:commandButton action="#{employeeProfile.enableEdit}"
+										value="#{bundle['editProfile']} " update="employeeProfile"
+										oncomplete="displayHijriCal()" class="BtnStyle EditProfileBtn" />
+								</div>
+								<div>
+									<p:commandButton value="#{bundle['save']}"
+										action="#{employeeProfile.save}"
+										disabled="#{employeeProfile.addButtonDisabled}"
+										styleClass="DoneBtnStyle" validateClient="true" ajax="false" />
+								</div>
+							</div>
+
+						</div>
+						<div class="col-md-6 col-md-pull-3">
+
+							<div class="row">
+
+								<p:messages globalOnly="true" id="msgs" />
+
+								<div class="col-md-4">
+									<h5>#{bundle['empFullName']}</h5>
+								</div>
+
+								<div class="col-md-8">
+									<div class="row RemoveBorderBottom">
+
+										<div class="col-md-4">
+											<p:inputText placeholder="#{bundle['firstName']}"
+												id="firstName" value="#{employeeProfile.firstName}"
+												disabled="#{employeeProfile.disableEdit}" required="true"
+												requiredMessage="#{bundle['firstNameRequired']}"
+												class="form-control" />
+											<div class="RequieredMessage">
+												<p:message for="firstName" />
+											</div>
+										</div>
+										<div class="col-md-4">
+											<p:inputText placeholder="#{bundle['secondName']}"
+												id="secondName" value="#{employeeProfile.secondName}"
+												disabled="#{employeeProfile.disableEdit}" required="true"
+												requiredMessage="#{bundle['secondNameRequired']}"
+												class="form-control" />
+											<div class="RequieredMessage">
+												<p:message for="secondName" />
+											</div>
+										</div>
+										<div class="col-md-4">
+											<p:inputText placeholder="#{bundle['lastName']}"
+												id="lastName" value="#{employeeProfile.thirdName}"
+												disabled="#{employeeProfile.disableEdit}" required="true"
+												requiredMessage="#{bundle['lastNameRequired']}"
+												class="form-control" />
+											<div class="RequieredMessage">
+												<p:message for="lastName" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['nationalNumber']}</h5>
+								</div>
+
+								<div class="col-md-8">
+									<p:outputLabel id="nationalNumber"
+										value="#{employeeProfile.nationalNumber}" class="form-control" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['gender']}</h5>
+								</div>
+								<div class="col-md-8">
+									<p:selectOneRadio value="#{employeeProfile.gender}" id="gender"
+										required="true" disabled="#{employeeProfile.disableEdit}"
+										requiredMessage=" #{bundle['genderRequired']}"
+										class="form-control RemoveBorder">
+										<f:selectItem itemLabel="#{bundle['male']}" itemValue="1"
+											class="form-control" />
+										<h5>#{bundle['male']}</h5>
+										<f:selectItem itemLabel="#{bundle['female']}" itemValue="2"
+											class="form-control" />
+										<h5>#{bundle['female']}</h5>
+									</p:selectOneRadio>
+									<div class="RequieredMessage">
+										<p:message for="gender" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['birthDate']}</h5>
+								</div>
+
+								<div class="col-md-8">
+									<div class="row RemoveBorderBottom">
+										<div class="col-md-7">
+											<p:selectOneRadio value="#{employeeProfile.birthDateType}"
+												id="birthDateType" disabled="#{employeeProfile.disableEdit}"
+												required="true"
+												requiredMessage=" #{bundle['selectDateRequired']}"
+												class="form-control RemoveBorder">
+												<f:selectItem itemLabel="#{bundle['hijric']}" itemValue="1"
+													class="form-control" />
+												<h5>#{bundle['hijric']}</h5>
+												<f:selectItem itemLabel="#{bundle['gregorian']}"
+													itemValue="2" class="form-control" />
+												<h5>#{bundle['gregorian']}</h5>
+												<p:ajax update="birthDatePane" event="change"
+													oncomplete="displayHijriCal()" />
+											</p:selectOneRadio>
+											<div class="RequieredMessage">
+												<p:message for="birthDateType" />
+											</div>
+										</div>
+										<div class="col-md-5">
+											<h:panelGroup id="birthDatePane">
+												<p:calendar navigator="true" yearRange="c-100:c"
+													value="#{employeeProfile.birthDate}" id="birthDate"
+													disabled="#{employeeProfile.disableEdit}"
+													requiredMessage="#{bundle['selectBirthDateRequired']}"
+													rendered="#{employeeProfile.birthDateType eq 2}" />
+												<p:inputText value="#{employeeProfile.birthDateHijri}"
+													id="birthDateHijri"
+													disabled="#{employeeProfile.disableEdit}"
+													requiredMessage="#{bundle['selectBirthDateRequired']}"
+													rendered="#{employeeProfile.birthDateType ne 2}" />
+												<div class="RequieredMessage">
+													<p:message for="birthDate" />
+												</div>
+											</h:panelGroup>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['selectCity']}</h5>
+								</div>
+
+								<div class="col-md-8 selectarrowsolution">
+									<p:selectOneMenu value="#{employeeProfile.city}" id="city"
+										required="true" disabled="#{employeeProfile.disableEdit}"
+										requiredMessage="#{bundle['requiredCity']}"
+										class="form-control">
+										<f:selectItem itemLabel="#{bundle['selectCity']}"
+											itemValue="-1" />
+										<f:selectItems value="#{employeeProfile.cities}" />
+									</p:selectOneMenu>
+									<div class="RequieredMessage">
+										<p:message for="city" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['email']}</h5>
+								</div>
+
+								<div class="col-md-8">
+									<p:inputText value="#{employeeProfile.email}" id="email"
+										placeholder="#{bundle['email']}"
+										disabled="#{employeeProfile.disableEdit}"
+										requiredMessage="#{bundle['companyEmailRequired']}"
+										validatorMessage="#{bundle['companyEmailvalidationmessage']}"
+										class="form-control">
+										<f:validateRegex
+											pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+									</p:inputText>
+									<div class="RequieredMessage">
+										<p:message for="email" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['contactNumber']}"</h5>
+								</div>
+
+								<div class="col-md-8">
+									<div class="row RemoveBorderBottom">
+										<div class="col-md-10 alwasright">
+											<p:inputText value="#{employeeProfile.contactNumber}"
+												id="contactNumber" disabled="#{employeeProfile.disableEdit}"
+												required="true"
+												requiredMessage="#{bundle['contactNumberRequired']}"
+												placeholder="#{bundle['contactNumber']}"
+												class="form-control" />
+											<div class="RequieredMessage">
+												<p:message for="contactNumber" />
+											</div>
+										</div>
+										<div class="col-md-2 NumberKey">
+											<h5>+966</h5>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+
+								<div class="col-md-4">
+									<h5>#{bundle['password']}</h5>
+								</div>
+
+								<div class="col-md-8">
+									<p:password value="#{employeeProfile.password}"
+										disabled="#{employeeProfile.disableEdit}"
+										requiredMessage="#{bundle['passwordRequired']}" id="password"
+										placeholder="#{bundle['password']}" class="form-control"
+										feedback="true" match="re_password"
+										promptLabel="#{bundle['promptLabel']}"
+										weakLabel="#{bundle['weakLabel']}"
+										goodLabel="#{bundle['goodLabel']}"
+										strongLabel="#{bundle['strongLabel']}" />
+									<div class="RequieredMessage">
+										<p:message for="password" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['passwordAgain']}</h5>
+								</div>
+
+								<div class="col-md-8">
+									<p:password value="#{employeeProfile.password}"
+										disabled="#{employeeProfile.disableEdit}"
+										requiredMessage="#{bundle['passwordAgain']}"
+										placeholder="#{bundle['passwordAgain']}" id="re_password"
+										class="form-control"
+										validatorMessage="password 1 should match password 2" />
+									<div class="RequieredMessage">
+										<p:message for="re_password" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['iban']}</h5>
+								</div>
+
+								<div class="col-md-8">
+									<div class="row RemoveBorderBottom">
+										<div class="col-md-10 alwasright">
+											<p:inputText value="#{employeeProfile.iban}" id="iban"
+												required="true" disabled="#{employeeProfile.disableEdit}"
+												requiredMessage="#{bundle['IbanRequired']}"
+												placeholder="#{bundle['iban']}" class="form-control" />
+											<div class="RequieredMessage">
+												<p:message for="iban" />
+											</div>
+										</div>
+										<div class="col-md-2">
+											<h5>SA</h5>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['experience']}</h5>
+								</div>
+
+								<div class="col-md-8">
+									<div class="row RemoveBorderBottom">
+										<div class="col-md-9">
+											<p:inputText id="experienceName"
+												placeholder="#{bundle['experience']}"
+												disabled="#{employeeProfile.disableEdit}"
+												class="form-control"
+												value="#{employeeProfile.experienceName}" />
+										</div>
+										<div class="col-md-3">
+											<p:commandButton class="SmallBtnStyle"
+												value="#{bundle['addbutton']}" ajax="true"
+												disabled="#{employeeProfile.disableEdit}"
+												process="@this,experienceName"
+												actionListener="#{employeeProfile.addExperience}"
+												update="experienceName experiencesList" />
+										</div>
+									</div>
+
+									<p:dataTable class="DefaultTableStyle" id="experiencesList"
+										var="experience" rows="5" emptyMessage=""
+										value="#{employeeProfile.employeeExperiencesList}"
+										rowKey="#{experience.experienceName}" paginator="true"
+										paginatorPosition="bottom"
+										paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="5,10,20">
+
+										<p:column headerText="#{bundle['experience']}">
+											<h:outputText value="#{experience.experienceName}">
+											</h:outputText>
+										</p:column>
+
+										<p:column headerText="" width="50">
+											<p:commandButton ajax="true" process="@this"
+												icon="ui-icon-trash"
+												disabled="#{employeeProfile.disableEdit}"
+												title="#{bundle['delete']}"
+												action="#{employeeProfile.deleteExperience}"
+												update="experiencesList">
+												<f:setPropertyActionListener value="#{experience}"
+													target="#{employeeProfile.selectedExperience}" />
+											</p:commandButton>
+										</p:column>
+
+									</p:dataTable>
+
+
+								</div>
+							</div>
+							
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['aboutEmployee']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<p:inputTextarea placeholder="#{bundle['aboutEmployee']}"
+									id="aboutEmployee" value="#{employeeProfile.aboutEmployee}"
+									required="true"
+									disabled="#{employeeProfile.disableEdit}"
+									requiredMessage="#{bundle['aboutEmployeeRequired']}"
+									class="form-control" />
+									
+								<div class="RequieredMessage">
+									<p:message for="aboutEmployee" />
+								</div>
+							</div>
+						</div>
+
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['ProfileAttach']}</h5>
+								</div>
+
+								<div class="col-md-8">
+									<table style="width: 100%">
+										<tr>
+											<td><p:fileUpload class="UploadAttachment"
+													cancelLabel="#{bundle['cancel']}"
+													label="#{bundle['choose']}"
+													uploadLabel="#{bundle['upload']}"
+													fileUploadListener="#{employeeProfile.uploadAttachmentFile}"
+													update="idFile" sizeLimit="2100000"
+													allowTypes="/(\.|\/)(doc|docx|pdf|jpg|jpeg|png|tif|tiff|bmp)$/"
+													invalidFileMessage="#{bundle['uploadNotAllowed']}"
+													invalidSizeMessage="#{bundle['fileSizeNotAllowed']} "
+													fileLimitMessage="limit wrong"
+													disabled="#{employeeProfile.disableEdit}">
+													<f:attribute name="fileType" value="1"></f:attribute>
+												</p:fileUpload></td>
+											</tr>
+											<tr>
+											<td class="DownloadAttachment"><p:outputLabel id="idFile"
+													value="#{employeeProfile.identityFile.fileName}"
+													rendered="#{employeeProfile.identityFile != null}" /> <p:commandButton
+													value="Download" ajax="false"
+													onclick="#{employeeProfile.downloadFile(1)}"
+													oncomplete="PrimeFaces.monitorDownload(start, stop);"
+													rendered="#{employeeProfile.identityFile != null}"
+													icon="ui-icon-arrowthick-1-s">
+													<p:fileDownload value="#{employeeProfile.idFile}" />
+												</p:commandButton></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['CVAttach']}</h5>
+								</div>
+								<div class="col-md-8">
+									<table style="width: 100%">
+										<tr>
+											<td><p:fileUpload class="UploadAttachment"
+													cancelLabel="#{bundle['cancel']}"
+													label="#{bundle['choose']}"
+													uploadLabel="#{bundle['upload']}"
+													fileUploadListener="#{employeeProfile.uploadAttachmentFile}"
+													update="cvFile DownloadCV" sizeLimit="2100000"
+													allowTypes="/(\.|\/)(doc|docx|pdf|jpg|jpeg|png|tif|tiff|bmp)$/"
+													invalidFileMessage="#{bundle['uploadNotAllowed']}"
+													invalidSizeMessage="#{bundle['fileSizeNotAllowed']} "
+													disabled="#{employeeProfile.disableEdit}">
+													<f:attribute name="fileType" value="2"></f:attribute>
+												</p:fileUpload>
+											</td>
+										</tr>
+										<tr>
+											<td class="DownloadAttachment"><p:outputLabel id="cvFile"
+													value="#{employeeProfile.cvFile.fileName}"
+													rendered="#{employeeProfile.cvFile != null}" /> <p:commandButton
+													id="DownloadCV" value="DownloadCV" ajax="false"
+													onclick="#{employeeProfile.downloadFile(2)}"
+													oncomplete="PrimeFaces.monitorDownload(start, stop);"
+													rendered="#{employeeProfile.cvFile != null}"
+													icon="ui-icon-arrowthick-1-s">
+													<p:fileDownload value="#{employeeProfile.cvFileStream}" />
+												</p:commandButton>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['experienceAttach']}</h5>
+								</div>
+								<div class="col-md-8">
+									<table style="width: 100%">
+											<tr>
+												<td><p:fileUpload class="UploadAttachment"
+													cancelLabel="#{bundle['cancel']}"
+													label="#{bundle['choose']}"
+													uploadLabel="#{bundle['upload']}"
+													fileUploadListener="#{employeeProfile.uploadAttachmentFile}"
+													update="experinceFile1 DownloadExp1" sizeLimit="2100000"
+													allowTypes="/(\.|\/)(doc|docx|pdf|jpg|jpeg|png|tif|tiff|bmp)$/"
+													invalidFileMessage="#{bundle['uploadNotAllowed']}"
+													invalidSizeMessage="#{bundle['fileSizeNotAllowed']} "
+													disabled="#{employeeProfile.disableEdit}">
+													<f:attribute name="fileType" value="3"></f:attribute>
+												</p:fileUpload></td>
+											</tr>
+											<tr>
+												<td class="DownloadAttachment"><p:outputLabel id="experinceFile1"
+													value="#{employeeProfile.experinceFile1.fileName}"
+													rendered="#{employeeProfile.experinceFile1 != null}" /> <p:commandButton
+													id="DownloadExp1" value="DownloadExp1" ajax="false"
+													onclick="#{employeeProfile.downloadFile(3)}"
+													oncomplete="PrimeFaces.monitorDownload(start, stop);"
+													rendered="#{employeeProfile.experinceFile1 != null}"
+													icon="ui-icon-arrowthick-1-s">
+													<p:fileDownload
+														value="#{employeeProfile.experinceFile1Stream}" />
+												</p:commandButton></td>
+											</tr>
+											<tr>
+												<td><p:fileUpload class="UploadAttachment"
+													cancelLabel="#{bundle['cancel']}"
+													label="#{bundle['choose']}"
+													uploadLabel="#{bundle['upload']}"
+													fileUploadListener="#{employeeProfile.uploadAttachmentFile}"
+													update="experinceFile2 DownloadExp2" sizeLimit="2100000"
+													allowTypes="/(\.|\/)(doc|docx|pdf|jpg|jpeg|png|tif|tiff|bmp)$/"
+													invalidFileMessage="#{bundle['uploadNotAllowed']}"
+													invalidSizeMessage="#{bundle['fileSizeNotAllowed']} "
+													disabled="#{employeeProfile.disableEdit}">
+													<f:attribute name="fileType" value="4"></f:attribute>
+												</p:fileUpload></td>
+											</tr>
+											<tr>
+												<td class="DownloadAttachment"><p:outputLabel id="experinceFile2"
+													value="#{employeeProfile.experinceFile2.fileName}"
+													rendered="#{employeeProfile.experinceFile2 != null}" /> <p:commandButton
+													id="DownloadExp2" value="DownloadExp2" ajax="false"
+													onclick="#{employeeProfile.downloadFile(4)}"
+													oncomplete="PrimeFaces.monitorDownload(start, stop);"
+													rendered="#{employeeProfile.experinceFile2 != null}"
+													icon="ui-icon-arrowthick-1-s">
+													<p:fileDownload
+														value="#{employeeProfile.experinceFile2Stream}" />
+												</p:commandButton></td>
+											</tr>
+											<tr>
+												<td><p:fileUpload class="UploadAttachment"
+													cancelLabel="#{bundle['cancel']}"
+													label="#{bundle['choose']}"
+													uploadLabel="#{bundle['upload']}"
+													fileUploadListener="#{employeeProfile.uploadAttachmentFile}"
+													update="experinceFile3 DownloadExp3" sizeLimit="2100000"
+													allowTypes="/(\.|\/)(doc|docx|pdf|jpg|jpeg|png|tif|tiff|bmp)$/"
+													invalidFileMessage="#{bundle['uploadNotAllowed']}"
+													invalidSizeMessage="#{bundle['fileSizeNotAllowed']} "
+													disabled="#{employeeProfile.disableEdit}">
+													<f:attribute name="fileType" value="5"></f:attribute>
+												</p:fileUpload></td>
+											</tr>
+											<tr>
+												<td class="DownloadAttachment"><p:outputLabel id="experinceFile3"
+														value="#{employeeProfile.experinceFile3.fileName}"
+														rendered="#{employeeProfile.experinceFile3 != null}" /> <p:commandButton
+														id="DownloadExp3" value="DownloadExp3" ajax="false"
+														onclick="#{employeeProfile.downloadFile(5)}"
+														oncomplete="PrimeFaces.monitorDownload(start, stop);"
+														rendered="#{employeeProfile.experinceFile3 != null}"
+														icon="ui-icon-arrowthick-1-s">
+														<p:fileDownload
+															value="#{employeeProfile.experinceFile1Stream}" />
+													</p:commandButton></td>
+											</tr>
+											<tr>
+											<td><p:fileUpload class="UploadAttachment"
+													cancelLabel="#{bundle['cancel']}"
+													label="#{bundle['choose']}"
+													uploadLabel="#{bundle['upload']}"
+													fileUploadListener="#{employeeProfile.uploadAttachmentFile}"
+													update="experinceFile4 DownloadExp4" sizeLimit="2100000"
+													allowTypes="/(\.|\/)(doc|docx|pdf|jpg|jpeg|png|tif|tiff|bmp)$/"
+													invalidFileMessage="#{bundle['uploadNotAllowed']}"
+													invalidSizeMessage="#{bundle['fileSizeNotAllowed']} "
+													disabled="#{employeeProfile.disableEdit}">
+													<f:attribute name="fileType" value="6"></f:attribute>
+												</p:fileUpload></td>
+											</tr>
+											<tr>
+												<td class="DownloadAttachment"><p:outputLabel id="experinceFile4"
+														value="#{employeeProfile.experinceFile4.fileName}"
+														rendered="#{employeeProfile.experinceFile4 != null}" /> <p:commandButton
+														id="DownloadExp4" value="DownloadExp4" ajax="false"
+														onclick="#{employeeProfile.downloadFile(6)}"
+														oncomplete="PrimeFaces.monitorDownload(start, stop);"
+														rendered="#{employeeProfile.experinceFile4 != null}"
+														icon="ui-icon-arrowthick-1-s">
+														<p:fileDownload
+															value="#{employeeProfile.experinceFile4Stream}" />
+													</p:commandButton></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+							<div class="row BtnDiv">
+								<div class="col-md-4 text-center"></div>
+							</div>
+						</div>
+
+						<div class="col-md-2 col-md-0"></div>
+					</div>
+				</div>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+<script type="text/javascript">
+function start() {
+    PF('statusDialog').show();
+}
+ 
+function stop() {
+    PF('statusDialog').hide();
+}
+</script>
+</html>

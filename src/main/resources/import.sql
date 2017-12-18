@@ -1,0 +1,1 @@
+INSERT INTO `his`.`user` (`account_non_expired`, `account_non_locked`, `credentials_non_expired`, `email`, `enabled`, `full_name`, `password`, `user_name`) VALUES (b'0', b'0', b'0', 'test@localhost.com', b'1', 'Test User', '123456', 'test');

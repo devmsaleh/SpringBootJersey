@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:body>
+
+	<ui:composition template="/template/commonLayout.xhtml">
+
+		<ui:define name="title">#{bundle['companyProfileTitle']}</ui:define>
+
+		<ui:define name="content">
+
+			<h:form id="registerCompany">
+
+				<div class="row PageBar">
+					<div class="col-md-12 PageTitle">#{bundle['companyProfile']}</div>
+				</div>
+
+
+				<div class="row content Registration">
+					<p:commandButton immediate="true" value="#{bundle['editProfile']}"
+						class="BtnStyle EditProfileBtn"
+						rendered="#{companyProfileBean.disableMode}"
+						action="#{companyProfileBean.enableEditing}" ajax="false" />
+					<p:commandButton value="#{bundle['saveProfile']}"
+						class="BtnStyle EditProfileBtn"
+						rendered="#{!companyProfileBean.disableMode}"
+						action="#{companyProfileBean.updateCompany}" ajax="false" />
+					<p:commandButton value="#{bundle['cancelbutton']}"
+						class="BtnStyle EditProfileBtn"
+						rendered="#{!companyProfileBean.disableMode}"
+						action="#{companyProfileBean.cancelChanges}" ajax="false" />
+
+					<div class="col-md-3 col-md-0"></div>
+					<div class="col-md-6 col-md-12">
+
+
+						<div class="row">
+
+							<p:messages globalOnly="true" id="msgs" />
+
+							<div class="col-md-4">
+								<h5>#{bundle['companyName']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<p:inputText disabled="#{companyProfileBean.disableMode}"
+									requiredMessage="#{bundle['companyNameRequired']}" id="name"
+									required="true" placeholder="#{bundle['companyName']}"
+									value="#{companyProfileBean.companyName}" type="text"
+									class="form-control" />
+								<div class="RequieredMessage">
+									<p:message for="name" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['workType']}</h5>
+							</div>
+
+							<div class="col-md-8">
+
+								<p:inputText disabled="#{companyProfileBean.disableMode}"
+									id="workType" requiredMessage="#{bundle['workTypeRequired']}"
+									required="true" placeholder="#{bundle['workType']}"
+									value="#{companyProfileBean.workType}" type="text"
+									class="form-control" />
+								<div class="RequieredMessage">
+									<p:message for="workType" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['commercialRecord']}</h5>
+
+							</div>
+
+							<div class="col-md-8">
+
+								<p:inputText disabled="true" id="commercialRecord"
+									requiredMessage="#{bundle['commercialRecordRequired']}"
+									mindate="new Date()" required="true"
+									placeholder="#{bundle['commercialRecord']}"
+									value="#{companyProfileBean.commercialRecord}" type="text"
+									class="form-control" />
+								<div class="RequieredMessage">
+									<p:message for="commercialRecord" />
+								</div>
+
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['commercialExpirationDate']}</h5>
+							</div>
+
+							<div class="col-md-8">
+
+								<p:inputText disabled="#{companyProfileBean.disableMode}"
+									id="commercialExpirationDate" required="true"
+									requiredMessage="#{bundle['commercialExpirationDateRequired']}"
+									placeholder="#{bundle['commercialExpirationDate']}"
+									value="#{companyProfileBean.commercialExpirationDate}" />
+
+								<div class="RequieredMessage">
+									<p:message for="commercialExpirationDate" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-4">
+								<h5>#{bundle['contactNumber']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<div class="row RemoveBorderBottom">
+									<div class="col-md-10 alwasright">
+										<p:inputText disabled="#{companyProfileBean.disableMode}"
+											id="contactNumber" required="true"
+											requiredMessage="#{bundle['contactNumberRequired']}"
+											placeholder="#{bundle['contactNumber']}"
+											value="#{companyProfileBean.contactNumber}"
+											class="form-control" />
+										<div class="RequieredMessage">
+											<p:message for="contactNumber" />
+										</div>
+									</div>
+									<div class="col-md-2 NumberKey">
+										<h5>+966</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['companyEmail']}</h5>
+							</div>
+							<div class="col-md-8">
+								<p:inputText disabled="#{companyProfileBean.disableMode}"
+									id="companyEmail" required="true"
+									placeholder="#{bundle['companyEmail']}"
+									requiredMessage="#{bundle['companyEmailRequired']}"
+									validatorMessage="#{bundle['companyEmailvalidationmessage']}"
+									value="#{companyProfileBean.email}" class="form-control">
+									<f:validateRegex
+										pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+								</p:inputText>
+								<div class="RequieredMessage">
+									<p:message for="companyEmail" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['workTime']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<div class="row RemoveBorderBottom">
+									<div class="col-md-2">
+										<h5>#{bundle['from']}</h5>
+									</div>
+									<div class="col-md-4">
+										<p:calendar disabled="#{companyProfileBean.disableMode}"
+											navigator="true" locale="en" pattern="hh:mm a"
+											id="workTimeStart" required="true"
+											placeholder="#{bundle['from']}"
+											validatorMessage=" #{bundle['valueMustBe']} hh:mm"
+											requiredMessage="#{bundle['fromRequired']}"
+											value="#{companyProfileBean.workTimeStart}" timeOnly="true"
+											size="10" />
+										<div class="RequieredMessage">
+											<p:message for="workTimeStart" />
+										</div>
+									</div>
+									<div class="col-md-2">
+										<h5>#{bundle['to']}</h5>
+									</div>
+									<div class="col-md-4">
+										<p:calendar disabled="#{companyProfileBean.disableMode}"
+											navigator="true" locale="en" pattern="hh:mm a"
+											id="workTimeEnd" required="true"
+											placeholder="#{bundle['to']}"
+											validatorMessage=" #{bundle['valueMustBe']} hh:mm"
+											requiredMessage="#{bundle['toRequired']}"
+											value="#{companyProfileBean.workTimeEnd}" timeOnly="true"
+											size="10" />
+										<div class="RequieredMessage">
+											<p:message for="workTimeEnd" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-4">
+								<h5>#{bundle['city']}</h5>
+							</div>
+
+							<div class="col-md-8 selectarrowsolution">
+
+								<p:selectOneMenu disabled="#{companyProfileBean.disableMode}"
+									value="#{companyProfileBean.selectedCity}" id="city"
+									class="form-control">
+									<f:selectItem itemLabel="#{bundle['selectCity']}"
+										itemValue="-1" />
+									<f:selectItems value="#{companyProfileBean.cities}" />
+								</p:selectOneMenu>
+
+								<div class="RequieredMessage">
+									<p:message for="city" />
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-4">
+								<h5>#{bundle['locationDescription']}</h5>
+							</div>
+							<div class="col-md-8">
+
+								<div class="row RemoveBorderBottom">
+
+									<div class="col-md-9">
+										<p:inputText disabled="#{companyProfileBean.disableMode}"
+											id="locationDescription" required="true"
+											requiredMessage="#{bundle['locationDescriptionRequired']}"
+											placeholder="#{bundle['locationDescription']}"
+											value="#{companyProfileBean.locationDescription}"
+											class="form-control" />
+										<div class="RequieredMessage">
+											<p:message for="locationDescription" />
+										</div>
+									</div>
+
+									<div class="col-md-3">
+
+										<h:inputHidden id="lat"
+											value="#{companyProfileBean.locationLatitude}" />
+										<h:inputHidden id="lng"
+											value="#{companyProfileBean.locationLongitude}" />
+
+										<button type="button" class="BtnLocation"
+											onclick="PF('gmapDialog').show();findMe(false,'registerCompany');">
+											<span class="glyphicon glyphicon-map-marker"></span>
+										</button>
+
+										<p:dialog dir="#{bundle['dir']}"
+											header="#{bundle['chooseBranchLocation']}"
+											widgetVar="gmapDialog" width="700" height="500" modal="true">
+
+											<p:panelGrid columns="4" style="width:100%;">
+												<h5>#{bundle['Address']}</h5>
+												<p:inputText disabled="#{companyProfileBean.disableMode}"
+													id="locationDescriptionDialog" readonly="true"
+													placeholder="#{bundle['Address']}" class="form-control" />
+												<p:commandButton
+													disabled="#{companyProfileBean.disableMode}"
+													onclick="PF('gmapDialog').hide();"
+													value="#{bundle['ChooseAddress']}" />
+												<p:commandButton
+													disabled="#{companyProfileBean.disableMode}"
+													onclick="findMe(true,'registerCompany');"
+													value="#{bundle['myLocation']}" />
+
+											</p:panelGrid>
+
+											<p:gmap center="24.709156813696378,46.67292563366709"
+												zoom="15" type="ROADMAP" style="width:100%;height:400px"
+												widgetVar="gmap"
+												onPointClick="handlePointClick(event,'registerCompany');">
+											</p:gmap>
+
+										</p:dialog>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['locationNearBy']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<p:inputText disabled="#{companyProfileBean.disableMode}"
+									id="locationNearBy" placeholder="#{bundle['locationNearBy']}"
+									required="true"
+									requiredMessage="#{bundle['locationNearByRequired']}"
+									value="#{companyProfileBean.locationNearBy}"
+									class="form-control" />
+								<div class="RequieredMessage">
+									<p:message for="locationNearBy" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['branchesNumber']}</h5>
+							</div>
+
+					<div class="col-md-8">
+						<div class="row RemoveBorderBottom">
+
+							<div class="col-md-9">
+								<p:inputText disabled="true"
+									placeholder="#{bundle['branchesNumber']}"
+									value="#{companyProfileBean.branchesNumber}"
+									class="form-control" />
+									
+							</div>
+							
+							<div class="col-md-3">
+							
+							<p:commandButton value="#{bundle['showBranchData']}"
+								class="BtnStyle EditProfileBtn"
+								rendered="#{companyProfileBean.renderBranchButton}"
+								onclick="PF('branchList').show();" />
+							</div>
+							
+							</div>
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col-md-4">
+								<h5>#{bundle['paymentType']}</h5>
+							</div>
+
+							<div class="col-md-8 selectarrowsolution">
+
+								<p:selectOneMenu disabled="#{companyProfileBean.disableMode}"
+									id="paymentType" value="#{companyProfileBean.paymentType}"
+									styleClass="form-control">
+									<f:selectItem itemLabel="#{bundle['visa']}" itemValue="1" />
+									<f:selectItem itemLabel="#{bundle['contract']}" itemValue="2" />
+
+									<p:ajax event="valueChange"
+										listener="#{companyProfileBean.paymentTypechanged}"
+										update="visaNumber visaExpirationYear visaExpirationMonth visaSecurityCode" />
+
+								</p:selectOneMenu>
+
+							</div>
+
+						</div>
+
+
+
+						<p:panelGrid id="visaDetails">
+
+
+
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['visaNumber']}</h5>
+								</div>
+
+								<div class="col-md-6">
+
+								
+
+									<p:inputText id="visaNumber"
+										disabled="#{!companyProfileBean.showVisaSection}"
+										placeholder="#{bundle['visaNumber']}"
+										requiredMessage="#{bundle['visaNumberRequired']}"
+										value="#{companyProfileBean.visaNumber}" class="form-control">
+											<p:ajax update="VisaType" event="blur" listener="#{companyProfileBean.cardNumberchanged}"/>
+									</p:inputText>
+									
+									<div class="RequieredMessage">
+										<p:message for="visaNumber" />
+									</div>
+
+								</div>
+								<div class="col-md-2 MasterVisaSelect">
+									<p:panel id="VisaType">
+										 <p:graphicImage name="imgs/icon_visa.png" rendered="#{companyProfileBean.displayVisa}" />  
+										 <p:graphicImage name="imgs/icon_masercard.png" rendered="#{companyProfileBean.displayMaster}"/>
+									</p:panel>
+								</div>
+							</div>
+
+							<div class="row">
+
+								<div class="col-md-4">
+									<h5>#{bundle['visaExpirationDate']}</h5>
+								</div>
+
+								<div class="col-md-8 selectarrowsolution">
+
+									<p:selectOneMenu id="visaExpirationMonth"
+										styleClass="form-control" style="width:150px"
+										disabled="#{!companyProfileBean.showVisaSection}"
+										value="#{companyProfileBean.visaExpirationMonth}"
+										required="true">
+
+										<f:selectItem itemLabel="----" itemValue="-1" />
+										<f:selectItem itemLabel="1" itemValue="01" />
+										<f:selectItem itemLabel="2" itemValue="02" />
+										<f:selectItem itemLabel="3" itemValue="03" />
+										<f:selectItem itemLabel="4" itemValue="04" />
+										<f:selectItem itemLabel="5" itemValue="05" />
+										<f:selectItem itemLabel="6" itemValue="06" />
+										<f:selectItem itemLabel="7" itemValue="07" />
+										<f:selectItem itemLabel="8" itemValue="08" />
+										<f:selectItem itemLabel="9" itemValue="09" />
+										<f:selectItem itemLabel="10" itemValue="10" />
+										<f:selectItem itemLabel="11" itemValue="11" />
+										<f:selectItem itemLabel="12" itemValue="12" />
+
+									</p:selectOneMenu>
+
+									/
+
+									<p:selectOneMenu id="visaExpirationYear"
+										styleClass="form-control" style="width:150px"
+										disabled="#{!companyProfileBean.showVisaSection}"
+										value="#{companyProfileBean.visaExpirationYear}"
+										required="true">
+
+										<f:selectItem itemLabel="----" itemValue="-1" />
+										<f:selectItem itemLabel="2017" itemValue="2017" />
+										<f:selectItem itemLabel="2018" itemValue="2018" />
+										<f:selectItem itemLabel="2019" itemValue="2019" />
+										<f:selectItem itemLabel="2020" itemValue="2020" />
+										<f:selectItem itemLabel="2021" itemValue="2021" />
+										<f:selectItem itemLabel="2022" itemValue="2022" />
+										<f:selectItem itemLabel="2023" itemValue="2023" />
+										<f:selectItem itemLabel="2024" itemValue="2024" />
+										<f:selectItem itemLabel="2025" itemValue="2025" />
+										<f:selectItem itemLabel="2026" itemValue="2026" />
+										<f:selectItem itemLabel="2027" itemValue="2027" />
+										<f:selectItem itemLabel="2028" itemValue="2028" />
+
+									</p:selectOneMenu>
+
+
+									<div class="RequieredMessage">
+										<p:message for="visaExpirationYear" id="visaExpirationYearmsg" />
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<h5>#{bundle['visaSecurityCode']}</h5>
+								</div>
+								<div class="col-md-8">
+									<p:inputText id="visaSecurityCode"
+										disabled="#{!companyProfileBean.showVisaSection}"
+										placeholder="#{bundle['visaSecurityCode']}" required="true"
+										requiredMessage="#{bundle['visaSecurityCodeRequired']}"
+										value="#{companyProfileBean.visaSecurityCode}"
+										class="form-control" />
+									<div class="RequieredMessage">
+										<p:message for="visaSecurityCode" />
+									</div>
+								</div>
+							</div>
+						</p:panelGrid>
+
+						<div class="row RegistrationCeberator">
+							<div class="col-md-12">
+								<h5>#{bundle['representativeSection']}</h5>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['representativeFullName']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<p:inputText disabled="#{companyProfileBean.disableMode}"
+									id="representativeFullName"
+									placeholder="#{bundle['representativeFullName']}"
+									required="true"
+									requiredMessage="#{bundle['representativeFullNameRequired']}"
+									value="#{companyProfileBean.representativeFullName}"
+									class="form-control" />
+								<div class="RequieredMessage">
+									<p:message for="representativeFullName" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['representativeContactNumber']}</h5>
+							</div>
+
+							<div class="col-md-8">
+								<div class="row RemoveBorderBottom">
+									<div class="col-md-10 alwasright">
+										<p:inputText disabled="#{companyProfileBean.disableMode}"
+											id="representativeContactNumber"
+											placeholder="#{bundle['representativeContactNumber']}"
+											required="true"
+											requiredMessage="#{bundle['representativeContactNumberRequired']}"
+											value="#{companyProfileBean.representativeContactNumber}"
+											class="form-control" />
+										<div class="RequieredMessage">
+											<p:message for="representativeContactNumber" />
+										</div>
+									</div>
+									<div class="col-md-2 NumberKey">
+										<h5>+966</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<h5>#{bundle['representativeEmail']}</h5>
+							</div>
+
+							<div class="col-md-8">
+
+								<p:inputText disabled="#{companyProfileBean.disableMode}"
+									id="representativeEmail"
+									placeholder="#{bundle['representativeEmail']}" required="true"
+									validatorMessage="#{bundle['companyEmailvalidationmessage']}"
+									requiredMessage="#{bundle['representativeEmailRequired']}"
+									value="#{companyProfileBean.representativeEmail}"
+									class="form-control">
+									<f:validateRegex
+										pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+								</p:inputText>
+
+								<div class="RequieredMessage">
+									<p:message for="representativeEmail" />
+								</div>
+							</div>
+						</div>
+					
+					
+					<div class="row RegistrationCeberator">
+							<div class="col-md-12">
+								<h5>#{bundle['attachments']}</h5>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<h5>  #{bundle['commercialRecordAttachment']}</h5>
+							</div>
+
+						<div class="col-md-8">
+							<p:panel id="files" class="UploadAttachment CompanyUploadAttachment">
+								<p:outputLabel id="certificateFileLabel"
+									value="#{companyProfileBean.certificateFileInfo.fileName}"
+									rendered="#{companyProfileBean.certificateFileInfo != null}"/>	
+								<p:commandButton id="certificateFileButton"
+									value=" #{bundle['upload']}" ajax="false"
+									onclick="#{companyProfileBean.downloadFile()}"
+									oncomplete="PrimeFaces.monitorDownload(start, stop);"
+									rendered="#{companyProfileBean.certificateFileInfo != null}"
+									icon="ui-icon-arrowthick-1-s">
+									<p:fileDownload value="#{companyProfileBean.certificateFile}" />
+								</p:commandButton>
+										
+									
+								<p:fileUpload styleClass="AttachmentDownloadCurrentFile" id="file" uploadLabel="#{bundle['upload']}" cancelLabel=" #{bundle['cancel']}" label="#{bundle['choose']}" 
+											fileUploadListener="#{companyProfileBean.uploadAttachmentFile}"
+											sizeLimit="2100000" update="files msgs"
+											allowTypes="/(\.|\/)(doc|docx|pdf|jpg|jpeg|png|tif|tiff|bmp)$/"
+											invalidFileMessage="#{bundle['uploadNotAllowed']}"
+											invalidSizeMessage="#{bundle['fileSizeNotAllowed']} "
+											rendered="#{companyProfileBean.certificateFileInfo == null}" >
+											
+								</p:fileUpload>
+						
+						</p:panel>
+					</div>
+					
+						</div>
+					</div>
+					<div class="col-md-3 col-md-0"></div>
+					
+
+				</div>
+
+
+			<p:dialog dir="#{bundle['dir']}"
+					widgetVar="branchList" width="850" height="400"
+					modal="true" closeOnEscape="true">
+									
+				    <div class="row">
+	
+					<div class="col-md-12">
+						<div class="panel CompanyReviewListPanel">
+							<div class="panel-heading">
+								<span class="glyphicon glyphicon-list"></span>
+								#{bundle['branchesData']}
+							</div>
+				
+				    
+				<p:dataTable id="branchList"
+						value="#{companyProfileBean.branchDetailsList}" var="branch"
+						emptyMessage="#{bundle['noFoundBranches']}"
+						rowKey="#{branch.id}">
+									
+					<p:column headerText="#{bundle['userName']} ">
+						<h:outputText value="#{branch.userName}" />
+					</p:column>
+					
+					
+					<p:column headerText=" #{bundle['password']}">
+						<h:outputText value="#{branch.passwordWithoutHash}" />
+					</p:column>
+					
+					
+					<p:column headerText="#{bundle['branchStatus']}">
+					
+						<h:outputText value="#{bundle['completeRegistration']} " rendered="#{branch.completedRegistration}"/>
+						<h:outputText value="#{bundle['unCompleteRegistration']}" rendered="#{!branch.completedRegistration}"/>
+						
+					</p:column>
+					
+					
+					<p:column headerText="  #{bundle['representativeFullName']}">
+						<h:outputText value="#{branch.fullName}" />
+					</p:column>
+					
+					
+					<p:column headerText=" #{bundle['representativeContactNumber']}">
+						<h:outputText value="#{branch.contactNumber}" />
+					</p:column>
+					
+				
+					</p:dataTable>
+				
+					
+				</div>
+			</div>
+			</div>
+		
+		</p:dialog>
+
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

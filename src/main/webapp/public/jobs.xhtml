@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      
+<h:body>
+ 
+	<ui:composition template="/template/commonLayout.xhtml">   
+		
+		<ui:define name="title">#{bundle['jobspageTitle']}</ui:define>
+
+    		<ui:define name="content">    			
+    			
+    		<h:form id="searchJobs">
+
+			<div class="row PageBar">
+				<div class="col-md-12 PageTitle">#{bundle['jobs']}</div>
+			</div>
+			
+			<p:messages id="msgs"  />
+	
+	
+			<div class="row content">
+				
+				<div class="col-md-3 SearchCarateria">
+					<div class="row">
+						<div class="col-md-12">
+							<h5>#{bundle['job']}</h5>
+						</div>
+				
+						<div class="col-md-12 selectarrowsolution">
+							<p:selectOneMenu value="#{jobsBean.job}" id="job" required="false" class="form-control JobSelection" requiredMessage="#{bundle['requiredjob']}">
+									<f:selectItem itemLabel="#{bundle['selectJob']}" itemValue="-1"/>
+									<f:selectItems  value="#{jobsBean.jobs}" />
+								</p:selectOneMenu>
+								<div class="RequieredMessage"><p:message  for="job" /></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<h5>#{bundle['gender']}</h5>
+						</div>
+						<div class="col-md-12">
+							<p:selectOneRadio value="#{jobsBean.gender}" id="gender" required="false" requiredMessage="#{bundle['RequiredSex']}" class="form-control RemoveBorder">
+								<f:selectItem itemLabel="#{bundle['SexMale']}" itemValue="1" class="form-control"/><h5>#{bundle['male']}</h5>
+								<f:selectItem itemLabel="#{bundle['SexFeMale']}" itemValue="2" class="form-control"/><h5>#{bundle['female']}</h5>
+							</p:selectOneRadio>
+							<div class="RequieredMessage"><p:message for="gender"/></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<h5>#{bundle['city']}</h5>
+						</div>
+				
+						<div class="col-md-12 selectarrowsolution">
+							<p:selectOneMenu value="#{jobsBean.city}" id="city" required="false" class="form-control" requiredMessage="#{bundle['requiredCity']}">
+									<f:selectItem itemLabel="#{bundle['selectCity']}" itemValue="-1"/>
+									<f:selectItems  value="#{jobsBean.cities}" />
+								</p:selectOneMenu>
+								<div class="city"><p:message  for="city" /></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<h5>#{bundle['date']}</h5>
+						</div>
+				
+						<div class="col-md-12">
+							<div class="row RemoveBorderBottom">
+								<div class="col-md-2">
+									<h6>#{bundle['from']}</h6>
+								</div>
+								<div class="col-md-4">
+									<p:calendar navigator="true" value="#{jobsBean.fromDate}" locale="ar"
+											id="fromDate" required="false"
+											mindate="new Date()"
+											requiredMessage="#{bundle['fromRequired']}" />
+										<div class="RequieredMessage"><p:message for="fromDate" /></div>
+								</div>
+								<div class="col-md-2">
+									<h6>#{bundle['to']}</h6>
+								</div>
+								<div class="col-md-4">
+									<p:calendar navigator="true" value="#{jobsBean.toDate}" id="toDate" mindate="new Date()"
+											required="false" requiredMessage="#{bundle['toRequired']}"/>
+										<div class="RequieredMessage"><p:message for="toDate" /></div>
+								</div>
+							</div>
+							</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<h5>#{bundle['numberOfHours']}</h5>
+						</div>
+						
+						<div class="col-md-12">
+							<div class="row RemoveBorderBottom">
+								<div class="col-md-2">
+									<h6>#{bundle['from']}</h6>
+								</div>
+								<div class="col-md-4">
+									<p:calendar lang="#{bundle['locale']}" id="workTimeStart"
+											required="false" placeholder="#{bundle['from']}"
+											validatorMessage=" #{bundle['valueMustBe']}   hh:mm"
+											requiredMessage="#{bundle['fromRequired']}"
+											value="#{jobsBean.fromHour}" pattern="HH:mm"
+											timeOnly="true" size="10" />
+										<div class="RequieredMessage">
+											<p:message for="workTimeStart" />
+										</div>
+								</div>
+								<div class="col-md-2">
+									<h6>#{bundle['to']}</h6>
+								</div>
+								<div class="col-md-4">
+									<p:calendar lang="#{bundle['locale']}" id="workTimeEnd"
+											required="false" placeholder="#{bundle['to']}"
+											validatorMessage=" #{bundle['valueMustBe']}   hh:mm"
+											requiredMessage="#{bundle['toRequired']}" pattern="HH:mm"
+											value="#{jobsBean.toHour}" timeOnly="true" size="710" />
+										<div class="RequieredMessage">
+											<p:message for="workTimeEnd" />
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row BtnDiv">
+							<div class="col-md-12 text-center">
+								<p:commandButton value="#{bundle['search']}" action="#{jobsBean.search}" update="jobs" styleClass="DoneBtnStyle" validateClient="true" ajax="false"/>
+							</div>
+					</div>
+					
+				</div>
+				
+				<div class="col-md-9">
+					
+						<div>
+						<p:dataTable class="ListGrid row" id="jobs" var="job" rows="20" emptyMessage="${bundle['nojobs']}"
+											value="#{jobsBean.searchJobs}"
+											rowKey="#{job.id}" 
+											selection="#{jobsBean.selectedCompanyJob}"
+											selectionMode="single">
+											
+							<p:ajax event="rowSelect" listener="#{jobsBean.onRowSelect}"/>
+								<p:column>
+									<div class="ListItem">
+											<div class="row ListItemFirst">
+											  <div class="col-md-8 JobTitle">
+													<label>#{job.jobType.nameArabic}</label>
+												</div>
+												<div class="col-md-4 AlowesAtLast JobField">
+													<label>#{job.workType}</label>
+												</div>
+											</div>
+				
+											<div class="row ListItemSecond">
+												<div class="col-md-5 DateFromToArea">
+													<table class="DateTable"><tr><td><label class="DateValue"><span class="CalenderIcon"></span>#{job.numberOfDays} #{bundle['days']}</label></td>
+														<td><label>#{jobsBean.getDateAsString(job.startDate)}</label></td>
+														<td class="arrowTD"><span class="ArrowIconAr"></span></td>
+														<td><label>#{jobsBean.getDateAsString(job.endDate)}</label></td></tr></table>
+												</div>
+												<div class="col-md-4 TimeFromToArea">
+													<table class="TimeTable"><tr><td><label class="TimeValue"><span class="TimeIcon"></span>#{job.numberOfHours} #{bundle['hours']}</label></td>
+														<td><label>#{jobsBean.getTimeAsString(job.startHour)}</label></td>
+														<td class="arrowTD"><span class="ArrowIconAr"></span></td>
+														<td><label>#{jobsBean.getTimeAsString(job.endHour)}</label></td></tr></table>
+												</div>
+												<div class="col-md-3 AlowesAtLast">
+													<p:commandButton value="#{bundle['apply']}" rendered="#{jobsBean.loggedInUser}" action="#{jobsBean.applyToJob(job)}" update="searchJobs:msgs" class="AskButton">
+														 <p:confirm  header="#{bundle['confirm']}" message="#{bundle['confirmJobMessage']}" icon="ui-icon-alert"   />
+													</p:commandButton>
+												</div>
+											</div>
+				
+											<div class="row ListItemTherd">
+												<div class="col-md-8 NearBy">
+													<label><span class="LocationIcon"></span>#{job.nearBy}</label>
+												</div>
+												<div class="col-md-4 AlowesAtLast PostingDateAndTime">#{job.dateCreated}</div>
+											</div>
+										</div>
+								</p:column>
+						</p:dataTable>
+						
+						<p:confirmDialog class="BtnWithIcon" style="min-width:300px;" global="true" showEffect="fade" hideEffect="fade">
+					        <p:commandButton value="#{bundle['yes']}" type="button" styleClass="ui-confirmdialog-yes BtnStyle" icon="ui-icon-check" />
+					        <p:commandButton value="#{bundle['no']}" type="button" styleClass="ui-confirmdialog-no BtnStyle" icon="ui-icon-close" />
+					    </p:confirmDialog>
+					</div>
+					
+				</div>
+				
+				<div class="PaginationHolder">
+						<nav aria-label="Page navigation text-center">
+						  <ul class="pagination">
+						    <li>
+						      <p:commandLink value="#{bundle['previous']} &laquo;" action="#{jobsBean.previous}" id="previous" ajax="true" update="searchJobs:jobs pageNumber previous next" disabled="#{jobsBean.previousDisabled}" ></p:commandLink>
+						    </li>
+						    <li><a class="PageNumber"><table><tr><tr><td>#{bundle['page']}</td><td> <p:outputLabel    id="pageNumber"  value="#{jobsBean.pageNumber}"/></td></tr></tr></table></a></li>
+						    <li>
+						    <p:commandLink value="#{bundle['next']} &raquo;" actionListener="#{jobsBean.next}"   id="next" ajax="true"   update="searchJobs:jobs pageNumber previous next" disabled="#{jobsBean.nextDisabled}"></p:commandLink>
+						    </li>
+						  </ul>
+						</nav>
+					</div>
+			</div>
+			
+			
+
+
+   </h:form>			
+  </ui:define>
+  </ui:composition>
+ </h:body>
+</html>
